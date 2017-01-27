@@ -1,0 +1,16 @@
+## Interface: 40300
+## Title: |cff1784d1E|r|cffe5e3e3lvUI|r |cff1784d1E|r|cffe5e3e3nhanced|r
+## Author: Feraldin
+## Version: 1.8
+## Notes: Plugin-Enhancements for |cff1784d1E|r|cffe5e3e3lvUI|r.
+## RequiredDeps: ElvUI
+## DefaultState: Enabled
+
+Libraries\Load_Libraries.xml
+Developer\Load_Developer.xml
+Locales\Load_Locales.xml
+Media\Load_Media.xml
+Config\Load_Config.xml
+Settings\Load_Settings.xml
+Modules\Load_Modules.xml
+ElvUI_Enhanced.lua
