@@ -40,7 +40,7 @@ function PD:UpdatePaperDoll(event)
 
 	if(InCombatLockdown()) then
 		PD:RegisterEvent("PLAYER_REGEN_ENABLED", "UpdatePaperDoll");
-		return
+		return;
 	else
 		PD:UnregisterEvent("PLAYER_REGEN_ENABLED");
 	end
@@ -51,8 +51,9 @@ function PD:UpdatePaperDoll(event)
 
 	local frame, id, durability, max, r, g, b;
 	local baseName = (unit == "player" and "Character") or "Inspect";
-	local link, iLevel;
-
+	local itemLink, itemLevel;
+	local _, avgEquipItemLevel = GetAverageItemLevel();
+	
 	for k, info in pairs(slots) do
 		frame = _G[("%s%s"):format(baseName, k)];
 		id = GetInventorySlotInfo(k);
@@ -60,11 +61,11 @@ function PD:UpdatePaperDoll(event)
 		if(info[1]) then
 			frame.ItemLevel:SetText();
 			if(E.private.equipment.itemlevel.enable and info[1]) then
-				link = GetInventoryItemLink(unit, id);
-				if(link) then
-					iLevel = self:GetItemLevel(unit, link);
-					if(iLevel) then
-						frame.ItemLevel:SetFormattedText("%s%d|r", levelColors[1], iLevel);
+				itemLink = GetInventoryItemLink(unit, id);
+				if(itemLink) then
+					itemLevel = self:GetItemLevel(unit, itemLink);
+					if(itemLevel and avgEquipItemLevel) then
+						frame.ItemLevel:SetFormattedText("%s%d|r", levelColors[(itemLevel < avgEquipItemLevel - 5 and 0 or (itemLevel > avgEquipItemLevel + 5 and 1 or (2)))], itemLevel);
 					end
 				end
 			end
@@ -83,10 +84,10 @@ function PD:UpdatePaperDoll(event)
 	end
 end
 
-function PD:GetItemLevel(unit, itemLink)
-	local iLevel = select(4, GetItemInfo(itemLink));
-	iLevel = tonumber(iLevel);
-	return iLevel;
+function PD:GetItemLevel(_, itemLink)
+	local _, itemLevel = select(3, GetItemInfo(itemLink));
+
+	return itemLevel;
 end
 
 function PD:InspectFrame_UpdateTabsComplete()
@@ -133,6 +134,7 @@ function PD:Initialize()
 	PD:RegisterEvent("PLAYER_EQUIPMENT_CHANGED", "UpdatePaperDoll");
 	PD:RegisterEvent("SOCKET_INFO_UPDATE", "UpdatePaperDoll");
 	PD:RegisterEvent("COMBAT_RATING_UPDATE", "UpdatePaperDoll");
+	PD:RegisterEvent("MASTERY_UPDATE", "UpdatePaperDoll")
 	PD:RegisterEvent("INSPECT_READY", "UpdatePaperDoll");
 
 	PD:RegisterEvent("PLAYER_ENTERING_WORLD", "InitialUpdatePaperDoll");
