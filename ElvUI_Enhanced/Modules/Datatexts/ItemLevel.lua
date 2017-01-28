@@ -35,7 +35,7 @@ local levelColors = {
 
 local function OnEvent(self)
 	local total, equipped = GetAverageItemLevel();
-	self.text:SetFormattedText(displayString, L["Item Level"], floor(equipped), floor(total));
+	self.text:SetFormattedText(displayString, ITEM_LEVEL_ABBR, floor(equipped), floor(total));
 
 	lastPanel = self;
 end
