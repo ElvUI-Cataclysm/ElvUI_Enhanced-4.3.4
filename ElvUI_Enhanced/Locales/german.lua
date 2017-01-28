@@ -15,12 +15,14 @@ L["Postpone Delay"] = true;
 
 -- Datatext
 L["Datatext Disabled"] = true;
+L["Equipped"] = true;
 L["In Combat"] = true;
 L["New Mail"] = "Neue Post"
 L["No Mail"] = "Keine Post"
 L["Not Learned"] = true;
 L["Out of Combat"] = true;
 L["Ready"] = true;
+L["Total"] = true;
 L["You are not playing a |cff0070DEShaman|r, datatext disabled."] = true;
 
 -- Death Recap
