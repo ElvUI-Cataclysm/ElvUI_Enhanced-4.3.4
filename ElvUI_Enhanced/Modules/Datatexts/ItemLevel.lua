@@ -51,7 +51,7 @@ local function OnEnter(self)
 
 	for i = 1, 17 do
 		if(slots[i]) then
-			local item = GetInventoryItemID("player", i)
+			local item = GetInventoryItemLink("player", GetInventorySlotInfo(slots[i][1]));
 			if(item) then
 				local _, _, quality, iLevel = GetItemInfo(item)
 				local r, g, b = GetItemQualityColor(quality)
