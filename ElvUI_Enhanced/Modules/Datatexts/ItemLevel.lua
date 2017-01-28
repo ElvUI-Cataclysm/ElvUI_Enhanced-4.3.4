@@ -1,10 +1,11 @@
 local E, L, V, P, G = unpack(ElvUI);
 local DT = E:GetModule("DataTexts");
-local PD = E:GetModule("PaperDoll");
+
+local floor = math.floor;
+local join = string.join;
 
 local displayString = "";
 local lastPanel;
-local floor = math.floor;
 
 local slots = {
 	[1] = {"HeadSlot", HEADSLOT},
@@ -32,45 +33,31 @@ local levelColors = {
 	[2] = {1, 1, .5}
 };
 
-local function GetItemLvL()
-	local total, item = 0, 0;
-	for i = 1, 17 do
-		local itemLink = GetInventoryItemLink("player", GetInventorySlotInfo(slots[i][1]));
-		if(itemLink) then
-			local itemLevel = PD:GetItemLevel("player", itemLink);
-			if(itemLevel and itemLevel > 0) then
-				item = item + 1;
-				total = total + itemLevel;
-			end
-		end
-	end
-
-	if(total < 1) then
-		return "0";
-	end
-
-	return floor(total / item);
-end
-
 local function OnEvent(self)
-	self.text:SetFormattedText(displayString, L["Item Level"], GetItemLvL());
+	local total, equipped = GetAverageItemLevel();
+	self.text:SetFormattedText(displayString, L["Item Level"], floor(equipped), floor(total));
+
+	lastPanel = self;
 end
 
 local function OnEnter(self)
-	local avgEquipItemLevel = GetItemLvL();
-	local color, itemLink, itemLevel;
+	local total, equipped = GetAverageItemLevel();
+	local color;
 
 	DT:SetupTooltip(self);
-	DT.tooltip:AddDoubleLine(L["Item Level"], avgEquipItemLevel, 1, 1, 1, 0, 1, 0);
+	DT.tooltip:AddDoubleLine(L["Total"], floor(total), 1, 1, 1, 1, 1, 0);
+	DT.tooltip:AddDoubleLine(L["Equipped"], floor(equipped), 1, 1, 1, 1, 1, 0);
 	DT.tooltip:AddLine(" ");
 
 	for i = 1, 17 do
-		itemLink = GetInventoryItemLink("player", GetInventorySlotInfo(slots[i][1]));
-		if(itemLink) then
-			itemLevel = PD:GetItemLevel("player", itemLink);
-			if(itemLevel and avgEquipItemLevel) then
-				color = levelColors[(itemLevel < avgEquipItemLevel - 5 and 0 or (itemLevel > avgEquipItemLevel + 5 and 1 or 2))];
-				DT.tooltip:AddDoubleLine(slots[i][2], itemLevel, 1, 1, 1, color[1], color[2], color[3])
+		if(slots[i]) then
+			local item = GetInventoryItemID("player", i)
+			if(item) then
+				local _, _, quality, iLevel = GetItemInfo(item)
+				local r, g, b = GetItemQualityColor(quality)
+
+				color = levelColors[(iLevel < equipped - 5 and 0 or (iLevel > equipped + 5 and 1 or 2))];
+				DT.tooltip:AddDoubleLine(slots[i][2], iLevel, r, g, b, color[1], color[2], color[3]);
 			end
 		end
 	end
@@ -79,8 +66,11 @@ local function OnEnter(self)
 end
 
 local function ValueColorUpdate(hex)
-	displayString = string.join("", "|cffffffff%s:|r", " ", hex, "%d|r");
-	if(lastPanel ~= nil) then OnEvent(lastPanel); end
+	displayString = join("", "%s: ", hex, "%d/%d|r");
+
+	if(lastPanel ~= nil) then 
+		OnEvent(lastPanel); 
+	end
 end
 E["valueColorUpdateFuncs"][ValueColorUpdate] = true;
 
