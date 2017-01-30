@@ -41,7 +41,6 @@ P.unitframe.units.player.animatedLoss = {
 	duration = .75,
 	startDelay = .2,
 	pauseDelay = .05,
-	postponeDelay = .05,
 	postponeDelay = .05
 };
 

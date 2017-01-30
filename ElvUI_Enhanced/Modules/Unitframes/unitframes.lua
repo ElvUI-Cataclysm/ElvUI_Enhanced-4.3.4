@@ -7,12 +7,12 @@ ElvUF_Player.AnimatedLoss:Hide();
 
 hooksecurefunc(UF, "Configure_HealthBar", function(self, frame)
 	if(frame.unitframeType == "player") then
-		local animatedLoss = frame.AnimatedLoss;
-		if(frame.db.animatedLoss.enable) then
+		if(frame.db.animatedLoss and frame.db.animatedLoss.enable) then
 			if(not frame:IsElementEnabled("AnimatedLoss")) then
 				frame:EnableElement("AnimatedLoss");
 			end
 
+			local animatedLoss = frame.AnimatedLoss;
 			animatedLoss:SetParent(frame.Health);
 
 			animatedLoss.duration = frame.db.animatedLoss.duration;
@@ -41,8 +41,8 @@ hooksecurefunc(UF, "Configure_Portrait", function(self, frame)
 		frame.PORTRAIT_WIDTH = (frame.USE_PORTRAIT_OVERLAY or frame.PORTRAIT_DETACHED or not frame.USE_PORTRAIT) and 0 or frame.db.portrait.width;
 		frame.CLASSBAR_WIDTH = frame.UNIT_WIDTH - ((frame.BORDER+frame.SPACING)*2) - frame.PORTRAIT_WIDTH  - frame.POWERBAR_OFFSET;
 
-		local portrait = frame.Portrait;
 		if(frame.USE_PORTRAIT) then
+			local portrait = frame.Portrait;
 			if(frame.PORTRAIT_DETACHED and frame.db.portrait.style == "3D") then
 				if(not portrait.Holder or (portrait.Holder and not portrait.Holder.mover)) then
 					portrait.Holder = CreateFrame("Frame", nil, UIParent);

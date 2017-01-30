@@ -45,8 +45,8 @@ local function OnEnter(self)
 	local color;
 
 	DT:SetupTooltip(self);
-	DT.tooltip:AddDoubleLine(L["Total"], floor(total), 1, 1, 1, 1, 1, 0);
 	DT.tooltip:AddDoubleLine(L["Equipped"], floor(equipped), 1, 1, 1, 1, 1, 0);
+	DT.tooltip:AddDoubleLine(L["Total"], floor(total), 1, 1, 1, 1, 1, 0);
 	DT.tooltip:AddLine(" ");
 
 	for i = 1, 17 do
@@ -65,6 +65,14 @@ local function OnEnter(self)
 	DT.tooltip:Show();
 end
 
+local function OnClick(self, btn)
+	if(btn == "LeftButton") then
+		ToggleCharacter("PaperDollFrame")
+	else
+		OnEvent(self)
+	end
+end
+
 local function ValueColorUpdate(hex)
 	displayString = join("", "%s: ", hex, "%d/%d|r");
 
@@ -74,4 +82,4 @@ local function ValueColorUpdate(hex)
 end
 E["valueColorUpdateFuncs"][ValueColorUpdate] = true;
 
-DT:RegisterDatatext("Item Level", {"PLAYER_ENTERING_WORLD", "PLAYER_EQUIPMENT_CHANGED", "UNIT_INVENTORY_CHANGED"}, OnEvent, nil, nil, OnEnter);
+DT:RegisterDatatext("Item Level", {"PLAYER_ENTERING_WORLD", "PLAYER_EQUIPMENT_CHANGED", "UNIT_INVENTORY_CHANGED"}, OnEvent, nil, OnClick, OnEnter);

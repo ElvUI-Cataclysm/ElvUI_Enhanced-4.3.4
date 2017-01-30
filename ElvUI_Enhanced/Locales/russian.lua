@@ -22,7 +22,7 @@ L["No Mail"] = true;
 L["Not Learned"] = true;
 L["Out of Combat"] = true;
 L["Ready"] = true;
-L["Total"] = true;
+L["Total"] = "Всего"
 L["You are not playing a |cff0070DEShaman|r, datatext disabled."] = true;
 
 -- Death Recap
