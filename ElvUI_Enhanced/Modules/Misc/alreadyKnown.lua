@@ -1,5 +1,4 @@
 local E, L, V, P, G = unpack(ElvUI);
-if(not E.db.general.alreadyknown) then return; end
 
 local _G = _G;
 local match = string.match;

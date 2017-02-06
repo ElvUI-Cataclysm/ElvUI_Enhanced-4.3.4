@@ -4,7 +4,6 @@
 P.general.minimap.locationText = "ABOVE";
 P.general.moverTransparancy = .8;
 P.general.declineduel = false;
-P.general.alreadyknown = true;
 
 -- Loss Control
 P.loseofcontrol = { 

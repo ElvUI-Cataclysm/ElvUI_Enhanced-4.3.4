@@ -47,7 +47,6 @@ L["Enable/Disable the display of item levels on the character screen."] = true;
 L["Only show durabitlity information for items that are damaged."] = "只在装备受损时显示耐久度."
 
 -- General
-L["Already Known"] = true;
 L["Auto decline all duels"] = "自动拒绝决斗请求"
 L["Automatically change your watched faction on the reputation bar to the faction you got reputation points for."] = "当你获得某个阵营的声望时, 将自动追踪此阵营的声望至经验栏位." 
 L["Automatically release body when killed inside a battleground."] = "在战场死亡后自动释放灵魂."

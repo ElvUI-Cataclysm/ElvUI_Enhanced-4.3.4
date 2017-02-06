@@ -47,7 +47,6 @@ L["Enable/Disable the display of item levels on the character screen."] = "Вк�
 L["Only show durabitlity information for items that are damaged."] = "Показывать уровень прочности только на поврежденных предметах."
 
 -- General
-L["Already Known"] = true;
 L["Auto decline all duels"] = "Автоматически отклонять все дуэли."
 L["Automatically change your watched faction on the reputation bar to the faction you got reputation points for."] = "Автоматическое изменение фракции на панели репутации на ту, очки репутации которой вы получили."
 L["Automatically release body when killed inside a battleground."] = "Автоматически покидать тело после смерти на полях боя."

@@ -201,17 +201,8 @@ end
 function EO:MiscOptions()
 	local M = E:GetModule("MiscEnh")
 
-	E.Options.args.general.args.general.args.alreadyknown = {
-		order = 16.1,
-		type = "toggle",
-		name = ColorizeSettingName(L["Already Known"]),
-		desc = L["Colorizes recipes, mounts & pets that are already known"],
-		get = function(info) return E.db.general.alreadyknown; end,
-		set = function(info, value) E.db.general.alreadyknown = value; E:StaticPopup_Show("PRIVATE_RL"); end
-	};
-
 	E.Options.args.general.args.general.args.pvpautorelease = {
-		order = 16.2,
+		order = 16.1,
 		type = "toggle",
 		name = ColorizeSettingName(L["PvP Autorelease"]),
 		desc = L["Automatically release body when killed inside a battleground."],
@@ -220,7 +211,7 @@ function EO:MiscOptions()
 	};
 
 	E.Options.args.general.args.general.args.declineduel = {
-		order = 16.3,
+		order = 16.2,
 		type = "toggle",
 		name = ColorizeSettingName(L["Decline Duel"]),
 		desc = L["Auto decline all duels"],
@@ -229,7 +220,7 @@ function EO:MiscOptions()
 	};
 
 	E.Options.args.general.args.general.args.autorepchange = {
-		order = 16.4,
+		order = 16.3,
 		type = "toggle",
 		name = ColorizeSettingName(L["Track Reputation"]),
 		desc = L["Automatically change your watched faction on the reputation bar to the faction you got reputation points for."],
@@ -238,7 +229,7 @@ function EO:MiscOptions()
 	};
 
 	E.Options.args.general.args.general.args.showQuestLevel = {
-		order = 16.5,
+		order = 16.4,
 		type = "toggle",
 		name = ColorizeSettingName(L["Show Quest Level"]),
 		desc = L["Display quest levels at Quest Log."],
@@ -247,14 +238,14 @@ function EO:MiscOptions()
 	};
 
 	E.Options.args.general.args.general.args.spacer = {
-		order = 16.6,
+		order = 16.5,
 		type = "description",
 		name = "",
 		width = "full"
 	};
 
 	E.Options.args.general.args.general.args.moverTransparancy = {
-		order = 16.7,
+		order = 16.6,
 		type = "range",
 		isPercent = true,
 		name = ColorizeSettingName(L["Mover Transparency"]),

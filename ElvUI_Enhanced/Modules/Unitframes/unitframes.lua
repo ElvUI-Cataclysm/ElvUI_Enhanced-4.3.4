@@ -75,9 +75,8 @@ hooksecurefunc(UF, "Configure_Portrait", function(self, frame)
 					E:DisableMover(portrait.Holder.mover:GetName());
 				end
 			end
+			self:Configure_HealthBar(frame);
+			self:Configure_Power(frame);
 		end
-
-		UF:Configure_HealthBar(frame);
-		UF:Configure_Power(frame);
 	end
 end);

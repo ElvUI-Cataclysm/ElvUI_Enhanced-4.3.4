@@ -47,7 +47,6 @@ L["Enable/Disable the display of item levels on the character screen."] = true;
 L["Only show durabitlity information for items that are damaged."] = "Só mostrar informação de durabilidade para itens danificados."
 
 -- General
-L["Already Known"] = true;
 L["Auto decline all duels"] = true;
 L["Automatically change your watched faction on the reputation bar to the faction you got reputation points for."] = "Mudar automaticamente a facção controlada para a facção na qual acabou de ganhar pontos de reputação." 
 L["Automatically release body when killed inside a battleground."] = "Automaticamente libertar o corpo quando morto num campo de batalha."

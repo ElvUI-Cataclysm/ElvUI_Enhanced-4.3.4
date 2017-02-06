@@ -22,7 +22,7 @@ L["No Mail"] = true;
 L["Not Learned"] = true;
 L["Out of Combat"] = true;
 L["Ready"] = true;
-L["Total"] = = "Total"
+L["Total"] = "Total"
 L["You are not playing a |cff0070DEShaman|r, datatext disabled."] = true;
 
 -- Death Recap
@@ -47,7 +47,6 @@ L["Enable/Disable the display of item levels on the character screen."] = "Activ
 L["Only show durabitlity information for items that are damaged."] = "Afficher la durabilité seulement quand l'équipement est endommagé."
 
 -- General
-L["Already Known"] = true;
 L["Auto decline all duels"] = true;
 L["Automatically change your watched faction on the reputation bar to the faction you got reputation points for."] = "Change automatiquement la réputation suivie sur la barre de réputation avec la faction que vous êtes en train de faire."
 L["Automatically release body when killed inside a battleground."] = "Libère automatiquement votre corps quand vous êtes tué en Champs de Bataille."

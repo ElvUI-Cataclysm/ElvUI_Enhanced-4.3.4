@@ -47,7 +47,6 @@ L["Enable/Disable the display of item levels on the character screen."] = true;
 L["Only show durabitlity information for items that are damaged."] = true;
 
 -- General
-L["Already Known"] = true;
 L["Auto decline all duels"] = true;
 L["Automatically change your watched faction on the reputation bar to the faction you got reputation points for."] = true;
 L["Automatically release body when killed inside a battleground."] = true;
