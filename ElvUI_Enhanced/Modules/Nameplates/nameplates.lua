@@ -15,23 +15,17 @@ end
 NP.GroupMembers = {};
 
 hooksecurefunc(NP, "CreatePlate", function(self, frame)
-	local myPlate = self.CreatedPlates[frame]
-	if not myPlate then return end
-
-	if(not myPlate.threatInfo) then
-		myPlate.threatInfo = myPlate.HealthBar:CreateFontString(nil, "OVERLAY");
-		myPlate.threatInfo:SetPoint("BOTTOMLEFT", myPlate.HealthBar, "BOTTOMLEFT", 1, 0);
-		myPlate.threatInfo:SetJustifyH("LEFT");
+	if(not frame.threatInfo) then
+		frame.threatInfo = frame.HealthBar:CreateFontString(nil, "OVERLAY");
+		frame.threatInfo:SetPoint("BOTTOMLEFT", frame.HealthBar, "BOTTOMLEFT", 1, 2);
+		frame.threatInfo:SetJustifyH("LEFT");
 	end
-	myPlate.threatInfo:FontTemplate(LSM:Fetch("font", NP.db.font), NP.db.fontSize, NP.db.fontOutline);
+	frame.threatInfo:FontTemplate(LSM:Fetch("font", NP.db.font), NP.db.fontSize, NP.db.fontOutline);
 end);
 
 hooksecurefunc(NP, "GetThreatReaction", function(self, frame)
-	local myPlate = self.CreatedPlates[frame]
-	if not myPlate then return end
-
-	if(myPlate.threatInfo) then
-		myPlate.threatInfo:SetText();
+	if(frame.threatInfo) then
+		frame.threatInfo:SetText();
 
 		if(NP.db.showthreat) then
 			local unit = frame.unit;
@@ -47,9 +41,9 @@ hooksecurefunc(NP, "GetThreatReaction", function(self, frame)
 			if(unit and not UnitIsPlayer(unit) and UnitCanAttack("player", unit)) then
 				local status, percent = select(2, UnitDetailedThreatSituation("player", unit));
 				if(status) then
-					myPlate.threatInfo:SetFormattedText("%s%.0f%%|r", Hex(GetThreatStatusColor(status)), percent);
+					frame.threatInfo:SetFormattedText("%s%.0f%%|r", Hex(GetThreatStatusColor(status)), percent);
 				else
-					myPlate.threatInfo:SetFormattedText("|cFF808080%s|r", L["None"]);
+					frame.threatInfo:SetFormattedText("|cFF808080%s|r", L["None"]);
 				end
 			end
 		end
