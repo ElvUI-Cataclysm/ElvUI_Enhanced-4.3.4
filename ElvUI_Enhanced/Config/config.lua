@@ -131,16 +131,6 @@ function EO:GeneralOptions()
 	};
 end
 
--- Nameplates
-function EO:NameplateOptions()
-	E.Options.args.nameplate.args.general.args.showthreat = {
-		order = 10,
-		type = "toggle",
-		name = ColorizeSettingName(L["Threat Text"]),
-		desc = L["Display threat level as text on targeted, boss or mouseover nameplate."]
-	}
-end
-
 -- Maps
 function EO:MapOptions()
 	E.Options.args.maps.args.minimap.args.generalGroup.args.spacer = {
@@ -485,7 +475,6 @@ function EO:GetOptions()
 	EO:MapOptions()
 	EO:MiscOptions()
 	EO:SkinsOptions()
-	EO:NameplateOptions()
 	EO:UnitFramesOptions()
 	EO:WatchFrame()
 end

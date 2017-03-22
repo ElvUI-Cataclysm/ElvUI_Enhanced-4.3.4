@@ -1,5 +1,5 @@
 local E, L, V, P, G = unpack(ElvUI)
-local AL = E:NewModule("AddOnList");
+local AL = E:NewModule("AddOnList", "AceHook-3.0");
 
 local floor = math.floor;
 
@@ -399,12 +399,36 @@ function AL:Initialize()
 		ShowUIPanel(ElvUI_AddonList);
 	end);
 
-	GameMenuButtonLogout:SetPoint("TOP", ElvUI_ButtonAddons, "BOTTOM", 0, -16);
+	self:HookScript(GameMenuButtonRatings, "OnShow", function(self)
+		ElvUI_ButtonAddons:Point("TOP", GameMenuButtonRatings, "BOTTOM", 0, -1);
+	end)
 
-	if(IsMacClient()) then
-		GameMenuFrame:SetHeight(292);
+	self:HookScript(GameMenuButtonRatings, "OnHide", function(self)
+		ElvUI_ButtonAddons:Point("TOP", GameMenuButtonMacros, "BOTTOM", 0, -1);
+	end)
+
+	self:RawHookScript(GameMenuButtonLogout, "OnShow", function(self)
+		self:SetPoint("TOP", ElvUI_ButtonAddons, "BOTTOM", 0, -16)
+
+		if not StaticPopup_Visible("CAMP") and not StaticPopup_Visible("QUIT") then
+			self:Enable()
+		else
+			self:Disable()
+		end
+	end)
+
+	if GetLocale() == "koKR" then
+		if IsMacClient() then
+			GameMenuFrame:Height(308)
+		else
+			GameMenuFrame:Height(282)
+		end
 	else
-		GameMenuFrame:SetHeight(266);
+		if IsMacClient() then
+			GameMenuFrame:Height(292)
+		else
+			GameMenuFrame:Height(266)
+		end
 	end
 end
 

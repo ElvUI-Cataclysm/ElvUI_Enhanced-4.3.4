@@ -15,9 +15,6 @@ P.loseofcontrol = {
 	Snare = true
 };
 
--- Nameplates
-P.nameplate.showthreat = false;
-
 -- Unitframes
 P["unitframe"]["hideroleincombat"] = false
 P["unitframe"]["units"]["target"]["classicon"] = {
