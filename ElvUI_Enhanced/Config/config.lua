@@ -60,7 +60,7 @@ local function GeneralOptions()
 				name = L["Decline Duel"],
 				desc = L["Auto decline all duels"],
 				get = function(info) return E.db.enhanced.general.declineduel; end,
-				set = function(info, value) E.db.enhanced.general.declineduel = value; E:StaticPopup_Show("PRIVATE_RL"); end
+				set = function(info, value) E.db.enhanced.general.declineduel = value; M:LoadDeclineDuel() end
 			},
 			hideZoneText = {
 				order = 7,

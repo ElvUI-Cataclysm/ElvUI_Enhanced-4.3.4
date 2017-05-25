@@ -56,7 +56,7 @@ L["You died."] = true;
 -- Decline Duels
 L["Auto decline all duels"] = true;
 L["Decline Duel"] = true;
-L["Declined duel request from "] = true;
+L["Declined duel request from "] = "Duelo rechazado de "
 
 -- Equipment
 L["Choose the equipment set to use for your primary specialization."] = true;
