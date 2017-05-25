@@ -1,7 +1,6 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/">
 	<Script file="Agility.lua"/>
 	<Script file="CombatIndicator.lua"/>
-	<Script file="Coordinates.lua"/>
 	<Script file="EnergyRegen.lua"/>
 	<Script file="Intellect.lua"/>
 	<Script file="ItemLevel.lua"/>
@@ -10,4 +9,6 @@
 	<Script file="Spirit.lua"/>
 	<Script file="Stamina.lua"/>
 	<Script file="Strength.lua"/>
+	<Script file="Range.lua"/>
+	<Script file="Time.lua"/>
 </Ui>

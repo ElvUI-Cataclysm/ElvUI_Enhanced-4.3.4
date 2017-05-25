@@ -1,29 +1,9 @@
-﻿local E, L, V, P, G = unpack(ElvUI);
+local E, L, V, P, G = unpack(ElvUI);
 
--- General
-P.general.minimap.locationText = "ABOVE";
-P.general.moverTransparancy = .8;
-P.general.declineduel = false;
-
--- Loss Control
-P.loseofcontrol = { 
-	CC = true,
-	PvE = true,
-	Silence = true,
-	Disarm = true,
-	Root = false,
-	Snare = true
-};
+-- Minimap
+P.general.minimap.locationText = "ABOVE"
 
 -- Unitframes
-P["unitframe"]["hideroleincombat"] = false
-P["unitframe"]["units"]["target"]["classicon"] = {
-	["enable"] = false,
-	["size"] = 28,
-	["xOffset"] = -58,
-	["yOffset"] = -22
-}
-
 P.unitframe.units.player.portrait.detachFromFrame = false;
 P.unitframe.units.player.portrait.detachedWidth = 54;
 P.unitframe.units.player.portrait.detachedHeight = 54;
@@ -40,11 +20,86 @@ P.unitframe.units.player.animatedLoss = {
 	postponeDelay = .05
 };
 
--- Watch Frame
-P.watchframe = {
-	["city"] = "COLLAPSED",
-	["pvp"] = "HIDDEN",
-	["arena"] = "HIDDEN",
-	["party"] = "COLLAPSED",
-	["raid"] = "COLLAPSED"
+-- Quest
+P.general.showQuestLevel = true;
+
+-- Enhanced
+P.enhanced = {
+	general = {
+		pvpAutoRelease = false,
+		autoRepChange = false,
+		moverTransparancy = 0.8,
+		declineduel = false,
+		hideZoneText = false
+	},
+	actionbars = {
+		transparentActionbars = {
+			transparentBackdrops = true,
+			transparentButtons = true
+		}
+	},
+	chat = {
+		dpsLinks = false,
+	},
+	datatexts = {
+		timeColorEnch = false,
+	},
+	equipment = {
+		enable = false,
+		durability = {
+			enable = true,
+			onlydamaged = true
+		},
+		itemlevel = {
+			enable = true
+		}
+	},
+	minimap = {
+		location = false,
+		locationdigits = 1,
+		hideincombat = false,
+		fadeindelay = 5,
+	},
+	nameplates = {
+		cacheUnitClass = false,
+		smooth = false,
+		smoothSpeed = 0.3,
+	},
+	tooltip = {
+		tooltipIcon = {
+			enable = false,
+			tooltipIconSpells  = true,
+			tooltipIconItems  = true,
+			tooltipIconAchievements  = true
+		}
+	},
+	loseofcontrol = { 
+		CC = true,
+		PvE = true,
+		Silence = true,
+		Disarm = true,
+		Root = false,
+		Snare = true
+	},
+	unitframe = {
+		units = {
+			target = {
+				classicon = {
+					enable = false,
+					size = 28,
+					xOffset = -58,
+					yOffset = -22
+				}
+			}
+		},
+		hideRoleInCombat = false
+	},
+	watchframe = {
+		enable = false,
+		city = "COLLAPSED",
+		pvp = "HIDDEN",
+		arena = "HIDDEN",
+		party = "COLLAPSED",
+		raid = "COLLAPSED"
+	}
 };

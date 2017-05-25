@@ -1,35 +1,19 @@
 local E, L, V, P, G = unpack(ElvUI);
 
--- General
-V.general.pvpautorelease = false;
-V.general.autorepchange = false;
-V.general.showQuestLevel = true;
+V.general.selectQuestReward = true
 
--- Minimap
-V.general.minimap.hideincombat = false;
-V.general.minimap.fadeindelay = 5;
-V.general.minimap.locationdigits = 1;
-
--- Equipment
 V.equipment = {
-	durability = {
-		enable = false,
+	["durability"] = {
+		enable = true,
 		onlydamaged = false
 	},
-	itemlevel = {
-		enable = false
+	["itemlevel"] = {
+		enable = true
 	}
-};
+}
 
--- Loss Control
 V.loseofcontrol = {
 	enable = false
 };
 
--- Skins
 V.skins.animations = true;
-
--- WatchFrame
-V.watchframe = {
-	enable = true
-};

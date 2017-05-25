@@ -1,9 +1,12 @@
-﻿<Ui xmlns="http://www.blizzard.com/wow/ui/">
-	<Include file="Maps\load_maps.xml"/>
-	<Include file="Misc\load_misc.xml"/>
-	<Include file="Unitframes\load_unitframes.xml"/>
-	<Include file="Watchframe\load_watchframe.xml"/>
-	<Include file="Datatexts\load_datatexts.xml"/>
-	<Include file="Quest\load_quest.xml"/>
-	<Include file="Skins\load_skins.xml"/>
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+	<Include file="Maps\Load_Maps.xml"/>
+	<Include file="Misc\Load_Misc.xml"/>
+	<Include file="Chat\Load_Chat.xml"/>
+	<Include file="Tooltip\Load_Tooltip.xml"/>
+	<Include file="Actionbars\Load_Actionbars.xml"/>
+	<Include file="Watchframe\Load_Watchframe.xml"/>
+	<Include file="Datatexts\Load_Datatexts.xml"/>
+	<Include file="Skins\Load_Skins.xml"/>
+	<Include file="Nameplates\Load_Nameplates.xml"/>
+	<Include file="Unitframes\Load_Unitframes.xml"/>
 </Ui>

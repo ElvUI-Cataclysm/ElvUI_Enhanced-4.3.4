@@ -192,7 +192,7 @@ function LOS:UNIT_AURA()
 	for i = 1, 40 do
 		local name, _, icon, _, _, duration, expirationTime = UnitDebuff("player", i);
 
-		if(E.db.loseofcontrol[abilities[name]] and expirationTime > maxExpirationTime) then
+		if(E.db.enhanced.loseofcontrol[abilities[name]] and expirationTime > maxExpirationTime) then
 			maxExpirationTime = expirationTime;
 			Icon = icon;
 			Duration = duration;

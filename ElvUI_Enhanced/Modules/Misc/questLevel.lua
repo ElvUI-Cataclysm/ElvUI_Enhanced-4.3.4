@@ -1,7 +1,7 @@
 local E, L, V, P, G = unpack(ElvUI);
 
 local function questlevel()
-	if(not E.private.general.showQuestLevel) then return; end
+	if not E.db.general.showQuestLevel then return; end
 
 	local buttons = QuestLogScrollFrame.buttons;
 	local numButtons = #buttons;

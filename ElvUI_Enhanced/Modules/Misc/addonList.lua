@@ -250,7 +250,7 @@ function AL:Initialize()
 		ElvUI_AddonList:Hide();
 	end);
 
-	local closeButton = CreateFrame("Button", "$parentCloseButton", addonList, "UIPanelButtonTemplate");
+	local closeButton = CreateFrame("Button", "$parentCloseButton", addonList, "UIPanelCloseButton");
 	closeButton:Size(32, 32);
 	closeButton:Point("TOPRIGHT", 1, 1);
 	S:HandleCloseButton(closeButton);
@@ -390,7 +390,7 @@ function AL:Initialize()
 	scrollFrame:SetScrollChild(scrollChild);
 
 	local buttonAddons = CreateFrame("Button", "ElvUI_ButtonAddons", GameMenuFrame, "GameMenuButtonTemplate");
-	buttonAddons:SetPoint("TOP", GameMenuButtonMacros, "BOTTOM", 0, -1);
+	buttonAddons:Point("TOP", GameMenuButtonMacros, "BOTTOM", 0, -1);
 	buttonAddons:SetText(ADDONS);
 	S:HandleButton(buttonAddons);
 

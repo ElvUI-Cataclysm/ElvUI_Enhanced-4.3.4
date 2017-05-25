@@ -17,7 +17,7 @@ function TC:TargetChanged()
 end
 
 function TC:ToggleSettings()
-	local db = E.db.unitframe.units.target.classicon;
+	local db = E.db.enhanced.unitframe.units.target.classicon;
 	if(db.enable) then
 		frame:SetSize(db.size, db.size);
 		frame:ClearAllPoints();

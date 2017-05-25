@@ -2,29 +2,33 @@ local E, L, V, P, G = unpack(ElvUI);
 local DT = E:GetModule("DataTexts");
 
 local floor = math.floor;
-local join = string.join;
+local join = string.join
+
+local GetInventoryItemLink = GetInventoryItemLink
+local GetInventorySlotInfo = GetInventorySlotInfo
+local GetItemInfo = GetItemInfo
 
 local displayString = "";
 local lastPanel;
 
 local slots = {
-	[1] = {"HeadSlot", HEADSLOT},
-	[2] = {"NeckSlot", NECKSLOT},
-	[3] = {"ShoulderSlot", SHOULDERSLOT},
-	[4] = {"BackSlot", BACKSLOT},
-	[5] = {"ChestSlot", CHESTSLOT},
-	[6] = {"WristSlot", WRISTSLOT},
-	[7] = {"HandsSlot", HANDSSLOT},
-	[8] = {"WaistSlot", WAISTSLOT},
-	[9] = {"LegsSlot", LEGSSLOT},
-	[10] = {"FeetSlot", FEETSLOT},
-	[11] = {"Finger0Slot", FINGER0SLOT_UNIQUE},
-	[12] = {"Finger1Slot", FINGER1SLOT_UNIQUE},
-	[13] = {"Trinket0Slot", TRINKET0SLOT_UNIQUE},
-	[14] = {"Trinket1Slot", TRINKET1SLOT_UNIQUE},
-	[15] = {"MainHandSlot", MAINHANDSLOT},
-	[16] = {"SecondaryHandSlot", SECONDARYHANDSLOT},
-	[17] = {"RangedSlot", RANGEDSLOT}
+	{"HeadSlot", HEADSLOT},
+	{"NeckSlot", NECKSLOT},
+	{"ShoulderSlot", SHOULDERSLOT},
+	{"BackSlot", BACKSLOT},
+	{"ChestSlot", CHESTSLOT},
+	{"WristSlot", WRISTSLOT},
+	{"HandsSlot", HANDSSLOT},
+	{"WaistSlot", WAISTSLOT},
+	{"LegsSlot", LEGSSLOT},
+	{"FeetSlot", FEETSLOT},
+	{"Finger0Slot", FINGER0SLOT_UNIQUE},
+	{"Finger1Slot", FINGER1SLOT_UNIQUE},
+	{"Trinket0Slot", TRINKET0SLOT_UNIQUE},
+	{"Trinket1Slot", TRINKET1SLOT_UNIQUE},
+	{"MainHandSlot", MAINHANDSLOT},
+	{"SecondaryHandSlot", SECONDARYHANDSLOT},
+	{"RangedSlot", RANGEDSLOT},
 };
 
 local levelColors = {
@@ -35,9 +39,8 @@ local levelColors = {
 
 local function OnEvent(self)
 	local total, equipped = GetAverageItemLevel();
-	self.text:SetFormattedText(displayString, ITEM_LEVEL_ABBR, floor(equipped), floor(total));
 
-	lastPanel = self;
+	self.text:SetFormattedText(displayString, ITEM_LEVEL_ABBR, floor(equipped), floor(total));
 end
 
 local function OnEnter(self)
@@ -49,16 +52,14 @@ local function OnEnter(self)
 	DT.tooltip:AddDoubleLine(L["Total"], floor(total), 1, 1, 1, 1, 1, 0);
 	DT.tooltip:AddLine(" ");
 
-	for i = 1, 17 do
-		if(slots[i]) then
-			local item = GetInventoryItemLink("player", GetInventorySlotInfo(slots[i][1]));
-			if(item) then
-				local _, _, quality, iLevel = GetItemInfo(item)
-				local r, g, b = GetItemQualityColor(quality)
+	for i = 1, #slots do
+		local item = GetInventoryItemLink("player", GetInventorySlotInfo(slots[i][1]));
+		if(item) then
+			local _, _, quality, iLevel = GetItemInfo(item)
+			local r, g, b = GetItemQualityColor(quality)
 
-				color = levelColors[(iLevel < equipped - 5 and 0 or (iLevel > equipped + 5 and 1 or 2))];
-				DT.tooltip:AddDoubleLine(slots[i][2], iLevel, r, g, b, color[1], color[2], color[3]);
-			end
+			color = levelColors[(iLevel < equipped - 5 and 0 or (iLevel > equipped + 5 and 1 or 2))];
+			DT.tooltip:AddDoubleLine(slots[i][2], iLevel, r, g, b, color[1], color[2], color[3]);
 		end
 	end
 
@@ -76,8 +77,8 @@ end
 local function ValueColorUpdate(hex)
 	displayString = join("", "%s: ", hex, "%d/%d|r");
 
-	if(lastPanel ~= nil) then 
-		OnEvent(lastPanel); 
+	if(lastPanel ~= nil) then
+		OnEvent(lastPanel);
 	end
 end
 E["valueColorUpdateFuncs"][ValueColorUpdate] = true;

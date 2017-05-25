@@ -1,12 +1,18 @@
 local E, L, V, P, G = unpack(ElvUI);
-local ENH = E:NewModule("ENH", "AceHook-3.0", "AceEvent-3.0", "AceTimer-3.0")
+local addon = E:NewModule("ElvUI_Enhanced");
 
-ENH.version = GetAddOnMetadata("ElvUI_Enhanced", "Version")
+local addonName = ...;
 
-function ENH:Initialize()
-	if(E.db.general.loginmessage) then
-		print(format(L['ENH_LOGIN_MSG'], E["media"].hexvaluecolor, ENH.version))
-	end	
+local LEP = LibStub("LibElvUIPlugin-1.0");
+
+function addon:Initialize()
+	self.version = GetAddOnMetadata("ElvUI_Enhanced", "Version")
+
+	if E.db.general.loginmessage then
+		print(format(L["ENH_LOGIN_MSG"], E["media"].hexvaluecolor, addon.version));
+	end
+
+	LEP:RegisterPlugin(addonName, self.GetOptions);
 end
 
-E:RegisterModule(ENH:GetName())
+E:RegisterModule(addon:GetName());

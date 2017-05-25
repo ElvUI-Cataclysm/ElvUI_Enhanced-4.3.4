@@ -1,10 +1,31 @@
 local E, L, V, P, G = unpack(ElvUI);
-local M = E:NewModule('MiscEnh', 'AceHook-3.0', 'AceEvent-3.0');
+local M = E:NewModule("Enhanced_Misc", "AceEvent-3.0");
 
-E.MiscEnh = M;
+E.Enhanced_Misc = M;
+
+local IsInInstance = IsInInstance
+local RepopMe = RepopMe
+
+function M:PLAYER_DEAD()
+	local inInstance, instanceType = IsInInstance();
+	if(inInstance and (instanceType == "pvp")) then
+		local soulstone = GetSpellInfo(20707);
+		if((E.myclass ~= "SHAMAN") and not (soulstone and UnitBuff("player", soulstone))) then
+			RepopMe();
+		end
+	end
+end
+
+function M:AutoRelease()
+	if(E.db.enhanced.general.pvpAutoRelease) then
+		self:RegisterEvent("PLAYER_DEAD");
+	else
+		self:UnregisterEvent("PLAYER_DEAD");
+	end
+end
 
 function M:LoadDeclineDuel()
-	if(not E.db.general.declineduel) then return end
+	if(not E.db.enhanced.general.declineduel) then return end
 
 	local DeclineDuel = CreateFrame("Frame")
 	DeclineDuel:RegisterEvent("DUEL_REQUESTED")
@@ -18,45 +39,23 @@ function M:LoadDeclineDuel()
 	end)
 end
 
-function M:LoadAutoRelease()
-	if(not E.private.general.pvpAutoRelease) then return end
-
-	local autoreleasepvp = CreateFrame("frame")
-	autoreleasepvp:RegisterEvent("PLAYER_DEAD")
-	autoreleasepvp:SetScript("OnEvent", function(self, event)
-		local inInstance, instanceType = IsInInstance()
-		if(inInstance and (instanceType == "pvp")) then
-			local soulstone = GetSpellInfo(20707)
-			if((E.myclass ~= "SHAMAN") and not (soulstone and UnitBuff("player", soulstone))) then
-				RepopMe()
-			end
-		end
-	end);
-end
-
-function M:UpdateMoverTransparancy()
-	local mover;
-	for name, _ in pairs(E.CreatedMovers) do
-		mover = _G[name];
-		if(mover) then
-			mover:SetAlpha(E.db.general.moverTransparancy);
-		end
+function M:HideZone()
+	if(E.db.enhanced.general.hideZoneText) then
+		ZoneTextFrame:UnregisterAllEvents()
+	else
+		ZoneTextFrame:RegisterEvent("ZONE_CHANGED_NEW_AREA")
+		ZoneTextFrame:RegisterEvent("ZONE_CHANGED_INDOORS")
+		ZoneTextFrame:RegisterEvent("ZONE_CHANGED")
 	end
 end
 
-function M:LoadMoverTransparancy()
-	hooksecurefunc(E, "CreateMover", function(_, parent)
-		parent.mover:SetAlpha(E.db.general.moverTransparancy);
-	end);
-
-	self:UpdateMoverTransparancy();
-end
-
 function M:Initialize()
-	self:LoadAutoRelease()
-	self:LoadWatchedFaction()
-	self:LoadMoverTransparancy()
+	self:AutoRelease();
+	self:HideZone()
 	self:LoadDeclineDuel()
+	self:LoadQuestReward()
+	self:WatchedFaction();
+	self:LoadMoverTransparancy()
 end
 
-E:RegisterModule(M:GetName())
+E:RegisterModule(M:GetName());
