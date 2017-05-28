@@ -33,9 +33,9 @@ L["Equipped"] = true;
 L["In Combat"] = true;
 L["New Mail"] = "Новое письмо"
 L["No Mail"] = "Нет писем"
-L["Not Learned"] = true;
+L["Not Learned!"] = true;
 L["Out of Combat"] = true;
-L["Ready"] = true;
+L["Ready!"] = true;
 L["Total"] = "Всего"
 L["You are not playing a |cff0070DEShaman|r, datatext disabled."] = true;
 
