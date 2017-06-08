@@ -251,8 +251,8 @@ function AL:Initialize()
 	end);
 
 	local closeButton = CreateFrame("Button", "$parentCloseButton", addonList, "UIPanelCloseButton");
-	closeButton:Size(32, 32);
-	closeButton:Point("TOPRIGHT", 1, 1);
+	closeButton:Size(32);
+	closeButton:Point("TOPRIGHT", -2, 2);
 	S:HandleCloseButton(closeButton);
 
 	closeButton:SetScript("OnClick", function()
@@ -432,4 +432,8 @@ function AL:Initialize()
 	end
 end
 
-E:RegisterModule(AL:GetName());
+local function InitializeCallback()
+	AL:Initialize()
+end
+
+E:RegisterModule(AL:GetName(), InitializeCallback)

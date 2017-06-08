@@ -384,7 +384,7 @@ local function TooltipOptions()
 					tooltipIconSpells = {
 						order = 3,
 						type = "toggle",
-						name = L["Enable Spell"],
+						name = STAT_CATEGORY_SPELL,
 						desc = L["Show/Hides an Icon for Spells on the Tooltip."],
 						get = function(info) return E.db.enhanced.tooltip.tooltipIcon.tooltipIconSpells; end,
 						set = function(info, value) E.db.enhanced.tooltip.tooltipIcon.tooltipIconSpells = value; end,
@@ -393,7 +393,7 @@ local function TooltipOptions()
 					tooltipIconItems = {
 						order = 4,
 						type = "toggle",
-						name = L["Enable Items"],
+						name = BUG_CATEGORY11,
 						desc = L["Show/Hides an Icon for Items on the Tooltip."],
 						get = function(info) return E.db.enhanced.tooltip.tooltipIcon.tooltipIconItems; end,
 						set = function(info, value) E.db.enhanced.tooltip.tooltipIcon.tooltipIconItems = value; end,
@@ -402,7 +402,7 @@ local function TooltipOptions()
 					tooltipIconAchievements = {
 						order = 5,
 						type = "toggle",
-						name = L["Enable Achievements"],
+						name = ACHIEVEMENTS,
 						desc = L["Show/Hides an Icon for Achievements on the Tooltip."],
 						get = function(info) return E.db.enhanced.tooltip.tooltipIcon.tooltipIconAchievements; end,
 						set = function(info, value) E.db.enhanced.tooltip.tooltipIcon.tooltipIconAchievements = value; end,

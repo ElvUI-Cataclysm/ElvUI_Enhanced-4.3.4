@@ -266,4 +266,8 @@ function LOS:Initialize()
 	self:RegisterEvent("UNIT_AURA");
 end
 
-E:RegisterModule(LOS:GetName());
+local function InitializeCallback()
+	LOS:Initialize()
+end
+
+E:RegisterModule(LOS:GetName(), InitializeCallback)

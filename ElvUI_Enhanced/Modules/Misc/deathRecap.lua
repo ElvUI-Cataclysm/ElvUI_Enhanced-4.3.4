@@ -362,8 +362,8 @@ function mod:Initialize()
 	frame.Unavailable:Point("CENTER");
 	frame.Unavailable:SetText(L["Death Recap unavailable."]);
 
-	frame.CloseXButton = CreateFrame("Button", "$parentCloseXButton", frame);
-	frame.CloseXButton:Size(32, 32);
+	frame.CloseXButton = CreateFrame("Button", "$parentCloseXButton", frame, "UIPanelCloseButton");
+	frame.CloseXButton:Size(32);
 	frame.CloseXButton:Point("TOPRIGHT", 2, 1);
 	frame.CloseXButton:SetScript("OnClick", function(self) HideUIPanel(self:GetParent()); end);
 	S:HandleCloseButton(frame.CloseXButton);
@@ -384,7 +384,7 @@ function mod:Initialize()
 	end)
 
 	frame:SetScript("OnEnter", function(self)
-		GameTooltip:SetOwner(self, "ANCHOR_TOPLEFT", 0, 4);
+		GameTooltip:SetOwner(self, "ANCHOR_TOPLEFT", 0, 1);
 		GameTooltip:ClearLines();
 		GameTooltip:AddDoubleLine(L["Hold Shift + Drag:"], L["Temporary Move"], 1, 1, 1);
 
@@ -404,8 +404,8 @@ function mod:Initialize()
 
 	for i = 1, 5 do
 		local button = CreateFrame("Frame", nil, frame);
-		button:Size(308, 32);
-		button:CreateBackdrop("Transparent");
+		button:Size(308, 34);
+		button:SetTemplate("Transparent");
 
 		frame.DeathRecapEntry[i] = button;
 
@@ -436,7 +436,7 @@ function mod:Initialize()
 		button.SpellInfo:SetScript("OnLeave", GameTooltip_Hide);
 
 		button.SpellInfo.FrameIcom = CreateFrame("Button", nil, button.SpellInfo);
-		button.SpellInfo.FrameIcom:Size(34, 34);
+		button.SpellInfo.FrameIcom:Size(34);
 		button.SpellInfo.FrameIcom:Point("LEFT", 0, 0);
 		button.SpellInfo.FrameIcom:SetTemplate("Default");
 
@@ -592,4 +592,8 @@ function mod:Initialize()
 	};
 end
 
-E:RegisterModule(mod:GetName());
+local function InitializeCallback()
+	mod:Initialize()
+end
+
+E:RegisterModule(mod:GetName(), InitializeCallback)

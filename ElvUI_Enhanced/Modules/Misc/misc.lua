@@ -60,4 +60,8 @@ function M:Initialize()
 	self:LoadMoverTransparancy()
 end
 
-E:RegisterModule(M:GetName());
+local function InitializeCallback()
+	M:Initialize()
+end
+
+E:RegisterModule(M:GetName(), InitializeCallback)

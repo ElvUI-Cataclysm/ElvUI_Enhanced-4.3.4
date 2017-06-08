@@ -41,4 +41,8 @@ function TC:Initialize()
 	self:ToggleSettings();
 end
 
-E:RegisterModule(TC:GetName());
+local function InitializeCallback()
+	TC:Initialize()
+end
+
+E:RegisterModule(TC:GetName(), InitializeCallback)

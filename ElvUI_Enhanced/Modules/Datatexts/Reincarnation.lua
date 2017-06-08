@@ -6,7 +6,6 @@ local floor = math.floor;
 
 local GetTime = GetTime;
 local IsSpellKnown = IsSpellKnown;
-local READY = READY
 
 local displayString = ""
 local lastPanel;

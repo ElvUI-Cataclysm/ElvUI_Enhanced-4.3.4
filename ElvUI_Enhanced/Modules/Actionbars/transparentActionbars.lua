@@ -89,4 +89,8 @@ function ETAB:Initialize()
 	E:Delay(0.3, ETAB.ButtonsBackdrop);
 end
 
-E:RegisterModule(ETAB:GetName())
+local function InitializeCallback()
+	ETAB:Initialize()
+end
+
+E:RegisterModule(ETAB:GetName(), InitializeCallback)

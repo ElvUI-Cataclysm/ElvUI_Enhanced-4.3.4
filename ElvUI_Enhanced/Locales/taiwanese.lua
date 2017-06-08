@@ -107,9 +107,6 @@ L["Toggle Location Panel."] = true;
 
 -- Tooltip
 L["Display the players raid progression in the tooltip, this may not immediately update when mousing over a unit."] = true;
-L["Enable Achievements"] = true;
-L["Enable Items"] = true;
-L["Enable Spell"] = true;
 L["Progression Info"] = true;
 L["Show/Hides an Icon for Achievements on the Tooltip."] = true;
 L["Show/Hides an Icon for Items on the Tooltip."] = true;

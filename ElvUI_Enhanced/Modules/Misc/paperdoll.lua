@@ -228,4 +228,8 @@ function PD:Initialize()
 	PD:RegisterEvent("PLAYER_ENTERING_WORLD", "InitialUpdatePaperDoll")
 end
 
-E:RegisterModule(PD:GetName())
+local function InitializeCallback()
+	PD:Initialize()
+end
+
+E:RegisterModule(PD:GetName(), InitializeCallback)
