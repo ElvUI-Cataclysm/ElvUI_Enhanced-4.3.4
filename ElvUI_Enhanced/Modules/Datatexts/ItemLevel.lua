@@ -7,6 +7,8 @@ local join = string.join
 local GetInventoryItemLink = GetInventoryItemLink
 local GetInventorySlotInfo = GetInventorySlotInfo
 local GetItemInfo = GetItemInfo
+local ITEM_LEVEL_ABBR = ITEM_LEVEL_ABBR
+local STAT_AVERAGE_ITEM_LEVEL = STAT_AVERAGE_ITEM_LEVEL
 
 local displayString = "";
 local lastPanel;
@@ -83,4 +85,4 @@ local function ValueColorUpdate(hex)
 end
 E["valueColorUpdateFuncs"][ValueColorUpdate] = true;
 
-DT:RegisterDatatext("Item Level", {"PLAYER_ENTERING_WORLD", "PLAYER_EQUIPMENT_CHANGED", "UNIT_INVENTORY_CHANGED"}, OnEvent, nil, OnClick, OnEnter);
+DT:RegisterDatatext("Item Level", {"PLAYER_ENTERING_WORLD", "PLAYER_EQUIPMENT_CHANGED", "UNIT_INVENTORY_CHANGED"}, OnEvent, nil, OnClick, OnEnter, nil, STAT_AVERAGE_ITEM_LEVEL)
