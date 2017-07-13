@@ -199,27 +199,27 @@ local function EquipmentOptions()
 				type = "header",
 				name = ColorizeSettingName(L["Equipment"])
 			},
-			intro2 = {
-				order = 2,
-				type = "description",
-				name = L["DURABILITY_DESC"]
-			},
 			durability = {
-				order = 3,
+				order = 2,
 				type = "group",
 				name = DURABILITY,
 				guiInline = true,
 				get = function(info) return E.private.equipment.durability[ info[#info] ] end,
 				set = function(info, value) E.private.equipment.durability[ info[#info] ] = value PD:UpdatePaperDoll() end,
 				args = {
-					enable = {
+					info = {
 						order = 1,
+						type = "description",
+						name = L["DURABILITY_DESC"]
+					},
+					enable = {
+						order = 2,
 						type = "toggle",
 						name = L["Enable"],
 						desc = L["Enable/Disable the display of durability information on the character screen."]
 					},
 					onlydamaged = {
-						order = 2,
+						order = 3,
 						type = "toggle",
 						name = L["Damaged Only"],
 						desc = L["Only show durabitlity information for items that are damaged."],
@@ -235,8 +235,13 @@ local function EquipmentOptions()
 				get = function(info) return E.private.equipment.itemlevel[ info[#info] ] end,
 				set = function(info, value) E.private.equipment.itemlevel[ info[#info] ] = value PD:UpdatePaperDoll() end,
 				args = {
+					info = {
+ 						order = 1,
+						type = "description",
+						name = L["ITEMLEVEL_DESC"]
+					},
 					enable = {
-						order = 1,
+						order = 2,
 						type = "toggle",
 						name = L["Enable"],
 						desc = L["Enable/Disable the display of item levels on the character screen."]
@@ -361,8 +366,16 @@ local function TooltipOptions()
 				type = "header",
 				name = ColorizeSettingName(L["Tooltip"])
 			},
+			itemQualityBorderColor = {
+ 				order = 2,
+				type = "toggle",
+				name = L["Item Border Color"],
+				desc = L["Colorize the tooltip border based on item quality."],
+				get = function(info) return E.db.enhanced.tooltip.itemQualityBorderColor end,
+				set = function(info, value) E.db.enhanced.tooltip.itemQualityBorderColor = value; E:GetModule("Enhanced_ItemBorderColor"):ToggleState(); end
+			},
 			tooltipIcon = {
-				order = 2,
+				order = 3,
 				type = "group",
 				name = L["Tooltip Icon"],
 				guiInline = true,
