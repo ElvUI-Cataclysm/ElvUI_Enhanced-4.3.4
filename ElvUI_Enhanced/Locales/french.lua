@@ -16,6 +16,13 @@ L["Transparent ActionBars"] = true;
 L["Transparent Backdrop"] = true;
 L["Transparent Buttons"] = true;
 
+-- AddOn List
+L["Enable All"] = true;
+L["Dependencies: "] = true;
+L["Disable All"] = true;
+L["Load AddOn"] = true;
+L["Requires Reload"] = true;
+
 -- Animated Loss
 L["Animated Loss"] = true;
 L["Pause Delay"] = true;
@@ -23,7 +30,8 @@ L["Start Delay"] = true;
 L["Postpone Delay"] = true;
 
 -- Chat
-L["Replaces long reports from damage meters with a clickeble hyperlink to reduce chat spam."] = true;
+L["Filter DPS meters Spam"] = true;
+L["Replaces long reports from damage meters with a clickable hyperlink to reduce chat spam.\nWorks correctly only with general reports such as DPS or HPS. May fail to filter te report of other things"] = true;
 
 -- Datatext
 L["Combat Indicator"] = true;
@@ -98,6 +106,7 @@ L["Smooth Bars"] = true;
 
 -- Minimap
 L["Above Minimap"] = "Sous la minicarte"
+L["Combat Hide"] = true;
 L["FadeIn Delay"] = "Délais d'estompage"
 L["Hide minimap while in combat."] = "Cacher la minicarte quand vous êtes en combat"
 L["Location Digits"] = "Chiffres d'emplacement"
@@ -137,9 +146,11 @@ L["Snare"] = "Ralentissement"
 
 -- Unitframes
 L["All role icons (Damage/Healer/Tank) on the unit frames are hidden when you go into combat."] = "Cachez toutes les icônes de rôle (Dommages/Healer/Tank) sur les cadres d'unité quand vous serait en combat."
+L["Class Icons"] = true;
 L["Detached Height"] = true;
 L["Hide Role Icon in combat"] = "Cachez les icônes de rôle en combat"
 L["Show class icon for units."] = true;
+L["Target"] = true;
 
 -- WatchFrame
 L["Hidden"] = "Caché"
