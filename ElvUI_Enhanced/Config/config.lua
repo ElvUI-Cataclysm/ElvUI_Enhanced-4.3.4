@@ -433,7 +433,7 @@ local function WatchFrameOptions()
 	local WF = E:GetModule("Enhanced_WatchFrame");
 
 	local choices = {
-		["NONE"] = L["None"],
+		["NONE"] = NONE,
 		["COLLAPSED"] = L["Collapsed"],
 		["HIDDEN"] = L["Hidden"]
 	};
