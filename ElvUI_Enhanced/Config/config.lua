@@ -100,7 +100,8 @@ end
 
 -- Actionbars
 local function ActionbarOptions()
-	local ETAB = E:GetModule("Enhanced_TransparentActionbars");
+	local EAB = E:GetModule("Enhanced_ActionBars")
+	local ETAB = E:GetModule("Enhanced_TransparentActionbars")
 
 	local config = {
 		order = 1.5,
@@ -112,8 +113,39 @@ local function ActionbarOptions()
 				type = "header",
 				name = ColorizeSettingName(L["ActionBars"])
 			},
-			transparentActionbars = {
+			equipped = {
 				order = 2,
+				type = "group",
+				name = L["Equipped Item Border"],
+				guiInline = true,
+				args = {
+					equipped = {
+						order = 1,
+						type = "toggle",
+						name = L["Enable"],
+						get = function(info) return E.db.enhanced.actionbars[ info[#info] ] end,
+						set = function(info, value) E.db.enhanced.actionbars[ info[#info] ] = value; EAB:UpdateCallback(); E:GetModule("ActionBars"):UpdateButtonSettings() end
+					},
+					equippedColor = {
+						order = 2,
+						type = "color",
+						name = L["Border Color"],
+						get = function(info)
+							local t = E.db.enhanced.actionbars[ info[#info] ]
+							local d = P.enhanced.actionbars[ info[#info] ]
+							return t.r, t.g, t.b, t.a, d.r, d.g, d.b
+						end,
+						set = function(info, r, g, b)
+							local t = E.db.enhanced.actionbars[ info[#info] ]
+							t.r, t.g, t.b = r, g, b
+							E:GetModule("ActionBars"):UpdateButtonSettings()
+						end,
+						disabled = function() return not E.db.enhanced.actionbars.equipped end
+					}
+				}
+			},
+			transparentActionbars = {
+				order = 3,
 				type = "group",
 				name = L["Transparent ActionBars"],
 				guiInline = true,
