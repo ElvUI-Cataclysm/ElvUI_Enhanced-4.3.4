@@ -127,6 +127,7 @@ L["Show/Hides an Icon for Spells and Items on the Tooltip."] = "Icon für Zauber
 L["Tooltip Icon"] = true;
 
 -- Misc
+L["Original Close Button"] = true;
 L["Skin Animations"] = "Skin-Animationen"
 L["Undress"] = "Ausziehen"
 

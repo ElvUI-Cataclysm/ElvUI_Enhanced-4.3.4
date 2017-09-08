@@ -62,22 +62,29 @@ local function GeneralOptions()
 				get = function(info) return E.db.enhanced.general.declineduel; end,
 				set = function(info, value) E.db.enhanced.general.declineduel = value; M:LoadDeclineDuel() end
 			},
-			hideZoneText = {
+			originalCloseButton = {
 				order = 7,
+				type = "toggle",
+				name = L["Original Close Button"],
+				get = function(info) return E.db.enhanced.general.originalCloseButton end,
+				set = function(info, value) E.db.enhanced.general.originalCloseButton = value E:StaticPopup_Show("CONFIG_RL") end
+			},
+			hideZoneText = {
+				order = 8,
 				type = "toggle",
 				name = L["Hide Zone Text"],
 				get = function(info) return E.db.enhanced.general.hideZoneText end,
 				set = function(info, value) E.db.enhanced.general.hideZoneText = value M:HideZone() end
 			},
 			animations = {
-				order = 8,
+				order = 9,
 				type = "toggle",
 				name = L["Skin Animations"],
 				get = function(info) return E.private.skins.animations; end,
 				set = function(info, value) E.private.skins.animations = value; end
 			},
 			moverTransparancy = {
-				order = 9,
+				order = 10,
 				type = "range",
 				isPercent = true,
 				name = L["Mover Transparency"],
