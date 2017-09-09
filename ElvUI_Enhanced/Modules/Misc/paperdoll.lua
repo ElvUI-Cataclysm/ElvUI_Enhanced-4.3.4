@@ -9,6 +9,7 @@ local CanInspect = CanInspect
 local GetInventoryItemDurability = GetInventoryItemDurability
 local GetInventoryItemLink = GetInventoryItemLink
 local GetInventorySlotInfo = GetInventorySlotInfo
+local GetItemQualityColor = GetItemQualityColor
 local GetItemInfo = GetItemInfo
 local InCombatLockdown = InCombatLockdown
 
@@ -86,7 +87,7 @@ local heirlooms = {
 }
 
 function PD:UpdatePaperDoll(inspect)
-	if not initialized then return end
+	if not self.initialized then return end
 
 	if InCombatLockdown() then
 		PD:RegisterEvent("PLAYER_REGEN_ENABLED", "UpdatePaperDoll", inspect)
@@ -101,8 +102,8 @@ function PD:UpdatePaperDoll(inspect)
 
 	local frame, slot, current, maximum, r, g, b
 	local baseName = inspect and "Inspect" or "Character"
-	local itemLink, itemLevel
-	local avgItemLevel, avgEquipItemLevel = GetAverageItemLevel()
+	local itemLink, itemLevel, rarity
+	local _, avgEquipItemLevel = GetAverageItemLevel()
 
 	for k, info in pairs(slots) do
 		frame = _G[("%s%s"):format(baseName, k)]
@@ -110,13 +111,24 @@ function PD:UpdatePaperDoll(inspect)
 
 		if info[1] then
 			frame.ItemLevel:SetText()
-			if E.private.equipment.itemlevel.enable and info[1] then
+			if E.db.enhanced.equipment.itemlevel.enable and info[1] then
 				itemLink = GetInventoryItemLink(unit, slot)
 
 				if itemLink then
 					itemLevel = self:GetItemLevel(unit, itemLink)
+					rarity = select(3, GetItemInfo(itemLink))
 					if itemLevel and avgEquipItemLevel then
-						frame.ItemLevel:SetFormattedText("%s%d|r", levelColors[(itemLevel < avgEquipItemLevel-10 and 0 or (itemLevel > avgEquipItemLevel + 10 and 1 or (2)))], itemLevel)
+						if E.db.enhanced.equipment.itemlevel.qualityColor then
+							if rarity and rarity > 1 then
+								frame.ItemLevel:SetText(itemLevel)
+								frame.ItemLevel:SetTextColor(GetItemQualityColor(rarity))
+							else
+								frame.ItemLevel:SetText(itemLevel)
+								frame.ItemLevel:SetTextColor(1, 1, 1)
+							end
+						else
+							frame.ItemLevel:SetFormattedText("%s%d|r", levelColors[(itemLevel < avgEquipItemLevel-10 and 0 or (itemLevel > avgEquipItemLevel + 10 and 1 or (2)))], itemLevel)
+						end
 					end
 				end
 			end
@@ -125,9 +137,9 @@ function PD:UpdatePaperDoll(inspect)
 		if not inspect and info[2] then
 			frame.DurabilityInfo:SetText()
 
-			if E.private.equipment.durability.enable then
+			if E.db.enhanced.equipment.durability.enable then
 				current, maximum = GetInventoryItemDurability(slot)
-				if current and maximum and (not E.private.equipment.durability.onlydamaged or current < maximum) then
+				if current and maximum and (not E.db.enhanced.equipment.durability.onlydamaged or current < maximum) then
 					r, g, b = E:ColorGradient((current / maximum), 1, 0, 0, 1, 1, 0, 0, 1, 0)
 					frame.DurabilityInfo:SetFormattedText("%s%.0f%%|r", E:RGBToHex(r, g, b), (current / maximum) * 100)
 				end
@@ -138,7 +150,7 @@ end
 
 function PD:DelayUpdateInfo(inspect)
 	if (updateTimer == 0 or PD:TimeLeft(updateTimer) == 0) then
-		updateTimer = PD:ScheduleTimer("UpdatePaperDoll", .2, inspect)
+		updateTimer = PD:ScheduleTimer("UpdatePaperDoll", 0.3, inspect)
 	end
 end
 
@@ -183,6 +195,8 @@ function PD:InspectFrame_UpdateTabsComplete()
 end
 
 function PD:InitialUpdatePaperDoll()
+	if self.initialized then return end
+
 	PD:UnregisterEvent("PLAYER_ENTERING_WORLD")
 
 	LoadAddOn("Blizzard_InspectUI")
@@ -195,30 +209,48 @@ function PD:InitialUpdatePaperDoll()
 
 	self:ScheduleTimer("UpdatePaperDoll", 5, false)
 
-	initialized = true
+	self.initialized = true
+end
+
+function PD:UpdateInfoText(name)
+	local db = E.db.enhanced.equipment
+	local frame
+	for k, info in pairs(slots) do
+		frame = _G[("%s%s"):format(name, k)]
+
+		if info[1] then
+			frame.ItemLevel:ClearAllPoints()
+			frame.ItemLevel:Point(db.itemlevel.position, frame, db.itemlevel.xOffset, db.itemlevel.yOffset)
+			frame.ItemLevel:FontTemplate(E.media.font, 12, "THINOUTLINE")
+			frame.ItemLevel:FontTemplate(E.LSM:Fetch("font", db.font), db.fontSize, db.fontOutline)
+		end
+
+		if name == "Character" and info[2] then
+			frame.DurabilityInfo:ClearAllPoints()
+			frame.DurabilityInfo:Point(db.durability.position, frame, db.durability.xOffset, db.durability.yOffset)
+			frame.DurabilityInfo:FontTemplate(E.media.font, 12, "THINOUTLINE")
+			frame.DurabilityInfo:FontTemplate(E.LSM:Fetch("font", db.font), db.fontSize, db.fontOutline)
+		end
+	end
 end
 
 function PD:BuildInfoText(name)
+	local frame
 	for k, info in pairs(slots) do
 		frame = _G[("%s%s"):format(name, k)]
 
 		if info[1] then
 			frame.ItemLevel = frame:CreateFontString(nil, "OVERLAY")
-			frame.ItemLevel:SetPoint("BOTTOMLEFT", frame, "BOTTOMLEFT", 1, 1)
-			frame.ItemLevel:FontTemplate(E.media.font, 12, "THINOUTLINE")
 		end
 
 		if name == "Character" and info[2] then
 			frame.DurabilityInfo = frame:CreateFontString(nil, "OVERLAY")
-			frame.DurabilityInfo:SetPoint("TOP", frame, "TOP", 0, -4)
-			frame.DurabilityInfo:FontTemplate(E.media.font, 12, "THINOUTLINE")
 		end
 	end
+	self:UpdateInfoText(name)
 end
 
 function PD:Initialize()
-	local frame
-
 	PD:RegisterEvent("UPDATE_INVENTORY_DURABILITY", "UpdatePaperDoll", false)
 	PD:RegisterEvent("PLAYER_EQUIPMENT_CHANGED", "UpdatePaperDoll", false)
 	PD:RegisterEvent("SOCKET_INFO_UPDATE", "UpdatePaperDoll", false)

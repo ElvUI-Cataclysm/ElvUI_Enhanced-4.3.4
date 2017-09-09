@@ -82,6 +82,7 @@ L["Equipment Set"] = "装备模组"
 L["Equipment"] = "自动换装"
 L["No Change"] = "不改变"
 L["Only show durabitlity information for items that are damaged."] = "只在装备受损时显示耐久度."
+L["Quality Color"] = true;
 L["Show the associated equipment sets for the items in your bags (or bank)."] = true;
 L["Specialization"] = "专精"
 L["You have equipped equipment set: "] = "你已装备此模组: "

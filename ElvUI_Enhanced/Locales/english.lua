@@ -82,6 +82,7 @@ L["Equipment Set"] = true;
 L["Equipment"] = true;
 L["No Change"] = true;
 L["Only show durabitlity information for items that are damaged."] = true;
+L["Quality Color"] = true;
 L["Show the associated equipment sets for the items in your bags (or bank)."] = true;
 L["Specialization"] = true
 L["You have equipped equipment set: "] = true;

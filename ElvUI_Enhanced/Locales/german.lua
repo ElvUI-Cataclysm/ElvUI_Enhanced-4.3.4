@@ -82,6 +82,7 @@ L["Equipment Set"] = "Ausrüstungsset"
 L["Equipment"] = "Ausrüstung"
 L["No Change"] = "Keine Änderung"
 L["Only show durabitlity information for items that are damaged."] = "Nur die Haltbarkeit für beschädigte Ausrüstungsteile anzeigen."
+L["Quality Color"] = true;
 L["Show the associated equipment sets for the items in your bags (or bank)."] = "Zeige auf Gegenständen im Rucksack (oder der Bank) die zugehörigen Ausrüstungssets als Text an."
 L["Specialization"] = "Talentspezialisierung"
 L["You have equipped equipment set: "] = "Sie haben das folgende Ausrüstungsset angelegt: "
