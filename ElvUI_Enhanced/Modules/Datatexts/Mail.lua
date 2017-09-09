@@ -1,10 +1,14 @@
-local E, L, V, P, G = unpack(ElvUI);
+local E, L, V, P, G = unpack(ElvUI)
 local DT = E:GetModule("DataTexts")
 
 local MAIL_LABEL = MAIL_LABEL
 
-local Mail_Icon = "|TInterface\\MINIMAP\\TRACKING\\Mailbox.blp:14:14|t";
-local Read;
+local Mail_Icon = "|TInterface\\MINIMAP\\TRACKING\\Mailbox.blp:14:14|t"
+local Read
+
+local function ColorizeSettingName(settingName)
+	return format("|cffff8000%s|r", settingName)
+end
 
 local function MakeIconString()
 	local str = ""
@@ -24,22 +28,22 @@ local function OnEvent(self, event, ...)
 	end
 	if event == "MAIL_INBOX_UPDATE" or event == "MAIL_SHOW" or event == "MAIL_CLOSED" then
 		for i = 1, GetInboxNumItems() do
-			local _, _, _, _, _, _, _, _, wasRead = GetInboxHeaderInfo(i);
+			local _, _, _, _, _, _, _, _, wasRead = GetInboxHeaderInfo(i)
 			if(not wasRead) then
-				newMail = true;
-				break;
+				newMail = true
+				break
 			end
 		end
 	end
 
 	if newMail then
 		self.text:SetText(MakeIconString()..L["New Mail"])
-		self.text:SetTextColor(0, 1, 0);
-		Read = false;
+		self.text:SetTextColor(0, 1, 0)
+		Read = false
 	else
 		self.text:SetText(L["No Mail"])
-		self.text:SetTextColor(1, 1, 1);
-		Read = true;
+		self.text:SetTextColor(1, 1, 1)
+		Read = true
 	end
 end
 
@@ -58,4 +62,4 @@ local function OnEnter(self)
 	DT.tooltip:Show()
 end
 
-DT:RegisterDatatext("Mail", {"PLAYER_ENTERING_WORLD", "MAIL_INBOX_UPDATE", "UPDATE_PENDING_MAIL", "MAIL_CLOSED", "PLAYER_LOGIN", "MAIL_SHOW"}, OnEvent, nil, nil, OnEnter, nil, MAIL_LABEL)
+DT:RegisterDatatext("Mail", {"PLAYER_ENTERING_WORLD", "MAIL_INBOX_UPDATE", "UPDATE_PENDING_MAIL", "MAIL_CLOSED", "PLAYER_LOGIN", "MAIL_SHOW"}, OnEvent, nil, nil, OnEnter, nil, ColorizeSettingName(MAIL_LABEL))

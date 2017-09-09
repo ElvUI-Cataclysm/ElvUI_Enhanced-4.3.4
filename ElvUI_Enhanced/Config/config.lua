@@ -10,7 +10,8 @@ end
 
 -- General
 local function GeneralOptions()
-	local M = E:GetModule("Enhanced_Misc");
+	local M = E:GetModule("Enhanced_Misc")
+	local AL = E:GetModule("AlreadyKnown")
 
 	local config = {
 		order = 1,
@@ -66,8 +67,17 @@ local function GeneralOptions()
 				order = 7,
 				type = "toggle",
 				name = L["Original Close Button"],
+				desc = L["Use blizzard close buttons, but desaturated"],
 				get = function(info) return E.db.enhanced.general.originalCloseButton end,
 				set = function(info, value) E.db.enhanced.general.originalCloseButton = value E:StaticPopup_Show("CONFIG_RL") end
+			},
+			alreadyKnown = {
+				order = 9,
+				type = "toggle",
+				name = L["Already Known"],
+				desc = L["Colorizes recipes, mounts & pets that are already known"],
+				get = function(info) return E.db.enhanced.general.alreadyKnown end,
+				set = function(info, value) E.db.enhanced.general.alreadyKnown = value AL:AlreadyKnownUpdate() end
 			},
 			hideZoneText = {
 				order = 8,

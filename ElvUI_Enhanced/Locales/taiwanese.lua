@@ -88,6 +88,7 @@ L["Specialization"] = "專精"
 L["You have equipped equipment set: "] = "你已裝備此模組: "
 
 -- General
+L["Already Known"] = true;
 L["Automatically change your watched faction on the reputation bar to the faction you got reputation points for."] = "當你獲得某個陣營的聲望時, 將自動追蹤此陣營的聲望至經驗值欄位." 
 L["Automatically release body when killed inside a battleground."] = "在戰場死亡後自動釋放靈魂."
 L["Automatically select the quest reward with the highest vendor sell value."] = "自動選取有最高賣價的任務獎勵物品"
@@ -100,6 +101,7 @@ L["PvP Autorelease"] = "PVP自動釋放靈魂"
 L["Select Quest Reward"] = "自動選取任務獎勵"
 L["Show Quest Level"] = true;
 L["Track Reputation"] = "聲望追蹤"
+L["Use blizzard close buttons, but desaturated"] = true;
 
 -- Nameplates
 L["Bars will transition smoothly."] = true;

@@ -15,6 +15,10 @@ local lastPanel
 local red = "|cffb11919"
 local texture = format("|T%s:14:14:0:0:64:64:4:60:4:60|t", GetSpellTexture(20608))
 
+local function ColorizeSettingName(settingName)
+	return format("|cffff8000%s|r", settingName)
+end
+
 local function OnUpdate(self)
 	if(E.myclass == "SHAMAN") then
 		local isKnown = IsSpellKnown(20608, false)
@@ -94,4 +98,4 @@ local function ValueColorUpdate(hex)
 end
 E["valueColorUpdateFuncs"][ValueColorUpdate] = true
 
-DT:RegisterDatatext("Reincarnation", {"PLAYER_ENTERING_WORLD", "SPELL_UPDATE_COOLDOWN"}, OnEvent, OnUpdate, OnClick, OnEnter, nil, L["Reincarnation"])
+DT:RegisterDatatext("Reincarnation", {"PLAYER_ENTERING_WORLD", "SPELL_UPDATE_COOLDOWN"}, OnEvent, OnUpdate, OnClick, OnEnter, nil, ColorizeSettingName(L["Reincarnation"]))

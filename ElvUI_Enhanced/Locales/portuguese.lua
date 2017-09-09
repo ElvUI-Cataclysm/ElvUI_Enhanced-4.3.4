@@ -88,6 +88,7 @@ L["Specialization"] = "Especialização"
 L["You have equipped equipment set: "] = "Você tem equipado o conjunto: "
 
 -- General
+L["Already Known"] = true;
 L["Automatically change your watched faction on the reputation bar to the faction you got reputation points for."] = "Mudar automaticamente a facção controlada para a facção na qual acabou de ganhar pontos de reputação." 
 L["Automatically release body when killed inside a battleground."] = "Automaticamente libertar o corpo quando morto num campo de batalha."
 L["Automatically select the quest reward with the highest vendor sell value."] = true;
@@ -100,6 +101,7 @@ L["PvP Autorelease"] = "Auto-libertar em JxJ"
 L["Select Quest Reward"] = true;
 L["Show Quest Level"] = true;
 L["Track Reputation"] = "Controlar Reputação"
+L["Use blizzard close buttons, but desaturated"] = true;
 
 -- Nameplates
 L["Bars will transition smoothly."] = true;

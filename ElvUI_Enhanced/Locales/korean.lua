@@ -88,6 +88,7 @@ L["Specialization"] = true
 L["You have equipped equipment set: "] = true;
 
 -- General
+L["Already Known"] = true;
 L["Automatically change your watched faction on the reputation bar to the faction you got reputation points for."] = true;
 L["Automatically release body when killed inside a battleground."] = true;
 L["Automatically select the quest reward with the highest vendor sell value."] = true;
@@ -100,6 +101,7 @@ L["PvP Autorelease"] = true;
 L["Select Quest Reward"] = true;
 L["Show Quest Level"] = true;
 L["Track Reputation"] = true;
+L["Use blizzard close buttons, but desaturated"] = true;
 
 -- Nameplates
 L["Bars will transition smoothly."] = true;
