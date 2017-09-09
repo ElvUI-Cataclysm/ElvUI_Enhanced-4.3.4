@@ -118,14 +118,22 @@ L["The time to wait before fading the minimap back in after combat hide. (0 = Di
 L["Toggle Location Panel."] = true;
 
 -- Tooltip
+L["Baradin Hold"] = true;
+L["Bastion of Twilight"] = true;
+L["Blackwing Descend"] = true;
+L["Check Player"] = true;
 L["Colorize the tooltip border based on item quality."] = "Окрашивать бордюр тултипа в цвет качества предмета"
 L["Display the players raid progression in the tooltip, this may not immediately update when mousing over a unit."] = true;
+L["Dragon Soul"] = true;
+L["Firelands"] = true;
 L["Item Border Color"] = "Цвет рамки предметов"
-L["Progression Info"] = "Прогресс"
+L["Progress Info"] = "Прогресс"
 L["Show/Hides an Icon for Achievements on the Tooltip."] = true;
 L["Show/Hides an Icon for Items on the Tooltip."] = true;
 L["Show/Hides an Icon for Spells on the Tooltip."] = true;
 L["Show/Hides an Icon for Spells and Items on the Tooltip."] = true;
+L["Throne of the Four Winds"] = true;
+L["Tiers"] = true;
 L["Tooltip Icon"] = true;
 
 -- Misc

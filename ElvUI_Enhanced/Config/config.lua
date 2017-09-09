@@ -567,9 +567,85 @@ local function TooltipOptions()
 						disabled = function() return not E.db.enhanced.tooltip.tooltipIcon.enable end
 					}
 				}
+			},
+			progressInfo = {
+				order = 4,
+				type = "group",
+				name = L["Progress Info"],
+				guiInline = true,
+				get = function(info) return E.db.enhanced.tooltip.progressInfo[info[#info]]; end,
+				set = function(info, value) E.db.enhanced.tooltip.progressInfo[info[#info]] = value; end,
+				args = {
+					enable = {
+						order = 1,
+						type = "toggle",
+						name = L["Enable"],
+						set = function(info, value) E.db.enhanced.tooltip.progressInfo[info[#info]] = value; E:GetModule("Enhanced_ProgressionInfo"):ToggleState(); end
+					},
+					checkPlayer = {
+						order = 2,
+						type = "toggle",
+						name = L["Check Player"],
+						disabled = function() return not E.db.enhanced.tooltip.progressInfo.enable end
+					},
+					modifier = {
+						order = 3,
+						type = "select",
+						name = L["Visibility"],
+						set = function(info, value) E.db.enhanced.tooltip.progressInfo[info[#info]] = value; E:GetModule("Enhanced_ProgressionInfo"):UpdateModifier(); end,
+						values = {
+							["ALL"] = ALWAYS,
+							["SHIFT"] = SHIFT_KEY,
+							["ALT"] = ALT_KEY,
+							["CTRL"] = CTRL_KEY
+						},
+						disabled = function() return not E.db.enhanced.tooltip.progressInfo.enable end
+					},
+					tiers = {
+						order = 4,
+						type = "group",
+						name = L["Tiers"],
+						get = function(info) return E.db.enhanced.tooltip.progressInfo.tiers[info[#info]]; end,
+						set = function(info, value) E.db.enhanced.tooltip.progressInfo.tiers[info[#info]] = value; E:GetModule("Enhanced_ProgressionInfo"):UpdateSettings() end,
+						disabled = function() return not E.db.enhanced.tooltip.progressInfo.enable end,
+						args = {
+							DS = {
+								order = 1,
+								type = "toggle",
+								name = L["Dragon Soul"]
+							},
+							FL = {
+								order = 2,
+								type = "toggle",
+								name = L["Firelands"]
+							},
+							BH = {
+								order = 3,
+								type = "toggle",
+								name = L["Baradin Hold"]
+							},
+							TOTFW = {
+								order = 4,
+								type = "toggle",
+								name = L["Throne of the Four Winds"]
+							},
+							BT = {
+								order = 5,
+								type = "toggle",
+								name = L["Bastion of Twilight"]
+							},
+							BWD = {
+								order = 6,
+								type = "toggle",
+								name = L["Blackwing Descend"]
+							}
+						}
+					}
+				}
 			}
 		}
 	};
+
 	return config;
 end
 

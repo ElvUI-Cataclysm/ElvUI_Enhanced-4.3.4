@@ -84,6 +84,19 @@ P.enhanced = {
 			tooltipIconSpells  = true,
 			tooltipIconItems  = true,
 			tooltipIconAchievements  = true
+		},
+		progressInfo = {
+			enable = false,
+			checkPlayer = false,
+			modifier = "SHIFT",
+			tiers = {
+				["DS"] = true,
+				["FL"] = true,
+				["BH"] = true,
+				["TOTFW"] = true,
+				["BT"] = true,
+				["BWD"] = true
+			}
 		}
 	},
 	loseofcontrol = { 
