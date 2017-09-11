@@ -242,7 +242,7 @@ function AL:AlreadyKnownUpdate()
 		hooksecurefunc("AuctionFrameAuctions_Update", AuctionFrameAuctions_Update)
 	end
 
-	if not isBlizzard_GuildBankUILoaded and isBlizzard_AuctionUILoaded then
+	if not isBlizzard_GuildBankUILoaded and not isBlizzard_AuctionUILoaded then
 		local function OnEvent (self, event, addonName)
 			if addonName == "Blizzard_GuildBankUI" then
 				isBlizzard_GuildBankUILoaded = true
