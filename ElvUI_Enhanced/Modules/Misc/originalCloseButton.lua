@@ -7,7 +7,8 @@ local buttons = {
 	"UI-Panel-MinimizeButton-Disabled",
 	"UI-Panel-MinimizeButton-Up",
 	"UI-Panel-SmallerButton-Up",
-	"UI-Panel-BiggerButton-Up"
+	"UI-Panel-BiggerButton-Up",
+	"UI-Panel-HideButton-Up"
 }
 
 function S:HandleCloseButton(f, point, text)

@@ -38,8 +38,8 @@ P.enhanced = {
 		equipped = false,
 		equippedColor = {r = 0, g = 1.0, b = 0},
 		transparentActionbars = {
-			transparentBackdrops = true,
-			transparentButtons = true
+			transparentBackdrops = false,
+			transparentButtons = false
 		}
 	},
 	chat = {

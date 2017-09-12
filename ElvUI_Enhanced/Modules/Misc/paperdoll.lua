@@ -221,14 +221,12 @@ function PD:UpdateInfoText(name)
 		if info[1] then
 			frame.ItemLevel:ClearAllPoints()
 			frame.ItemLevel:Point(db.itemlevel.position, frame, db.itemlevel.xOffset, db.itemlevel.yOffset)
-			frame.ItemLevel:FontTemplate(E.media.font, 12, "THINOUTLINE")
 			frame.ItemLevel:FontTemplate(E.LSM:Fetch("font", db.font), db.fontSize, db.fontOutline)
 		end
 
 		if name == "Character" and info[2] then
 			frame.DurabilityInfo:ClearAllPoints()
 			frame.DurabilityInfo:Point(db.durability.position, frame, db.durability.xOffset, db.durability.yOffset)
-			frame.DurabilityInfo:FontTemplate(E.media.font, 12, "THINOUTLINE")
 			frame.DurabilityInfo:FontTemplate(E.LSM:Fetch("font", db.font), db.fontSize, db.fontOutline)
 		end
 	end
