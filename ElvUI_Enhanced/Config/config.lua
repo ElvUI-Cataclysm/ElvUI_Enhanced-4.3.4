@@ -858,25 +858,29 @@ local function UnitFrameOptions()
 								order = 4,
 								type = "range",
 								name = L["Duration"],
-								min = 0.01, max = 1.50, step = 0.01
+								min = 0.01, max = 1.50, step = 0.01,
+								disabled = function() return not E.db.unitframe.units.player.animatedLoss.enable end
 							},
 							startDelay = {
 								order = 5,
 								type = "range",
 								name = L["Start Delay"],
-								min = 0.01, max = 1.00, step = 0.01
+								min = 0.01, max = 1.00, step = 0.01,
+								disabled = function() return not E.db.unitframe.units.player.animatedLoss.enable end
 							},
 							pauseDelay = {
 								order = 6,
 								type = "range",
 								name = L["Pause Delay"],
-								min = 0.01, max = 0.30, step = 0.01
+								min = 0.01, max = 0.30, step = 0.01,
+								disabled = function() return not E.db.unitframe.units.player.animatedLoss.enable end
 							},
 							postponeDelay = {
 								order = 7,
 								type = "range",
 								name = L["Postpone Delay"],
-								min = 0.01, max = 0.30, step = 0.01
+								min = 0.01, max = 0.30, step = 0.01,
+								disabled = function() return not E.db.unitframe.units.player.animatedLoss.enable end
 							}
 						}
 					},
@@ -895,7 +899,8 @@ local function UnitFrameOptions()
 							detachFromFrame = {
 								order = 2,
 								type = "toggle",
-								name = L["Detach From Frame"]
+								name = L["Detach From Frame"],
+								disabled = function() return not E.db.unitframe.units.target.portrait.enable end
 							},
 							spacer = {
 								order = 3,
@@ -907,12 +912,14 @@ local function UnitFrameOptions()
 								type = "range",
 								name = L["Detached Width"],
 								min = 10, max = 600, step = 1,
+								disabled = function() return not E.db.unitframe.units.player.portrait.enable end
 							},
 							detachedHeight = {
 								order = 5,
 								type = "range",
 								name = L["Detached Height"],
 								min = 10, max = 600, step = 1,
+								disabled = function() return not E.db.unitframe.units.player.portrait.enable end
 							}
 						}
 					}
@@ -953,7 +960,8 @@ local function UnitFrameOptions()
 								desc = L["Size of the indicator icon."],
 								min = 16, max = 40, step = 1,
 								get = function(info) return E.db.enhanced.unitframe.units.target.classicon.size end,
-								set = function(info, value) E.db.enhanced.unitframe.units.target.classicon.size = value; TC:ToggleSettings() end
+								set = function(info, value) E.db.enhanced.unitframe.units.target.classicon.size = value; TC:ToggleSettings() end,
+								disabled = function() return not E.db.enhanced.unitframe.units.target.classicon.enable end
 							},
 							xOffset = {
 								order = 5,
@@ -961,7 +969,8 @@ local function UnitFrameOptions()
 								name = L["xOffset"],
 								min = -100, max = 100, step = 1,
 								get = function(info) return E.db.enhanced.unitframe.units.target.classicon.xOffset end,
-								set = function(info, value) E.db.enhanced.unitframe.units.target.classicon.xOffset = value; TC:ToggleSettings() end
+								set = function(info, value) E.db.enhanced.unitframe.units.target.classicon.xOffset = value; TC:ToggleSettings() end,
+								disabled = function() return not E.db.enhanced.unitframe.units.target.classicon.enable end
 							},
 							yOffset = {
 								order = 6,
@@ -969,7 +978,8 @@ local function UnitFrameOptions()
 								name = L["yOffset"],
 								min = -80, max = 40, step = 1,
 								get = function(info) return E.db.enhanced.unitframe.units.target.classicon.yOffset end,
-								set = function(info, value) E.db.enhanced.unitframe.units.target.classicon.yOffset = value; TC:ToggleSettings() end
+								set = function(info, value) E.db.enhanced.unitframe.units.target.classicon.yOffset = value; TC:ToggleSettings() end,
+								disabled = function() return not E.db.enhanced.unitframe.units.target.classicon.enable end
 							}
 						}
 					},
@@ -988,7 +998,8 @@ local function UnitFrameOptions()
 							detachFromFrame = {
 								order = 2,
 								type = "toggle",
-								name = L["Detach From Frame"]
+								name = L["Detach From Frame"],
+								disabled = function() return not E.db.unitframe.units.player.portrait.enable end
 							},
 							spacer = {
 								order = 3,
@@ -999,13 +1010,15 @@ local function UnitFrameOptions()
 								order = 4,
 								type = "range",
 								name = L["Detached Width"],
-								min = 10, max = 600, step = 1
+								min = 10, max = 600, step = 1,
+								disabled = function() return not E.db.unitframe.units.target.portrait.enable end
 							},
 							detachedHeight = {
 								order = 5,
 								type = "range",
 								name = L["Detached Height"],
-								min = 10, max = 600, step = 1
+								min = 10, max = 600, step = 1,
+								disabled = function() return not E.db.unitframe.units.target.portrait.enable end
 							}
 						}
 					}
