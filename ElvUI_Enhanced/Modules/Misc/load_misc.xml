@@ -12,4 +12,5 @@
 	<Script file="undressButton.lua"/>
 	<Script file="questReward.lua"/>
 	<Script file="originalCloseButton.lua"/>
+	<Script file="merchant.lua"/>
 </Ui>

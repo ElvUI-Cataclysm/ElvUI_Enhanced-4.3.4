@@ -90,6 +90,7 @@ L["You have equipped equipment set: "] = true;
 -- General
 L["Add button to Dressing Room frame with ability to undress model."] = true;
 L["Add button to Trainer frame with ability to train all available skills in one click."] = true;
+L["Alt-Click Merchant"] = true;
 L["Already Known"] = true;
 L["Automatically change your watched faction on the reputation bar to the faction you got reputation points for."] = true;
 L["Automatically release body when killed inside a battleground."] = true;
@@ -98,6 +99,7 @@ L["Changes the transparency of all the movers."] = true;
 L["Colorizes recipes, mounts & pets that are already known"] = true;
 L["Display quest levels at Quest Log."] = true;
 L["Hide Zone Text"] = true;
+L["Holding Alt key while buying something from vendor will now buy an entire stack."] = true;
 L["Mover Transparency"] = true;
 L["Original Close Button"] = true;
 L["PvP Autorelease"] = true;

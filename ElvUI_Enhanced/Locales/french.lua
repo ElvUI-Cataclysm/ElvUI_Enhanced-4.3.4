@@ -90,6 +90,7 @@ L["You have equipped equipment set: "] = "Vous avez équipez le set d'équipemen
 -- General
 L["Add button to Dressing Room frame with ability to undress model."] = true;
 L["Add button to Trainer frame with ability to train all available skills in one click."] = true;
+L["Alt-Click Merchant"] = true;
 L["Already Known"] = true;
 L["Automatically change your watched faction on the reputation bar to the faction you got reputation points for."] = "Change automatiquement la réputation suivie sur la barre de réputation avec la faction que vous êtes en train de faire."
 L["Automatically release body when killed inside a battleground."] = "Libère automatiquement votre corps quand vous êtes tué en Champs de Bataille."
@@ -98,6 +99,7 @@ L["Changes the transparency of all the movers."] = "Change la transparence des A
 L["Colorizes recipes, mounts & pets that are already known"] = true;
 L["Display quest levels at Quest Log."] = true;
 L["Hide Zone Text"] = true;
+L["Holding Alt key while buying something from vendor will now buy an entire stack."] = true;
 L["Mover Transparency"] = "Transparence des Ancres"
 L["Original Close Button"] = true;
 L["PvP Autorelease"] = "Libération automatique en PVP"

@@ -118,10 +118,16 @@ local function GeneralOptions()
 				get = function(info) return E.private.skins.animations; end,
 				set = function(info, value) E.private.skins.animations = value; end
 			},
-			spacer = {
+			altBuyMaxStack = {
 				order = 13,
-				type = "description",
-				name = " "
+				type = "toggle",
+				name = L["Alt-Click Merchant"],
+				desc = L["Holding Alt key while buying something from vendor will now buy an entire stack."],
+				get = function(info) return E.db.enhanced.general.altBuyMaxStack end,
+				set = function(info, value)
+					E.db.enhanced.general.altBuyMaxStack = value
+					M:BuyStackToggle()
+				end
 			},
 			moverTransparancy = {
 				order = 14,

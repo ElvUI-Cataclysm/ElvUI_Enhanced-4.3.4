@@ -57,6 +57,7 @@ function M:Initialize()
 	self:WatchedFaction()
 	self:LoadMoverTransparancy()
 	self:QuestLevelToggle()
+	self:BuyStackToggle()
 end
 
 local function InitializeCallback()
