@@ -53,7 +53,7 @@ local spamNextLines = {
 
 function EDL:FilterLine(event, source, msg, ...)
 	for _, line in ipairs(spamNextLines) do
-		if msg:match(line) then
+		if msg and msg:match(line) then
 			local curTime = GetTime()
 
 			for id, meter in ipairs(self.Meters) do
@@ -81,7 +81,7 @@ function EDL:FilterLine(event, source, msg, ...)
 	for i, line in ipairs(spamFirstLines) do
 		local newID = 0
 
-		if msg:match(line) then
+		if msg and msg:match(line) then
 			local curTime = GetTime()
 
 			if find(msg, "|cff(.+)|r") then

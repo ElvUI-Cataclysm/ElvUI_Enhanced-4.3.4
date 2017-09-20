@@ -1,36 +1,65 @@
-local E, L, V, P, G = unpack(ElvUI);
+local E, L, V, P, G = unpack(ElvUI)
+local UB = E:NewModule("Enhanced_UndressButtons")
 local S = E:GetModule("Skins")
 
--- Dressing Room Undress Button
-local DressUpFrameUndressButton = CreateFrame("Button", "DressUpFrameUndressButton", DressUpFrame, "UIPanelButtonTemplate");
-DressUpFrameUndressButton:SetText(L["Undress"]);
-DressUpFrameUndressButton:Size(80, 22);
-DressUpFrameUndressButton:SetParent(DressUpFrame);
-DressUpFrameUndressButton:HookScript("OnClick", function(self)
-	self.model:Undress();
-	PlaySound("gsTitleOptionOK");
-end)
-DressUpFrameUndressButton.model = DressUpModel;
+function UB:CreateUndressButton()
+	self.dressUpButton = CreateFrame("Button", "DressUpFrameUndressButton", DressUpFrame, "UIPanelButtonTemplate")
+	self.dressUpButton:Size(80, 22)
+	self.dressUpButton:SetText(L["Undress"])
+	self.dressUpButton:SetScript("OnClick", function(self)
+		self.model:Undress()
+		PlaySound("gsTitleOptionOK")
+	end)
+	self.dressUpButton.model = DressUpModel
 
--- Side Dressing Room Undress Button
-local SideDressUpFrameUndressButton = CreateFrame("Button", "SideDressUpFrameUndressButton", SideDressUpFrame, "UIPanelButtonTemplate");
-SideDressUpFrameUndressButton:SetText(L["Undress"]);
-SideDressUpFrameUndressButton:Size(80, 22);
-SideDressUpFrameUndressButton:SetParent(SideDressUpModel);
+	self.sideDressUpButton = CreateFrame("Button", "SideDressUpFrameUndressButton", SideDressUpModel, "UIPanelButtonTemplate")
+	self.sideDressUpButton:Size(80, 22)
+	self.sideDressUpButton:SetText(L["Undress"])
+	self.sideDressUpButton:SetScript("OnClick", function(self)
+		self.model:Undress()
+		PlaySound("gsTitleOptionOK")
+	end)
+	self.sideDressUpButton.model = SideDressUpModel
 
-SideDressUpFrameUndressButton:HookScript("OnClick", function(self)
-	self.model:Undress();
-	PlaySound("gsTitleOptionOK");
-end)
-SideDressUpFrameUndressButton.model = SideDressUpModel;
+	if E.private.skins.blizzard.enable ~= true or E.private.skins.blizzard.dressingroom ~= true then
+		DressUpFrameUndressButton:Point("RIGHT", DressUpFrameResetButton, "LEFT", 2, 0)
+		SideDressUpFrameUndressButton:Point("BOTTOM", SideDressUpModelResetButton, "BOTTOM", 0, -25)
+	else
+		S:HandleButton(DressUpFrameUndressButton)
+		DressUpFrameUndressButton:Point("RIGHT", DressUpFrameResetButton, "LEFT", -3, 0)
 
-if(E.private.skins.blizzard.enable ~= true or E.private.skins.blizzard.dressingroom ~= true) then
-	DressUpFrameUndressButton:Point("RIGHT", DressUpFrameResetButton, "LEFT", 2, 0);
-	SideDressUpFrameUndressButton:Point("BOTTOM", SideDressUpModelResetButton, "BOTTOM", 0, -25);
-else
-	S:HandleButton(DressUpFrameUndressButton);
-	DressUpFrameUndressButton:Point("RIGHT", DressUpFrameResetButton, "LEFT", -3, 0);
-
-	S:HandleButton(SideDressUpFrameUndressButton);
-	SideDressUpFrameUndressButton:Point("RIGHT", SideDressUpModelResetButton, "LEFT", -3, 0);
+		S:HandleButton(SideDressUpFrameUndressButton)
+		SideDressUpFrameUndressButton:Point("RIGHT", SideDressUpModelResetButton, "LEFT", -3, 0)
+	end
 end
+
+function UB:ToggleState()
+	if E.db.enhanced.general.undressButton then
+		if not (self.dressUpButton and self.dressUpButton) then
+			self:CreateUndressButton()
+		end
+
+		self.dressUpButton:Show()
+		self.sideDressUpButton:Show()
+
+		SideDressUpModelResetButton:Point("BOTTOM", 43, 1)
+	else
+		if self.dressUpButton and self.dressUpButton then
+			self.dressUpButton:Hide()
+			self.sideDressUpButton:Hide()
+		end
+		SideDressUpModelResetButton:Point("BOTTOM", 0, 0)
+	end
+end
+
+function UB:Initialize()
+	if not E.db.enhanced.general.undressButton then return end
+
+	self:ToggleState()
+end
+
+local function InitializeCallback()
+	UB:Initialize()
+end
+
+E:RegisterModule(UB:GetName(), InitializeCallback)

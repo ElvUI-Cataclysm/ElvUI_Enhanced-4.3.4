@@ -14,7 +14,7 @@ local function ColorizeSettingName(settingName)
 	return format("|cffff8000%s|r", settingName)
 end
 
-local function OnEvent(self, event, ...)
+local function OnEvent(self)
 	self.text:SetFormattedText(displayNumberString, SPIRIT_COLON, select(2, UnitStat("player", 5)))
 	lastPanel = self
 end

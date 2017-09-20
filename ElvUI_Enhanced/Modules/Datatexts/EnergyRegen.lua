@@ -12,7 +12,7 @@ local function ColorizeSettingName(settingName)
 	return format("|cffff8000%s|r", settingName)
 end
 
-local function OnEvent(self, event, ...)
+local function OnEvent(self)
 	self.text:SetFormattedText(displayNumberString, STAT_ENERGY_REGEN, GetPowerRegen())
 	lastPanel = self
 end

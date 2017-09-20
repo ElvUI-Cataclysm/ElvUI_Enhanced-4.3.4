@@ -1,11 +1,11 @@
-﻿local E, L, V, P, G, _ = unpack(ElvUI);
-local LOS = E:NewModule("LoseOfControl", "AceEvent-3.0");
-local LSM = LibStub("LibSharedMedia-3.0");
+﻿local E, L, V, P, G = unpack(ElvUI)
+local LOS = E:NewModule("LoseOfControl", "AceEvent-3.0")
+local LSM = LibStub("LibSharedMedia-3.0")
 
 local function SpellName(id)
-	local name, _, _, _, _, _, _, _, _ = GetSpellInfo(id)
-	if(not name) then
-		print('|cff1784d1ElvUI:|r SpellID is not valid: '..id..'. Please check for an updated version, if none exists report to ElvUI author.')
+	local name = GetSpellInfo(id)
+	if not name then
+		print("|cff1784d1ElvUI:|r SpellID is not valid: "..id..". Please check for an updated version, if none exists report to ElvUI author.")
 		return "Impale"
 	else
 		return name
@@ -81,7 +81,7 @@ G.loseofcontrol = {
 	[SpellName(10326)] = "CC",		-- Turn Evil
 	[SpellName(31935)] = "Silence",	-- Avenger's Shield
 	[SpellName(63529)] = "Snare",	-- Dazed - Avenger's Shield
-	[SpellName(20170)] = "Snare",	-- Seal of Justice (100% movement snare; druids and shamans might want this though)
+	[SpellName(20170)] = "Snare",	-- Seal of Justice (100% movement snare druids and shamans might want this though)
 -- Priest
 	[SpellName(605)]   = "CC",		-- Mind Control
 	[SpellName(64044)] = "CC",		-- Psychic Horror
@@ -169,101 +169,103 @@ G.loseofcontrol = {
 	[SpellName(66770)] = "PvE",		-- Ferocious Butt (Icehowl)
 	[SpellName(71340)] = "PvE",		-- Pact of the Darkfallen  (Blood-Queen Lana'thel)
 	[SpellName(70126)] = "PvE"		-- Frost Beacon  (Sindragosa)
-};
+}
 
-local abilities = {};
+local abilities = {}
 
 function LOS:OnUpdate(elapsed)
-	if(self.timeLeft) then
-		self.timeLeft = self.timeLeft - elapsed;
+	if self.timeLeft then
+		self.timeLeft = self.timeLeft - elapsed
 
-		if(self.timeLeft >= 10) then
-			self.NumberText:SetFormattedText("%d", self.timeLeft);
-		elseif(self.timeLeft < 9.95) then
-			self.NumberText:SetFormattedText("%.1f", self.timeLeft);
+		if self.timeLeft >= 10 then
+			self.NumberText:SetFormattedText("%d", self.timeLeft)
+		elseif self.timeLeft < 9.95 then
+			self.NumberText:SetFormattedText("%.1f", self.timeLeft)
 		end
 	end
 end
 
-function LOS:UNIT_AURA()
-	local maxExpirationTime = 0;
-	local Icon, Duration;
+function LOS:UNIT_AURA(_, unit)
+	if unit ~= "player" then return end
+
+	local maxExpirationTime = 0
+	local Icon, Duration
 
 	for i = 1, 40 do
-		local name, _, icon, _, _, duration, expirationTime = UnitDebuff("player", i);
+		local name, _, icon, _, _, duration, expirationTime = UnitDebuff("player", i)
 
-		if(E.db.enhanced.loseofcontrol[abilities[name]] and expirationTime > maxExpirationTime) then
-			maxExpirationTime = expirationTime;
-			Icon = icon;
-			Duration = duration;
+		if E.db.enhanced.loseofcontrol[abilities[name]] and expirationTime > maxExpirationTime then
+			maxExpirationTime = expirationTime
+			Icon = icon
+			Duration = duration
 
-			self.AbilityName:SetText(name);
+			self.AbilityName:SetText(name)
 		end
 	end
 
-	if(maxExpirationTime == 0) then
-		self.maxExpirationTime = 0;
-		self.frame.timeLeft = nil;
-		self.frame:SetScript("OnUpdate", nil);
-		self.frame:Hide();
-	elseif(maxExpirationTime ~= self.maxExpirationTime) then
-		self.maxExpirationTime = maxExpirationTime;
+	if maxExpirationTime == 0 then
+		self.maxExpirationTime = 0
+		self.frame.timeLeft = nil
+		self.frame:SetScript("OnUpdate", nil)
+		self.frame:Hide()
+	elseif maxExpirationTime ~= self.maxExpirationTime then
+		self.maxExpirationTime = maxExpirationTime
 
-		self.Icon:SetTexture(Icon);
+		self.Icon:SetTexture(Icon)
 
-		self.Cooldown:SetCooldown(maxExpirationTime - Duration, Duration);
+		self.Cooldown:SetCooldown(maxExpirationTime - Duration, Duration)
 
-		local timeLeft = maxExpirationTime - GetTime();
-		if(not self.frame.timeLeft) then
-			self.frame.timeLeft = timeLeft;
+		local timeLeft = maxExpirationTime - GetTime()
+		if not self.frame.timeLeft then
+			self.frame.timeLeft = timeLeft
 
-			self.frame:SetScript("OnUpdate", self.OnUpdate);
+			self.frame:SetScript("OnUpdate", self.OnUpdate)
 		else
-			self.frame.timeLeft = timeLeft;
+			self.frame.timeLeft = timeLeft
 		end
 
-		self.frame:Show();
+		self.frame:Show()
 	end
 end
 
 function LOS:Initialize()
-	if(not E.private.loseofcontrol.enable) then return; end
+	if not E.private.loseofcontrol.enable then return end
 
-	self.frame = CreateFrame("Frame", "ElvUI_LoseOfControlFrame", UIParent);
-	self.frame:Point("CENTER", 0, 0);
-	self.frame:Size(54);
-	self.frame:SetTemplate();
-	self.frame:Hide();
+	self.frame = CreateFrame("Frame", "ElvUI_LoseOfControlFrame", UIParent)
+	self.frame:Point("CENTER", 0, 0)
+	self.frame:Size(54)
+	self.frame:SetTemplate()
+	self.frame:Hide()
 
 	for name, v in pairs(G.loseofcontrol) do
-		if(name) then
-			abilities[name] = v;
+		if name then
+			abilities[name] = v
 		end
 	end
 
-	E:CreateMover(self.frame, "LossControlMover", L["Loss Control Icon"]);
+	E:CreateMover(self.frame, "LossControlMover", L["Loss Control Icon"])
 
-	self.Icon = self.frame:CreateTexture(nil, "ARTWORK");
-	self.Icon:SetInside();
-	self.Icon:SetTexCoord(.1, .9, .1, .9);
+	self.Icon = self.frame:CreateTexture(nil, "ARTWORK")
+	self.Icon:SetInside()
+	self.Icon:SetTexCoord(unpack(E.TexCoords))
 
-	self.AbilityName = self.frame:CreateFontString(nil, "OVERLAY");
-	self.AbilityName:FontTemplate(E["media"].normFont, 20, "OUTLINE");
-	self.AbilityName:SetPoint("BOTTOM", self.frame, 0, -28);
+	self.AbilityName = self.frame:CreateFontString(nil, "OVERLAY")
+	self.AbilityName:FontTemplate(E["media"].normFont, 20, "OUTLINE")
+	self.AbilityName:Point("BOTTOM", self.frame, 0, -28)
 
-	self.Cooldown = CreateFrame("Cooldown", self.frame:GetName().."Cooldown", self.frame, "CooldownFrameTemplate");
-	self.Cooldown:SetInside();
+	self.Cooldown = CreateFrame("Cooldown", self.frame:GetName().."Cooldown", self.frame, "CooldownFrameTemplate")
+	self.Cooldown:SetInside()
 
-	self.frame.NumberText = self.frame:CreateFontString(nil, "OVERLAY");
-	self.frame.NumberText:FontTemplate(E["media"].normFont, 20, "OUTLINE");
-	self.frame.NumberText:SetPoint("BOTTOM", self.frame, 0, -58);
+	self.frame.NumberText = self.frame:CreateFontString(nil, "OVERLAY")
+	self.frame.NumberText:FontTemplate(E["media"].normFont, 20, "OUTLINE")
+	self.frame.NumberText:Point("BOTTOM", self.frame, 0, -58)
 
-	self.SecondsText = self.frame:CreateFontString(nil, "OVERLAY");
-	self.SecondsText:FontTemplate(E["media"].normFont, 20, "OUTLINE");
-	self.SecondsText:SetPoint("BOTTOM", self.frame, 0, -80);
-	self.SecondsText:SetText(L["seconds"]);
+	self.SecondsText = self.frame:CreateFontString(nil, "OVERLAY")
+	self.SecondsText:FontTemplate(E["media"].normFont, 20, "OUTLINE")
+	self.SecondsText:Point("BOTTOM", self.frame, 0, -80)
+	self.SecondsText:SetText(L["seconds"])
 
-	self:RegisterEvent("UNIT_AURA");
+	self:RegisterEvent("UNIT_AURA")
 end
 
 local function InitializeCallback()

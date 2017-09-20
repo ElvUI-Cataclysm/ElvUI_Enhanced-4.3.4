@@ -20,12 +20,12 @@ local function ColorizeSettingName(settingName)
 end
 
 local function OnUpdate(self)
-	if(E.myclass == "SHAMAN") then
+	if E.myclass == "SHAMAN" then
 		local isKnown = IsSpellKnown(20608, false)
-		if(not isKnown) then return end
+		if not isKnown then return end
 
 		local s, d = GetSpellCooldown(20608)
-		if(s > 0 and d > 0) then 
+		if s > 0 and d > 0 then 
 			self.text:SetFormattedText(texture.." "..red..format("%d:%02d", floor((d-(GetTime()-s))/60), floor((d-(GetTime()-s))%60)).."|r")
 		else
 			self.text:SetFormattedText(texture.." "..displayString, READY.."!")
@@ -34,7 +34,7 @@ local function OnUpdate(self)
 end
 
 local function OnEnter(self)
-	if(E.myclass ~= "SHAMAN") then
+	if E.myclass ~= "SHAMAN" then
 
 		DT:SetupTooltip(self)
 
@@ -46,16 +46,16 @@ local function OnEnter(self)
 end
 
 local function OnEvent(self, event)
-	if(E.myclass == "SHAMAN") then
+	if E.myclass == "SHAMAN" then
 		local isKnown = IsSpellKnown(20608, false)
-		if(not isKnown) then
+		if not isKnown then
 			self.text:SetFormattedText(texture.." "..displayString, SPELL_FAILED_NOT_KNOWN)
 		else
-			if(event == "SPELL_UPDATE_COOLDOWN") then
+			if event == "SPELL_UPDATE_COOLDOWN" then
 				self:SetScript("OnUpdate", OnUpdate)
-			elseif(not self.text:GetText()) then
+			elseif not self.text:GetText() then
 				local s, d = GetSpellCooldown(20608)
-				if(s > 0 and d > 0) then 
+				if s > 0 and d > 0 then 
 					self.text:SetFormattedText(texture.." "..red..format("%d:%02d", floor((d - (GetTime() - s)) / 60), floor((d - (GetTime() - s)) % 60)).."|r")
 				else
 					self.text:SetFormattedText(texture.." "..displayString, READY.."!")
@@ -65,6 +65,7 @@ local function OnEvent(self, event)
 	else
 		self.text:SetFormattedText(red..L["Datatext Disabled"].."!|r")
 	end
+
 	lastPanel = self
 end
 
@@ -94,7 +95,9 @@ end
 local function ValueColorUpdate(hex)
 	displayString = join("", hex, "%s|r")
 
-	if(lastPanel ~= nil) then OnEvent(lastPanel) end
+	if lastPanel ~= nil
+		then OnEvent(lastPanel)
+	end
 end
 E["valueColorUpdateFuncs"][ValueColorUpdate] = true
 

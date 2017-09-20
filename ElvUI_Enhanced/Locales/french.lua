@@ -88,6 +88,8 @@ L["Specialization"] = "Spécialisation"
 L["You have equipped equipment set: "] = "Vous avez équipez le set d'équipement: "
 
 -- General
+L["Add button to Dressing Room frame with ability to undress model."] = true;
+L["Add button to Trainer frame with ability to train all available skills in one click."] = true;
 L["Already Known"] = true;
 L["Automatically change your watched faction on the reputation bar to the faction you got reputation points for."] = "Change automatiquement la réputation suivie sur la barre de réputation avec la faction que vous êtes en train de faire."
 L["Automatically release body when killed inside a battleground."] = "Libère automatiquement votre corps quand vous êtes tué en Champs de Bataille."
@@ -97,10 +99,13 @@ L["Colorizes recipes, mounts & pets that are already known"] = true;
 L["Display quest levels at Quest Log."] = true;
 L["Hide Zone Text"] = true;
 L["Mover Transparency"] = "Transparence des Ancres"
+L["Original Close Button"] = true;
 L["PvP Autorelease"] = "Libération automatique en PVP"
 L["Select Quest Reward"] = "Sélection de la récompense de quête"
 L["Show Quest Level"] = true;
+L["Skin Animations"] = true;
 L["Track Reputation"] = "Suivre la Réputation"
+L["Undress"] = "Déshabillé"
 L["Use blizzard close buttons, but desaturated"] = true;
 
 -- Nameplates
@@ -137,11 +142,6 @@ L["Show/Hides an Icon for Spells and Items on the Tooltip."] = true;
 L["Throne of the Four Winds"] = true;
 L["Tiers"] = true;
 L["Tooltip Icon"] = true;
-
--- Misc
-L["Original Close Button"] = true;
-L["Skin Animations"] = true;
-L["Undress"] = "Déshabillé"
 
 -- Movers
 L["Loss Control Icon"] = "Icône de la perte de contrôle"

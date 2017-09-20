@@ -14,9 +14,9 @@ local int = 5
 local function OnUpdate(self, t)
 	int = int - t
 
-	if(int > 0) then return end
+	if int > 0 then return end
 
-	if(GameTimeFrame.flashInvite) then
+	if GameTimeFrame.flashInvite then
 		E:Flash(self, 0.53)
 	else
 		E:StopFlash(self)
@@ -31,7 +31,7 @@ end
 local function ValueColorUpdate(hex)
 	displayNumberString = join("", hex, "%1|r")
 
-	if(lastPanel ~= nil) then
+	if lastPanel ~= nil then
 		OnUpdate(lastPanel, 20000)
 	end
 end
@@ -45,11 +45,11 @@ local function GetLastPanel(name)
 			pointIndex = DT.PointLocation[i]
 
 			for option, value in pairs(db.panels) do
-				if(value and type(value) == "table") then
-					if(option == panelName and db.panels[option][pointIndex] and db.panels[option][pointIndex] == name) then
+				if value and type(value) == "table" then
+					if option == panelName and db.panels[option][pointIndex] and db.panels[option][pointIndex] == name then
 						return panel.dataPanels[pointIndex]
 					end
-				elseif(value and type(value) == "string" and value == name) then
+				elseif value and type(value) == "string" and value == name then
 					return panel.dataPanels[pointIndex]
 				end
 			end

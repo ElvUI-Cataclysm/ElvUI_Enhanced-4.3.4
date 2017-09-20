@@ -44,8 +44,11 @@ local function GeneralOptions()
 				type = "toggle",
 				name = L["Show Quest Level"],
 				desc = L["Display quest levels at Quest Log."],
-				get = function(info) return E.db.general.showQuestLevel; end,
-				set = function(info, value) E.db.general.showQuestLevel = value; end
+				get = function(info) return E.db.enhanced.general.showQuestLevel; end,
+				set = function(info, value)
+					E.db.enhanced.general.showQuestLevel = value
+					M:QuestLevelToggle()
+				end
 			},
 			selectQuestReward = {
 				order = 5,
@@ -61,7 +64,7 @@ local function GeneralOptions()
 				name = L["Decline Duel"],
 				desc = L["Auto decline all duels"],
 				get = function(info) return E.db.enhanced.general.declineduel; end,
-				set = function(info, value) E.db.enhanced.general.declineduel = value; M:LoadDeclineDuel() end
+				set = function(info, value) E.db.enhanced.general.declineduel = value; M:DeclineDuel() end
 			},
 			originalCloseButton = {
 				order = 7,
@@ -71,8 +74,30 @@ local function GeneralOptions()
 				get = function(info) return E.db.enhanced.general.originalCloseButton end,
 				set = function(info, value) E.db.enhanced.general.originalCloseButton = value E:StaticPopup_Show("CONFIG_RL") end
 			},
-			alreadyKnown = {
+			trainAllButton = {
+ 				order = 8,
+ 				type = "toggle",
+				name = L["Train All Button"],
+				desc = L["Add button to Trainer frame with ability to train all available skills in one click."],
+				get = function(info) return E.db.enhanced.general.trainAllButton end,
+				set = function(info, value)
+					E.db.enhanced.general.trainAllButton = value
+					E:GetModule("Enhanced_TrainAll"):ToggleState()
+				end,
+			},
+			undressButton = {
 				order = 9,
+				type = "toggle",
+				name = L["Undress Button"],
+				desc = L["Add button to Dressing Room frame with ability to undress model."],
+				get = function(info) return E.db.enhanced.general.undressButton end,
+				set = function(info, value)
+					E.db.enhanced.general.undressButton = value
+					E:GetModule("Enhanced_UndressButtons"):ToggleState()
+				end
+			},
+			alreadyKnown = {
+				order = 10,
 				type = "toggle",
 				name = L["Already Known"],
 				desc = L["Colorizes recipes, mounts & pets that are already known"],
@@ -80,21 +105,26 @@ local function GeneralOptions()
 				set = function(info, value) E.db.enhanced.general.alreadyKnown = value AL:AlreadyKnownUpdate() end
 			},
 			hideZoneText = {
-				order = 8,
+				order = 11,
 				type = "toggle",
 				name = L["Hide Zone Text"],
 				get = function(info) return E.db.enhanced.general.hideZoneText end,
 				set = function(info, value) E.db.enhanced.general.hideZoneText = value M:HideZone() end
 			},
 			animations = {
-				order = 9,
+				order = 12,
 				type = "toggle",
 				name = L["Skin Animations"],
 				get = function(info) return E.private.skins.animations; end,
 				set = function(info, value) E.private.skins.animations = value; end
 			},
+			spacer = {
+				order = 13,
+				type = "description",
+				name = " "
+			},
 			moverTransparancy = {
-				order = 10,
+				order = 14,
 				type = "range",
 				isPercent = true,
 				name = L["Mover Transparency"],
@@ -161,20 +191,21 @@ local function ActionbarOptions()
 				guiInline = true,
 				get = function(info) return E.db.enhanced.actionbars.transparentActionbars[ info[#info] ] end,
 				set = function(info, value) E.db.enhanced.actionbars.transparentActionbars[ info[#info] ] = value; end,
+				disabled = function() return not E.private.actionbar.enable end,
 				args = {
 					transparentBackdrops = {
 						order = 1,
 						type = "toggle",
 						name = L["Transparent Backdrop"],
 						desc = L["Sets actionbars' backgrounds to transparent template."],
-						set = function(info, value) E.db.enhanced.actionbars.transparentActionbars[ info[#info] ] = value; ETAB:BarsBackdrop() end
+						set = function(info, value) E.db.enhanced.actionbars.transparentActionbars[ info[#info] ] = value; ETAB.StyleBackdrops() end
 					},
 					transparentButtons = {
 						order = 2,
 						type = "toggle",
 						name = L["Transparent Buttons"],
 						desc = L["Sets actionbars buttons' backgrounds to transparent template."],
-						set = function(info, value) E.db.enhanced.actionbars.transparentActionbars[ info[#info] ] = value; ETAB:ButtonsBackdrop() end
+						set = function(info, value) E.db.enhanced.actionbars.transparentActionbars[ info[#info] ] = value; ETAB.StyleBackdrops() end
 					}
 				}
 			}
@@ -541,7 +572,12 @@ local function TooltipOptions()
 						name = L["Enable"],
 						desc = L["Show/Hides an Icon for Spells and Items on the Tooltip."],
 						get = function(info) return E.db.enhanced.tooltip.tooltipIcon.enable; end,
-						set = function(info, value) E.db.enhanced.tooltip.tooltipIcon.enable = value; end
+						set = function(info, value)
+							E.db.enhanced.tooltip.tooltipIcon.enable = value
+							E:GetModule("Enhanced_TooltipIcon"):ToggleItemsState()
+							E:GetModule("Enhanced_TooltipIcon"):ToggleSpellsState()
+							E:GetModule("Enhanced_TooltipIcon"):ToggleAchievementsState()
+						end
 					},
 					spacer = {
 						order = 2,
@@ -555,7 +591,10 @@ local function TooltipOptions()
 						name = SPELLS,
 						desc = L["Show/Hides an Icon for Spells on the Tooltip."],
 						get = function(info) return E.db.enhanced.tooltip.tooltipIcon.tooltipIconSpells; end,
-						set = function(info, value) E.db.enhanced.tooltip.tooltipIcon.tooltipIconSpells = value; end,
+						set = function(info, value)
+							E.db.enhanced.tooltip.tooltipIcon.tooltipIconSpells = value
+							E:GetModule("Enhanced_TooltipIcon"):ToggleSpellsState()
+						end,
 						disabled = function() return not E.db.enhanced.tooltip.tooltipIcon.enable end
 					},
 					tooltipIconItems = {
@@ -564,7 +603,10 @@ local function TooltipOptions()
 						name = ITEMS,
 						desc = L["Show/Hides an Icon for Items on the Tooltip."],
 						get = function(info) return E.db.enhanced.tooltip.tooltipIcon.tooltipIconItems; end,
-						set = function(info, value) E.db.enhanced.tooltip.tooltipIcon.tooltipIconItems = value; end,
+						set = function(info, value)
+							E.db.enhanced.tooltip.tooltipIcon.tooltipIconItems = value
+							E:GetModule("Enhanced_TooltipIcon"):ToggleItemsState()
+						end,
 						disabled = function() return not E.db.enhanced.tooltip.tooltipIcon.enable end
 					},
 					tooltipIconAchievements = {
@@ -573,7 +615,10 @@ local function TooltipOptions()
 						name = ACHIEVEMENTS,
 						desc = L["Show/Hides an Icon for Achievements on the Tooltip."],
 						get = function(info) return E.db.enhanced.tooltip.tooltipIcon.tooltipIconAchievements; end,
-						set = function(info, value) E.db.enhanced.tooltip.tooltipIcon.tooltipIconAchievements = value; end,
+						set = function(info, value)
+							E.db.enhanced.tooltip.tooltipIcon.tooltipIconAchievements = value
+							E:GetModule("Enhanced_TooltipIcon"):ToggleAchievementsState()
+						end,
 						disabled = function() return not E.db.enhanced.tooltip.tooltipIcon.enable end
 					}
 				}

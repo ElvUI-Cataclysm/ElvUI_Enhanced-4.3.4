@@ -88,6 +88,8 @@ L["Specialization"] = "Talentspezialisierung"
 L["You have equipped equipment set: "] = "Sie haben das folgende Ausrüstungsset angelegt: "
 
 -- General
+L["Add button to Dressing Room frame with ability to undress model."] = true;
+L["Add button to Trainer frame with ability to train all available skills in one click."] = true;
 L["Already Known"] = true;
 L["Automatically change your watched faction on the reputation bar to the faction you got reputation points for."] = "Ändere automatisch die beobachtete Fraktion auf der Erfahrungsleiste zu der Fraktion für die Sie grade Rufpunkte erhalten haben."
 L["Automatically release body when killed inside a battleground."] = "Gibt automatisch Ihren Geist frei, wenn Sie auf dem Schlachtfeld getötet wurden."
@@ -97,10 +99,13 @@ L["Colorizes recipes, mounts & pets that are already known"] = "Rezepte, Reittie
 L["Display quest levels at Quest Log."] = "Questlevel im Questlog anzeigen."
 L["Hide Zone Text"] = "Zonentext verstecken"
 L["Mover Transparency"] = "Transparenz Ankerpunkte"
+L["Original Close Button"] = true;
 L["PvP Autorelease"] = "Automatische Freigabe im PvP"
 L["Select Quest Reward"] = "Wähle Questbelohnung"
 L["Show Quest Level"] = "Zeige Questlevel"
+L["Skin Animations"] = "Skin-Animationen"
 L["Track Reputation"] = "Ruf beobachten"
+L["Undress"] = "Ausziehen"
 L["Use blizzard close buttons, but desaturated"] = true;
 
 -- Nameplates
@@ -137,11 +142,6 @@ L["Show/Hides an Icon for Spells and Items on the Tooltip."] = "Icon für Zauber
 L["Throne of the Four Winds"] = true;
 L["Tiers"] = true;
 L["Tooltip Icon"] = true;
-
--- Misc
-L["Original Close Button"] = true;
-L["Skin Animations"] = "Skin-Animationen"
-L["Undress"] = "Ausziehen"
 
 -- Movers
 L["Loss Control Icon"] = "Kontrollverlust-Icon"
