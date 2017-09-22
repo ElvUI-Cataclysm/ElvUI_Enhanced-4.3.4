@@ -6,6 +6,7 @@ local format, join = string.format, string.join
 
 local GetInventoryItemLink = GetInventoryItemLink
 local GetInventorySlotInfo = GetInventorySlotInfo
+local GetAverageItemLevel = GetAverageItemLevel
 local GetItemInfo = GetItemInfo
 local ITEM_LEVEL_ABBR = ITEM_LEVEL_ABBR
 local STAT_AVERAGE_ITEM_LEVEL = STAT_AVERAGE_ITEM_LEVEL
@@ -47,6 +48,8 @@ local function OnEvent(self)
 	local total, equipped = GetAverageItemLevel()
 
 	self.text:SetFormattedText(displayString, ITEM_LEVEL_ABBR, floor(equipped), floor(total))
+
+	lastPanel = self
 end
 
 local function OnEnter(self)
@@ -60,7 +63,7 @@ local function OnEnter(self)
 
 	for i = 1, #slots do
 		local item = GetInventoryItemLink("player", GetInventorySlotInfo(slots[i][1]))
-		if(item) then
+		if item then
 			local _, _, quality, iLevel = GetItemInfo(item)
 			local r, g, b = GetItemQualityColor(quality)
 
@@ -73,7 +76,7 @@ local function OnEnter(self)
 end
 
 local function OnClick(self, btn)
-	if(btn == "LeftButton") then
+	if btn == "LeftButton" then
 		ToggleCharacter("PaperDollFrame")
 	else
 		OnEvent(self)
@@ -83,7 +86,7 @@ end
 local function ValueColorUpdate(hex)
 	displayString = join("", "%s: ", hex, "%d/%d|r")
 
-	if(lastPanel ~= nil) then
+	if lastPanel ~= nil then
 		OnEvent(lastPanel)
 	end
 end
