@@ -116,7 +116,7 @@ local function GeneralOptions()
 			animations = {
 				order = 12,
 				type = "toggle",
-				name = L["Skin Animations"],
+				name = L["Achievements Animated Bars"],
 				get = function(info) return E.private.skins.animations; end,
 				set = function(info, value) E.private.skins.animations = value; end
 			},

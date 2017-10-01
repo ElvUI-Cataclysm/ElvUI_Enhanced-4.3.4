@@ -1,5 +1,5 @@
-local E, L, V, P, G = unpack(ElvUI);
-local TC = E:NewModule("TargetClass", "AceEvent-3.0");
+local E, L, V, P, G = unpack(ElvUI)
+local TC = E:NewModule("TargetClass", "AceEvent-3.0")
 
 local CLASS_ICON_TCOORDS = CLASS_ICON_TCOORDS
 

@@ -1,3 +1,3 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/">
-	<Include file="Blizzard\Load_Blizzard.xml"/>
+	<Script file="Achievement.lua"/>
 </Ui>
