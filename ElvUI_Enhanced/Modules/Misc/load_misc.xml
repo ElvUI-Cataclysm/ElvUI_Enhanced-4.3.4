@@ -4,7 +4,6 @@
 	<Script file="paperdoll.lua"/>
 	<Script file="movers.lua"/>
 	<Script file="addonList.lua"/>
-	<Script file="deathRecap.lua"/>
 	<Script file="questLevel.lua"/>
 	<Script file="losecontrol.lua"/>
 	<Script file="alreadyKnown.lua"/>
