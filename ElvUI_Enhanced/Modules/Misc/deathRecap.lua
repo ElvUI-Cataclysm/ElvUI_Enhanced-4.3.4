@@ -1,5 +1,5 @@
 local E, L, V, P, G = unpack(ElvUI)
-local mod = E:GetModule("Enhanced_Blizzard")
+local mod = E:NewModule("DeathRecap", "AceHook-3.0", "AceEvent-3.0")
 
 local format, upper = string.format, string.upper
 local floor = math.floor
@@ -7,18 +7,20 @@ local tsort, twipe = table.sort, table.wipe
 local band = bit.band
 local tonumber, strsub = tonumber, strsub
 
-local UnitHealth = UnitHealth
-local UnitHealthMax = UnitHealthMax
-local COMBATLOG_FILTER_ME = COMBATLOG_FILTER_ME
 local GetReleaseTimeRemaining = GetReleaseTimeRemaining
 local RepopMe = RepopMe
+local UnitHealth = UnitHealth
+local UnitHealthMax = UnitHealthMax
+local IsShiftKeyDown = IsShiftKeyDown
+
+local COMBATLOG_FILTER_ME = COMBATLOG_FILTER_ME
 
 local lastDeathEvents
 local index = 0
 local deathList = {}
 local eventList = {}
 
-local function AddEvent(timestamp, event, sourceName, spellId, spellName, environmentalType, amount, overkill, school, resisted, blocked, absorbed)
+function mod:AddEvent(timestamp, event, sourceName, spellId, spellName, environmentalType, amount, overkill, school, resisted, blocked, absorbed)
 	if (index > 0) and (eventList[index].timestamp + 10 <= timestamp) then
 		index = 0
 		twipe(eventList)
@@ -52,35 +54,27 @@ local function AddEvent(timestamp, event, sourceName, spellId, spellName, enviro
 	eventList[index].maxHP = UnitHealthMax("player")
 end
 
-local function HasEvents()
-	if lastDeathEvents then
-		return #deathList > 0, #deathList
-	else
-		return false, #deathList
-	end
-end
-
-local function EraseEvents()
+function mod:EraseEvents()
 	if index > 0 then
 		index = 0
 		twipe(eventList)
 	end
 end
 
-local function AddDeath()
+function mod:AddDeath()
 	if #eventList > 0 then
-		local _, deathEvents = HasEvents()
+		local _, deathEvents = self:HasEvents()
 		local deathIndex = deathEvents + 1
 		deathList[deathIndex] = CopyTable(eventList)
-		EraseEvents()
+		self:EraseEvents()
 
-		DEFAULT_CHAT_FRAME:AddMessage("|cff71d5ff|Hdeath:"..deathIndex.."|h["..L["You died."].."]|h|r")
+		DEFAULT_CHAT_FRAME:AddMessage("|cff71d5ff|Hdeath:" .. deathIndex .. "|h[" .. L["You died."] .. "]|h|r")
 
 		return true
 	end
 end
 
-local function GetDeathEvents(recapID)
+function mod:GetDeathEvents(recapID)
 	if recapID and deathList[recapID] then
 		local deathEvents = deathList[recapID]
 		tsort(deathEvents, function(a, b) return a.timestamp > b.timestamp end)
@@ -88,72 +82,44 @@ local function GetDeathEvents(recapID)
 	end
 end
 
-local function GetTableInfo(data)
-	local texture
-	local nameIsNotSpell = false
-
-	local event = data.event
-	local spellId = data.spellId
-	local spellName = data.spellName
-
-	if event == "SWING_DAMAGE" then
-		spellId = 6603
-		spellName = ACTION_SWING
-
-		nameIsNotSpell = true
-	elseif event == "RANGE_DAMAGE" then
-		nameIsNotSpell = true
---	elseif strsub(event, 1, 5) == "SPELL" then
-	elseif event == "ENVIRONMENTAL_DAMAGE" then
-		local environmentalType = data.environmentalType
-		environmentalType = upper(environmentalType)
-		spellName = _G["ACTION_ENVIRONMENTAL_DAMAGE_"..environmentalType]
-		nameIsNotSpell = true
-		if environmentalType == "DROWNING" then
-			texture = "spell_shadow_demonbreath"
-		elseif environmentalType == "FALLING" then
-			texture = "ability_rogue_quickrecovery"
-		elseif environmentalType == "FIRE" or environmentalType == "LAVA" then
-			texture = "spell_fire_fire"
-		elseif environmentalType == "SLIME" then
-			texture = "inv_misc_slime_01"
-		elseif environmentalType == "FATIGUE" then
-			texture = "ability_creature_cursed_05"
-		else
-			texture = "ability_creature_cursed_05"
-		end
-		texture = "Interface\\Icons\\" .. texture
+function mod:HasEvents()
+	if lastDeathEvents then
+		return #deathList > 0, #deathList
+	else
+		return false, #deathList
 	end
-
-	local spellNameStr = spellName
-	local spellString
-	if spellName then
-		if nameIsNotSpell then
-			spellString = format("|Haction:%s|h%s|h", event, spellNameStr)
-		else
-			spellString = spellName
-		end
-	end
-
-	if spellId and not texture then
-		texture = select(3, GetSpellInfo(spellId))
-	end
-	return spellId, spellString, texture
 end
 
-local function OpenRecap(recapID)
+function mod:PLAYER_DEAD()
+	if StaticPopup_FindVisible("DEATH") then
+		if self:AddDeath() then
+			lastDeathEvents = true
+		else
+			lastDeathEvents = false
+		end
+
+		StaticPopup_Hide("DEATH")
+		E:StaticPopup_Show("DEATH", GetReleaseTimeRemaining(), SECONDS)
+	end
+end
+
+function mod:HidePopup()
+	E:StaticPopup_Hide("DEATH")
+end
+
+function mod:OpenRecap(recapID)
 	local self = DeathRecapFrame
 
 	if self:IsShown() and self.recapID == recapID then
-		self:Hide()
+		HideUIPanel(self)
 		return
 	end
 
-	local deathEvents = GetDeathEvents(recapID)
+	local deathEvents = mod:GetDeathEvents(recapID)
 	if not deathEvents then return end
 
 	self.recapID = recapID
-	self:Show()
+	ShowUIPanel(self)
 
 	if not deathEvents or #deathEvents <= 0 then
 		for i = 1, 5 do
@@ -171,7 +137,7 @@ local function OpenRecap(recapID)
 		local entry = self.DeathRecapEntry[i]
 		local dmgInfo = entry.DamageInfo
 		local evtData = deathEvents[i]
-		local spellId, spellName, texture = GetTableInfo(evtData)
+		local spellId, spellName, texture = mod:GetTableInfo(evtData)
 
 		entry:Show()
 		self.DeathTimeStamp = self.DeathTimeStamp or evtData.timestamp
@@ -188,15 +154,15 @@ local function OpenRecap(recapID)
 				dmgInfo.amount = evtData.amount - evtData.overkill
 			end
 			if evtData.absorbed and evtData.absorbed > 0 then
-				dmgInfo.dmgExtraStr = dmgInfo.dmgExtraStr.." "..format(L["(%d Absorbed)"], evtData.absorbed)
+				dmgInfo.dmgExtraStr = dmgInfo.dmgExtraStr .. " " .. format(L["(%d Absorbed)"], evtData.absorbed)
 				dmgInfo.amount = evtData.amount - evtData.absorbed
 			end
 			if evtData.resisted and evtData.resisted > 0 then
-				dmgInfo.dmgExtraStr = dmgInfo.dmgExtraStr.." "..format(L["(%d Resisted)"], evtData.resisted)
+				dmgInfo.dmgExtraStr = dmgInfo.dmgExtraStr .. " " .. format(L["(%d Resisted)"], evtData.resisted)
 				dmgInfo.amount = evtData.amount - evtData.resisted
 			end
 			if evtData.blocked and evtData.blocked > 0 then
-				dmgInfo.dmgExtraStr = dmgInfo.dmgExtraStr.." "..format(L["(%d Blocked)"], evtData.blocked)
+				dmgInfo.dmgExtraStr = dmgInfo.dmgExtraStr .. " " .. format(L["(%d Blocked)"], evtData.blocked)
 				dmgInfo.amount = evtData.amount - evtData.blocked
 			end
 
@@ -255,15 +221,15 @@ local function OpenRecap(recapID)
 	end
 end
 
-local function Spell_OnEnter(self)
-	if self.spellId  then
+function mod:Spell_OnEnter()
+	if self.spellId then
 		GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
 		GameTooltip:SetHyperlink(GetSpellLink(self.spellId))
 		GameTooltip:Show()
 	end
 end
 
-local function Amount_OnEnter(self)
+function mod:Amount_OnEnter()
 	GameTooltip:SetOwner(self, "ANCHOR_LEFT")
 	GameTooltip:ClearLines()
 	if self.amount then
@@ -289,32 +255,68 @@ local function Amount_OnEnter(self)
 	GameTooltip:Show()
 end
 
-function mod:HideDeathPopup()
-	E:StaticPopup_Hide("DEATH")
-end
+function mod:GetTableInfo(data)
+	local texture
+	local nameIsNotSpell = false
 
-function mod:PLAYER_DEAD()
-	if StaticPopup_FindVisible("DEATH") then
-		if AddDeath() then
-			lastDeathEvents = true
+	local event = data.event
+	local spellId = data.spellId
+	local spellName = data.spellName
+
+	if event == "SWING_DAMAGE" then
+		spellId = 6603
+		spellName = ACTION_SWING
+
+		nameIsNotSpell = true
+	elseif event == "RANGE_DAMAGE" then
+		nameIsNotSpell = true
+--	elseif strsub(event, 1, 5) == "SPELL" then
+	elseif event == "ENVIRONMENTAL_DAMAGE" then
+		local environmentalType = data.environmentalType
+		environmentalType = upper(environmentalType)
+		spellName = _G["ACTION_ENVIRONMENTAL_DAMAGE_" .. environmentalType]
+		nameIsNotSpell = true
+		if environmentalType == "DROWNING" then
+			texture = "spell_shadow_demonbreath"
+		elseif environmentalType == "FALLING" then
+			texture = "ability_rogue_quickrecovery"
+		elseif environmentalType == "FIRE" or environmentalType == "LAVA" then
+			texture = "spell_fire_fire"
+		elseif environmentalType == "SLIME" then
+			texture = "inv_misc_slime_01"
+		elseif environmentalType == "FATIGUE" then
+			texture = "ability_creature_cursed_05"
 		else
-			lastDeathEvents = false
+			texture = "ability_creature_cursed_05"
 		end
-
-		StaticPopup_Hide("DEATH")
-		E:StaticPopup_Show("DEATH", GetReleaseTimeRemaining(), SECONDS)
+		texture = "Interface\\Icons\\" .. texture
 	end
+
+	local spellNameStr = spellName
+	local spellString
+	if spellName then
+		if nameIsNotSpell then
+			spellString = format("|Haction:%s|h%s|h", event, spellNameStr)
+		else
+			spellString = spellName
+		end
+	end
+
+	if spellId and not texture then
+		texture = select(3, GetSpellInfo(spellId))
+	end
+	return spellId, spellString, texture
 end
 
-function mod:COMBAT_LOG_EVENT_UNFILTERED(_, timestamp, event, _, _, sourceName, sourceFlags, _, destGUID, destName, destFlags, ...)
-	if (band(destFlags, COMBATLOG_FILTER_ME) ~= COMBATLOG_FILTER_ME) or (band(sourceFlags, COMBATLOG_FILTER_ME) == COMBATLOG_FILTER_ME) then return end
-	if (event ~= "ENVIRONMENTAL_DAMAGE")
-	and (event ~= "RANGE_DAMAGE")
-	and (event ~= "SPELL_DAMAGE")
-	and (event ~= "SPELL_EXTRA_ATTACKS")
-	and (event ~= "SPELL_INSTAKILL")
-	and (event ~= "SPELL_PERIODIC_DAMAGE")
-	and (event ~= "SWING_DAMAGE")
+function mod:COMBAT_LOG_EVENT_UNFILTERED(_, timestamp, event, hideCaster, sourceGUID, sourceName, sourceFlags, sourceRaidFlags, destGUID, destName, destFlags, destRaidFlags, ...)
+	if band(destFlags, COMBATLOG_FILTER_ME) ~= COMBATLOG_FILTER_ME or band(sourceFlags, COMBATLOG_FILTER_ME) == COMBATLOG_FILTER_ME then return end
+	if event ~= "ENVIRONMENTAL_DAMAGE"
+	and event ~= "RANGE_DAMAGE"
+	and event ~= "SPELL_DAMAGE"
+	and event ~= "SPELL_EXTRA_ATTACKS"
+	and event ~= "SPELL_INSTAKILL"
+	and event ~= "SPELL_PERIODIC_DAMAGE"
+	and event ~= "SWING_DAMAGE"
 	then return end
 
 	local subVal = strsub(event, 1, 5)
@@ -330,20 +332,20 @@ function mod:COMBAT_LOG_EVENT_UNFILTERED(_, timestamp, event, _, _, sourceName, 
 
 	if not tonumber(amount) then return end
 
-	AddEvent(timestamp, event, sourceName, spellId, spellName, environmentalType, amount, overkill, school, resisted, blocked, absorbed)
+	self:AddEvent(timestamp, event, sourceName, spellId, spellName, environmentalType, amount, overkill, school, resisted, blocked, absorbed)
 end
 
 function mod:SetItemRef(link, ...)
 	if strsub(link, 1, 5) == "death" then
 		local _, id = strsplit(":", link)
-		OpenRecap(tonumber(id))
+		mod:OpenRecap(tonumber(id))
 		return
 	else
 		self.hooks.SetItemRef(link, ...)
 	end
 end
 
-function mod:DeathRecap()
+function mod:Initialize()
 	local S = E:GetModule("Skins")
 
 	local frame = CreateFrame("Frame", "DeathRecapFrame", UIParent)
@@ -351,7 +353,6 @@ function mod:DeathRecap()
 	frame:Point("CENTER")
 	frame:SetTemplate("Transparent")
 	frame:Hide()
-	frame:SetScript("OnHide", function(self) self.recapID = nil end)
 	tinsert(UISpecialFrames, frame:GetName())
 
 	frame.Title = frame:CreateFontString("ARTWORK", nil, "GameFontNormal")
@@ -406,12 +407,13 @@ function mod:DeathRecap()
 		local button = CreateFrame("Frame", nil, frame)
 		button:Size(308, 34)
 		button:SetTemplate("Transparent")
+
 		frame.DeathRecapEntry[i] = button
 
 		button.DamageInfo = CreateFrame("Button", nil, button)
 		button.DamageInfo:Point("TOPLEFT", 0, 0)
 		button.DamageInfo:Point("BOTTOMRIGHT", button, "BOTTOMLEFT", 80, 0)
-		button.DamageInfo:SetScript("OnEnter", Amount_OnEnter)
+		button.DamageInfo:SetScript("OnEnter", self.Amount_OnEnter)
 		button.DamageInfo:SetScript("OnLeave", GameTooltip_Hide)
 
 		button.DamageInfo.Amount = button.DamageInfo:CreateFontString("ARTWORK", nil, "GameFontNormalRight")
@@ -431,7 +433,7 @@ function mod:DeathRecap()
 		button.SpellInfo = CreateFrame("Button", nil, button)
 		button.SpellInfo:Point("TOPLEFT", button.DamageInfo, "TOPRIGHT", 16, 0)
 		button.SpellInfo:Point("BOTTOMRIGHT", 0, 0)
-		button.SpellInfo:SetScript("OnEnter", Spell_OnEnter)
+		button.SpellInfo:SetScript("OnEnter", self.Spell_OnEnter)
 		button.SpellInfo:SetScript("OnLeave", GameTooltip_Hide)
 
 		button.SpellInfo.FrameIcom = CreateFrame("Button", nil, button.SpellInfo)
@@ -478,10 +480,10 @@ function mod:DeathRecap()
 
 	self:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
 	self:RegisterEvent("PLAYER_DEAD")
-	self:RegisterEvent("PLAYER_ENTERING_WORLD", "HideDeathPopup")
-	self:RegisterEvent("RESURRECT_REQUEST", "HideDeathPopup")
-	self:RegisterEvent("PLAYER_ALIVE", "HideDeathPopup")
-	self:RegisterEvent("RAISED_AS_GHOUL", "HideDeathPopup")
+	self:RegisterEvent("PLAYER_ENTERING_WORLD", "HidePopup")
+	self:RegisterEvent("RESURRECT_REQUEST", "HidePopup")
+	self:RegisterEvent("PLAYER_ALIVE", "HidePopup")
+	self:RegisterEvent("RAISED_AS_GHOUL", "HidePopup")
 
 	self:RawHook("SetItemRef", true)
 
@@ -502,7 +504,7 @@ function mod:DeathRecap()
 			elseif self.timeleft == -1 then
 				self.text:SetText(DEATH_RELEASE_NOTIMER)
 			end
-			if HasEvents() then
+			if mod:HasEvents() then
 				self.button3:Enable()
 				self.button3:SetScript("OnEnter", nil)
 				self.button3:SetScript("OnLeave", nil)
@@ -519,7 +521,7 @@ function mod:DeathRecap()
 		OnHide = function(self)
 			self.button3:SetScript("OnEnter", nil)
 			self.button3:SetScript("OnLeave", nil)
-			DeathRecapFrame:Hide()
+			HideUIPanel(DeathRecapFrame)
 		end,
 		OnAccept = function(self)
 			if IsActiveBattlefieldArena() then
@@ -551,12 +553,12 @@ function mod:DeathRecap()
 			end
 		end,
 		OnAlt = function()
-			local _, recapID = HasEvents()
-			OpenRecap(recapID)
+			local _, recapID = mod:HasEvents()
+			mod:OpenRecap(recapID)
 		end,
 		OnUpdate = function(self, elapsed)
 			if self.timeleft > 0 then
-				local text = _G[self:GetName().."Text"]
+				local text = _G[self:GetName() .. "Text"]
 				local timeleft = self.timeleft
 				if timeleft < 60 then
 					text:SetFormattedText(DEATH_RELEASE_TIMER, timeleft, SECONDS)
@@ -578,7 +580,9 @@ function mod:DeathRecap()
 				self.button2:Disable()
 			end
 		end,
-		DisplayButton2 = HasSoulstone,
+		DisplayButton2 = function(self)
+			return HasSoulstone()
+		end,
 
 		timeout = 0,
 		whileDead = 1,
@@ -588,3 +592,9 @@ function mod:DeathRecap()
 		noCloseOnAlt = true
 	}
 end
+
+local function InitializeCallback()
+	mod:Initialize()
+end
+
+E:RegisterModule(mod:GetName(), InitializeCallback)
