@@ -1,5 +1,6 @@
 local E, L, V, P, G = unpack(ElvUI)
 local DT = E:GetModule("DataTexts")
+local PD = E:GetModule("PaperDoll")
 
 local floor = math.floor
 local format, join = string.format, string.join
@@ -44,12 +45,18 @@ local levelColors = {
 	[2] = {1, 1, .5}
 }
 
-local function OnEvent(self)
+local function OnEvent(self, event)
+	if event == "PLAYER_ENTERING_WORLD" then
+		PD:ScheduleTimer("UpdateDataTextItemLevel", 5, self)
+		return
+	end
+	PD:UpdateDataTextItemLevel(self)
+end
+
+function PD:UpdateDataTextItemLevel(self)
 	local total, equipped = GetAverageItemLevel()
 
 	self.text:SetFormattedText(displayString, ITEM_LEVEL_ABBR, floor(equipped), floor(total))
-
-	lastPanel = self
 end
 
 local function OnEnter(self)
