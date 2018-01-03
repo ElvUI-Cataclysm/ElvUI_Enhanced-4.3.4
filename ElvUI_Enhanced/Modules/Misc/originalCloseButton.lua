@@ -53,6 +53,7 @@ function S:HandleCloseButton(f, point, text)
 		f.backdrop:Point("BOTTOMRIGHT", -8, 8)
 		f:HookScript("OnEnter", S.SetModifiedBackdrop)
 		f:HookScript("OnLeave", S.SetOriginalBackdrop)
+		f:SetHitRectInsets(6, 6, 7, 7)
 	end
 
 	if not f.text then
