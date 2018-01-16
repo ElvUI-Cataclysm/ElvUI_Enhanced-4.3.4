@@ -48,7 +48,8 @@ local function UnitClassHook(self, frame, type)
 	elseif type == "ENEMY_PLAYER" then
 		local r, g, b = self:RoundColors(frame.oldHealthBar:GetStatusBarColor())
 		for class, _ in pairs(RAID_CLASS_COLORS) do
-			if RAID_CLASS_COLORS[class].r == r and RAID_CLASS_COLORS[class].g == g and RAID_CLASS_COLORS[class].b == b then
+			local bb = b
+			if RAID_CLASS_COLORS[class].r == r and RAID_CLASS_COLORS[class].g == g and RAID_CLASS_COLORS[class].b == bb then
 				return class
 			end
 		end

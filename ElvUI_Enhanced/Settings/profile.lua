@@ -30,10 +30,16 @@ P.enhanced = {
 		showQuestLevel = false,
 		declineduel = false,
 		hideZoneText = false,
-		originalCloseButton = false,
+
 		trainAllButton = false,
 		undressButton = false,
 		alreadyKnown = true
+	},
+	skins = {
+		closeButton = {
+			originalCloseButton = false,
+			classColor = false
+		}
 	},
 	actionbars = {
 		equipped = false,
@@ -129,5 +135,18 @@ P.enhanced = {
 		arena = "HIDDEN",
 		party = "COLLAPSED",
 		raid = "COLLAPSED"
+	},
+	raidmarkerbar = {
+		["enable"] = false,
+		["backdrop"] = true,
+		["transparentButtons"] = false,
+		["transparentBackdrop"] = false,
+		["buttonSize"] = 22,
+		["spacing"] = 1,
+		["orientation"] = "HORIZONTAL",
+		["reverse"] = false,
+		["modifier"] = "shift-",
+		["visibility"] = "DEFAULT",
+		["customVisibility"] = "[noexists, nogroup] hide;show"
 	}
-};
+}

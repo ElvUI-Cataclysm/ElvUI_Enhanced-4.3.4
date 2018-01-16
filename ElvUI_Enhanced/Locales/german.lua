@@ -4,7 +4,6 @@ if not L then return end
 
 -- DESC locales
 L["ENH_LOGIN_MSG"] = "Sie verwenden |cff1784d1ElvUI|r |cff1784d1Enhanced|r |cffff8000(Cataclysm)|r Version %s%s|r."
-L["EQUIPMENT_DESC"] = "Passen Sie die Einstellungen für das Ändern Ihrer Ausrüstung an, wenn Sie Ihre Talentspezialisierung ändern oder ein Schlachtfeld betreten."
 L["DURABILITY_DESC"] = "Passen Sie die Einstellungen für die Haltbarkeit im Charakterfenster an."
 L["ITEMLEVEL_DESC"] = "Passen Sie die Einstellungen für die Anzeige von Gegenstandsstufen im Charakterfenster an."
 L["WATCHFRAME_DESC"] = "Passen Sie die Einstellungen des Watchframe (Questlog) nach ihren Wünschen an."
@@ -69,23 +68,12 @@ L["Decline Duel"] = "Duell ablehnen"
 L["Declined duel request from "] = "Duellaufforderung abgelehnt von "
 
 -- Equipment
-L["Choose the equipment set to use for your primary specialization."] = "Wählen Sie das Ausrüstungsset für Ihre primäre Talentspezialisierung."
-L["Choose the equipment set to use for your secondary specialization."] = "Wählen Sie das Ausrüstungsset für Ihre sekundäre Talentspezialisierung."
-L["Choose the equipment set to use when you enter a battleground or arena."] = "Wählen Sie Ihr Ausrüstungsset für Schlachtfelder oder die Arena."
 L["Damaged Only"] = "Nur Beschädigte"
-L["Enable/Disable the battleground switch."] = "Automatische Änderung der Ausrüstung beim Betreten eines Schlachtfelds aktivieren / deaktivieren."
 L["Enable/Disable the display of durability information on the character screen."] = "Anzeige der Haltbarkeit im Charakterfenster."
 L["Enable/Disable the display of item levels on the character screen."] = "Anzeige von Gegenstandsstufen im Charakterfenster aktivieren / deaktivieren."
-L["Enable/Disable the specialization switch."] = "Automatische Änderung der Ausrüstung beim Talentwechsel aktivieren / deaktivieren."
-L["Equipment Set Overlay"] = "Ausrüstungssettext"
-L["Equipment Set"] = "Ausrüstungsset"
 L["Equipment"] = "Ausrüstung"
-L["No Change"] = "Keine Änderung"
 L["Only show durabitlity information for items that are damaged."] = "Nur die Haltbarkeit für beschädigte Ausrüstungsteile anzeigen."
 L["Quality Color"] = true;
-L["Show the associated equipment sets for the items in your bags (or bank)."] = "Zeige auf Gegenständen im Rucksack (oder der Bank) die zugehörigen Ausrüstungssets als Text an."
-L["Specialization"] = "Talentspezialisierung"
-L["You have equipped equipment set: "] = "Sie haben das folgende Ausrüstungsset angelegt: "
 
 -- General
 L["Add button to Dressing Room frame with ability to undress model."] = true;
@@ -101,14 +89,11 @@ L["Display quest levels at Quest Log."] = "Questlevel im Questlog anzeigen."
 L["Hide Zone Text"] = "Zonentext verstecken"
 L["Holding Alt key while buying something from vendor will now buy an entire stack."] = true;
 L["Mover Transparency"] = "Transparenz Ankerpunkte"
-L["Original Close Button"] = true;
 L["PvP Autorelease"] = "Automatische Freigabe im PvP"
 L["Select Quest Reward"] = "Wähle Questbelohnung"
 L["Show Quest Level"] = "Zeige Questlevel"
-L["Achievements Animated Bars"] = true
 L["Track Reputation"] = "Ruf beobachten"
 L["Undress"] = "Ausziehen"
-L["Use blizzard close buttons, but desaturated"] = true;
 
 -- Nameplates
 L["Bars will transition smoothly."] = "Balken werden sanft übergehen"
@@ -158,6 +143,23 @@ L["PvE"] = "PvE"
 L["Root"] = "Wurzeln"
 L["Silence"] = "Stille"
 L["Snare"] = "Verlangsamung"
+
+-- Skins
+L["Achievements Animated Bars"] = true
+L["Close Button"] = true
+L["Original Close Button"] = true
+L["Use blizzard close buttons, but desaturated"] = true
+
+-- Raid Marks
+L["Raid Markers"] = "Schlachtzugs-Markierungen"
+L["Click to clear the mark."] = "Klicken um die Marker zu löschen."
+L["Click to mark the target."] = "Klicken um ein Ziel zu markieren."
+L["%sClick to remove all worldmarkers."] = "%sKlicken um alle Weltmarkierungen zu entfernen."
+L["%sClick to place a worldmarker."] = "%sKlicken um ein Weltmarker zu setzen."
+L["Raid Marker Bar"] = "Schlachtzugs-Markierungs-Leiste"
+L["Reverse"] = "Umkehren"
+L["Modifier Key"] = "Modifier Taste"
+L["Set the modifier key for placing world markers."] = "Setzt eine modifierungs Taste um eine Weltmarkierung zu setzen."
 
 -- Unitframes
 L["All role icons (Damage/Healer/Tank) on the unit frames are hidden when you go into combat."] = "Alle Rollensymbole (Schaden/Heiler/Tank) auf den Einheitenfenstern werden versteckt, wenn der Charakter sich im Kampf befindet."

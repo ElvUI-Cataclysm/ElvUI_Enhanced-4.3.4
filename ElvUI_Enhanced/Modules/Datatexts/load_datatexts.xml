@@ -9,6 +9,7 @@
 	<Script file="Spirit.lua"/>
 	<Script file="Stamina.lua"/>
 	<Script file="Strength.lua"/>
+	<Script file="StopWatch.lua"/>
 	<Script file="Range.lua"/>
 	<Script file="Time.lua"/>
 </Ui>

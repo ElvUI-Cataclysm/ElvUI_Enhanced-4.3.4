@@ -4,7 +4,6 @@ if not L then return end
 
 -- DESC locales
 L["ENH_LOGIN_MSG"] = "Вы используете |cff1784d1ElvUI|r |cff1784d1Enhanced|r |cffff8000(Cataclysm)|r версии %s%s|r."
-L["EQUIPMENT_DESC"] = "Adjust the settings for switching your gear set when you change specialization or enter a battleground."
 L["DURABILITY_DESC"] = "Настройка параметров информации о прочности предметов в окне персонажа."
 L["ITEMLEVEL_DESC"] = "Настройка параметров информации об уровне предмета в окне персонажа."
 L["WATCHFRAME_DESC"] = "Настройте отображение списка заданий (квест лог) исходя из ваших личных предпочтений."
@@ -69,23 +68,12 @@ L["Decline Duel"] = true;
 L["Declined duel request from "] = "DДуэль отклонена от "
 
 -- Equipment
-L["Choose the equipment set to use for your primary specialization."] = true;
-L["Choose the equipment set to use for your secondary specialization."] = true;
-L["Choose the equipment set to use when you enter a battleground or arena."] = true;
 L["Damaged Only"] = "Только поврежденные"
-L["Enable/Disable the battleground switch."] = true;
 L["Enable/Disable the display of durability information on the character screen."] = "Включить/Выключить отображение информации о прочности предметов в окне персонажа."
 L["Enable/Disable the display of item levels on the character screen."] = "Включить/Выключить отображение уровня предмета в окне персонажа."
-L["Enable/Disable the specialization switch."] = true;
-L["Equipment Set Overlay"] = "Название комплекта"
-L["Equipment Set"] = true;
 L["Equipment"] = "Экипировка"
-L["No Change"] = true;
 L["Only show durabitlity information for items that are damaged."] = "Показывать уровень прочности только на поврежденных предметах."
 L["Quality Color"] = true;
-L["Show the associated equipment sets for the items in your bags (or bank)."] = "Отображает название комплекта экипировки, к которому привязан предмет, на его иконке в сумках или банке."
-L["Specialization"] = true
-L["You have equipped equipment set: "] = true;
 
 -- General
 L["Add button to Dressing Room frame with ability to undress model."] = true;
@@ -101,14 +89,11 @@ L["Display quest levels at Quest Log."] = true;
 L["Hide Zone Text"] = true;
 L["Holding Alt key while buying something from vendor will now buy an entire stack."] = true;
 L["Mover Transparency"] = "Прозрачность фиксаторов"
-L["Original Close Button"] = true;
 L["PvP Autorelease"] = "Автовыход из тела"
 L["Select Quest Reward"] = true;
 L["Show Quest Level"] = true;
-L["Achievements Animated Bars"] = true;
 L["Track Reputation"] = "Отслеживание репутации"
 L["Undress"] = "Раздеть"
-L["Use blizzard close buttons, but desaturated"] = true;
 
 -- Nameplates
 L["Bars will transition smoothly."] = true;
@@ -158,6 +143,23 @@ L["PvE"] = "Рейдовые"
 L["Root"] = "Замедления"
 L["Silence"] = "Молчание"
 L["Snare"] = "Ловушки"
+
+-- Skins
+L["Achievements Animated Bars"] = true
+L["Close Button"] = true
+L["Original Close Button"] = true
+L["Use blizzard close buttons, but desaturated"] = true
+
+-- Raid Marks
+L["Raid Markers"] = "Рейдовые Метки"
+L["Click to clear the mark."] = "Снять метку"
+L["Click to mark the target."] = "Повесить метку"
+L["%sClick to remove all worldmarkers."] = "%s+ЛКМ для удаления всех меток на земле."
+L["%sClick to place a worldmarker."] = "%s+ЛКМ для установки метки на землю."
+L["Raid Marker Bar"] = "Полоса меток"
+L["Reverse"] = "Обратный порядок"
+L["Modifier Key"] = "Модификатор"
+L["Set the modifier key for placing world markers."] = "Модификатор для установки меток на земле."
 
 -- Unitframes
 L["All role icons (Damage/Healer/Tank) on the unit frames are hidden when you go into combat."] = "Все иконки ролей (дд/хил/танк) на фреймах юнитов будут скрыты во время боя."

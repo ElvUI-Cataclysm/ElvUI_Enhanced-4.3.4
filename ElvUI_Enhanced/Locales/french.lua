@@ -4,7 +4,6 @@ if not L then return; end
 
 -- DESC locales
 L["ENH_LOGIN_MSG"] = "Vous utilisez |cff1784d1ElvUI|r |cff1784d1Enhanced|r |cffff8000(Cataclysm)|r version %s%s|r."
-L["EQUIPMENT_DESC"] = "Ajustez les réglages pour passer d'un équipement à l'autre lorsque vous changez de spécialisation ou lorsque que vous effectuez un Champs de Bataille."
 L["DURABILITY_DESC"] = "Ajustez les réglages pour afficher la durabilité sur l'écran d'infos de personnage."
 L["ITEMLEVEL_DESC"] = "Réglez les paramètres pour afficher le niveau d'objet sur l'écran d'infos de personnage."
 L["WATCHFRAME_DESC"] = "Adjust the settings for the visibility of the watchframe (questlog) to your personal preference."
@@ -69,23 +68,12 @@ L["Decline Duel"] = true;
 L["Declined duel request from "] = "Décliné les invites en duel de "
 
 -- Equipment
-L["Choose the equipment set to use for your primary specialization."] = "Choisissez le set d'équipement à utiliser pour votre spécialisation principale."
-L["Choose the equipment set to use for your secondary specialization."] = "Choisissez le set d'équipement à utiliser pour votre spécialisation secondaire."
-L["Choose the equipment set to use when you enter a battleground or arena."] = "Choisissez le set d'équipement à utiliser quant vous entrez dans un Champs de Bataille ou une Arène."
 L["Damaged Only"] = "Dégâts seulement"
-L["Enable/Disable the battleground switch."] = "Activer / Désactiver la fonction du changement d'équipement lorsque vous entrez dans un Champs de Bataille ou une Arène."
 L["Enable/Disable the display of durability information on the character screen."] = "Activer / Désactiver l'affichage des informations de durabilité sur l'écran d'infos de personnage."
 L["Enable/Disable the display of item levels on the character screen."] = "Activer / Désactiver l'affichage des informations du niveau d'objet sur l'écran d'infos de personnage."
-L["Enable/Disable the specialization switch."] = "Activer / Désactiver la fonction du changement d'équipement lorsque vous changez de spécialisation."
-L["Equipment Set Overlay"] = "Nom du set d'équipement"
-L["Equipment Set"] = "Set d'équipement"
 L["Equipment"] = "Équipement"
-L["No Change"] = "Ne pas changer"
 L["Only show durabitlity information for items that are damaged."] = "Afficher la durabilité seulement quand l'équipement est endommagé."
 L["Quality Color"] = true;
-L["Show the associated equipment sets for the items in your bags (or bank)."] = "Affiche le nom associés au set d'équipement sur vos objets dans vos sacs et votre banque."
-L["Specialization"] = "Spécialisation"
-L["You have equipped equipment set: "] = "Vous avez équipez le set d'équipement: "
 
 -- General
 L["Add button to Dressing Room frame with ability to undress model."] = true;
@@ -101,14 +89,11 @@ L["Display quest levels at Quest Log."] = true;
 L["Hide Zone Text"] = true;
 L["Holding Alt key while buying something from vendor will now buy an entire stack."] = true;
 L["Mover Transparency"] = "Transparence des Ancres"
-L["Original Close Button"] = true;
 L["PvP Autorelease"] = "Libération automatique en PVP"
 L["Select Quest Reward"] = "Sélection de la récompense de quête"
 L["Show Quest Level"] = true;
-L["Achievements Animated Bars"] = true;
 L["Track Reputation"] = "Suivre la Réputation"
 L["Undress"] = "Déshabillé"
-L["Use blizzard close buttons, but desaturated"] = true;
 
 -- Nameplates
 L["Bars will transition smoothly."] = true;
@@ -158,6 +143,23 @@ L["PvE"] = "PvE"
 L["Root"] = "Immobilisation"
 L["Silence"] = "Silence"
 L["Snare"] = "Ralentissement"
+
+-- Skins
+L["Achievements Animated Bars"] = true
+L["Close Button"] = true
+L["Original Close Button"] = true
+L["Use blizzard close buttons, but desaturated"] = true
+
+-- Raid Marks
+L["Raid Markers"] = true
+L["Click to clear the mark."] = true
+L["Click to mark the target."] = true
+L["%sClick to remove all worldmarkers."] = true
+L["%sClick to place a worldmarker."] = true
+L["Raid Marker Bar"] = true
+L["Reverse"] = true
+L["Modifier Key"] = true
+L["Set the modifier key for placing world markers."] = true
 
 -- Unitframes
 L["All role icons (Damage/Healer/Tank) on the unit frames are hidden when you go into combat."] = "Cachez toutes les icônes de rôle (Dommages/Healer/Tank) sur les cadres d'unité quand vous serait en combat."

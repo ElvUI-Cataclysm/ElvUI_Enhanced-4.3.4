@@ -4,7 +4,6 @@ if not L then return end
 
 -- DESC locales
 L["ENH_LOGIN_MSG"] = "You are using |cff1784d1ElvUI Enhanced|r |cffff8000(Cataclysm)|r version %s%s|r."
-L["EQUIPMENT_DESC"] = "Adjust the settings for switching your gear set when you change specialization or enter a battleground."
 L["DURABILITY_DESC"] = "Adjust the settings for the durability information on the character screen."
 L["ITEMLEVEL_DESC"] = "Adjust the settings for the item level information on the character screen."
 L["WATCHFRAME_DESC"] = "Adjust the settings for the visibility of the watchframe (questlog) to your personal preference."
@@ -69,23 +68,12 @@ L["Decline Duel"] = true;
 L["Declined duel request from "] = true;
 
 -- Equipment
-L["Choose the equipment set to use for your primary specialization."] = true;
-L["Choose the equipment set to use for your secondary specialization."] = true;
-L["Choose the equipment set to use when you enter a battleground or arena."] = true;
 L["Damaged Only"] = true;
-L["Enable/Disable the battleground switch."] = true;
 L["Enable/Disable the display of durability information on the character screen."] = true;
 L["Enable/Disable the display of item levels on the character screen."] = true;
-L["Enable/Disable the specialization switch."] = true;
-L["Equipment Set Overlay"] = true;
-L["Equipment Set"] = true;
 L["Equipment"] = true;
-L["No Change"] = true;
 L["Only show durabitlity information for items that are damaged."] = true;
 L["Quality Color"] = true;
-L["Show the associated equipment sets for the items in your bags (or bank)."] = true;
-L["Specialization"] = true
-L["You have equipped equipment set: "] = true;
 
 -- General
 L["Add button to Dressing Room frame with ability to undress model."] = true;
@@ -101,14 +89,11 @@ L["Display quest levels at Quest Log."] = true;
 L["Hide Zone Text"] = true;
 L["Holding Alt key while buying something from vendor will now buy an entire stack."] = true;
 L["Mover Transparency"] = true;
-L["Original Close Button"] = true;
 L["PvP Autorelease"] = true;
 L["Select Quest Reward"] = true;
 L["Show Quest Level"] = true;
-L["Achievements Animated Bars"] = true;
 L["Track Reputation"] = true;
 L["Undress"] = true;
-L["Use blizzard close buttons, but desaturated"] = true;
 
 -- Nameplates
 L["Bars will transition smoothly."] = true;
@@ -158,6 +143,23 @@ L["PvE"] = "PvE"
 L["Root"] = "뿌리묶기"
 L["Silence"] = "침묵"
 L["Snare"] = "덫"
+
+-- Skins
+L["Achievements Animated Bars"] = true
+L["Close Button"] = true
+L["Original Close Button"] = true
+L["Use blizzard close buttons, but desaturated"] = true
+
+-- Raid Marks
+L["Raid Markers"] = true
+L["Click to clear the mark."] = true
+L["Click to mark the target."] = true
+L["%sClick to remove all worldmarkers."] = true
+L["%sClick to place a worldmarker."] = true
+L["Raid Marker Bar"] = true
+L["Reverse"] = true
+L["Modifier Key"] = true
+L["Set the modifier key for placing world markers."] = true
 
 -- Unitframes
 L["All role icons (Damage/Healer/Tank) on the unit frames are hidden when you go into combat."] = true;

@@ -3,6 +3,8 @@ local S = E:GetModule("Skins")
 
 local select = select
 
+local RAID_CLASS_COLORS = RAID_CLASS_COLORS
+
 local buttons = {
 	"UI-Panel-MinimizeButton-Disabled",
 	"UI-Panel-MinimizeButton-Up",
@@ -11,12 +13,17 @@ local buttons = {
 	"UI-Panel-HideButton-Up"
 }
 
+local classColor = E.myclass == "PRIEST" and E.PriestColors or (CUSTOM_CLASS_COLORS and CUSTOM_CLASS_COLORS[E.myclass] or RAID_CLASS_COLORS[E.myclass])
+
 function S:HandleCloseButton(f, point, text)
-	if E.db.enhanced.general.originalCloseButton then
+	if E.db.enhanced.skins.closeButton.originalCloseButton then
 		for i = 1, f:GetNumRegions() do
 			local region = select(i, f:GetRegions())
 			if region:GetObjectType() == "Texture" then
 				region:SetDesaturated(1)
+				if E.db.enhanced.skins.closeButton.classColor then
+					region:SetVertexColor(classColor.r, classColor.g, classColor.b)
+				end
 				for n = 1, #buttons do
 					local texture = buttons[n]
 					if region:GetTexture() == "Interface\\Buttons\\"..texture then
@@ -60,6 +67,9 @@ function S:HandleCloseButton(f, point, text)
 		f.text = f:CreateFontString(nil, "OVERLAY")
 		f.text:SetFont([[Interface\AddOns\ElvUI\media\fonts\PT_Sans_Narrow.ttf]], 16, "OUTLINE")
 		f.text:SetText(text)
+		if E.db.enhanced.skins.closeButton.classColor then
+			f.text:SetTextColor(classColor.r, classColor.g, classColor.b)
+		end
 		f.text:SetJustifyH("CENTER")
 		f.text:SetPoint("CENTER", f, "CENTER")
 	end

@@ -65,16 +65,9 @@ local function GeneralOptions()
 				get = function(info) return E.db.enhanced.general.declineduel; end,
 				set = function(info, value) E.db.enhanced.general.declineduel = value; M:DeclineDuel() end
 			},
-			originalCloseButton = {
-				order = 7,
-				type = "toggle",
-				name = L["Original Close Button"],
-				desc = L["Use blizzard close buttons, but desaturated"],
-				get = function(info) return E.db.enhanced.general.originalCloseButton end,
-				set = function(info, value) E.db.enhanced.general.originalCloseButton = value E:StaticPopup_Show("CONFIG_RL") end
-			},
+			
 			trainAllButton = {
- 				order = 8,
+ 				order = 7,
  				type = "toggle",
 				name = L["Train All Button"],
 				desc = L["Add button to Trainer frame with ability to train all available skills in one click."],
@@ -85,7 +78,7 @@ local function GeneralOptions()
 				end,
 			},
 			undressButton = {
-				order = 9,
+				order = 8,
 				type = "toggle",
 				name = L["Undress Button"],
 				desc = L["Add button to Dressing Room frame with ability to undress model."],
@@ -96,7 +89,7 @@ local function GeneralOptions()
 				end
 			},
 			alreadyKnown = {
-				order = 10,
+				order = 9,
 				type = "toggle",
 				name = L["Already Known"],
 				desc = L["Colorizes recipes, mounts & pets that are already known"],
@@ -107,21 +100,14 @@ local function GeneralOptions()
 				end
 			},
 			hideZoneText = {
-				order = 11,
+				order = 10,
 				type = "toggle",
 				name = L["Hide Zone Text"],
 				get = function(info) return E.db.enhanced.general.hideZoneText end,
 				set = function(info, value) E.db.enhanced.general.hideZoneText = value M:HideZone() end
 			},
-			animations = {
-				order = 12,
-				type = "toggle",
-				name = L["Achievements Animated Bars"],
-				get = function(info) return E.private.skins.animations; end,
-				set = function(info, value) E.private.skins.animations = value; end
-			},
 			altBuyMaxStack = {
-				order = 13,
+				order = 11,
 				type = "toggle",
 				name = L["Alt-Click Merchant"],
 				desc = L["Holding Alt key while buying something from vendor will now buy an entire stack."],
@@ -132,7 +118,7 @@ local function GeneralOptions()
 				end
 			},
 			moverTransparancy = {
-				order = 14,
+				order = 12,
 				type = "range",
 				isPercent = true,
 				name = L["Mover Transparency"],
@@ -547,10 +533,58 @@ local function NamePlatesOptions()
 	return config;
 end
 
+-- Skins
+local function SkinsOptions()
+	local config = {
+		order = 7,
+		type = "group",
+		name = L["Skins"],
+		args = {
+			header = {
+				order = 1,
+				type = "header",
+				name = ColorizeSettingName(L["Skins"])
+			},
+			animations = {
+				order = 2,
+				type = "toggle",
+				name = L["Achievements Animated Bars"],
+				get = function(info) return E.private.skins.animations; end,
+				set = function(info, value) E.private.skins.animations = value; end
+			},
+			closeButton = {
+				order = 3,
+				type = "group",
+				name = L["Close Button"],
+				guiInline = true,
+				args = {
+					originalCloseButton = {
+						order = 1,
+						type = "toggle",
+						name = L["Original Close Button"],
+						desc = L["Use blizzard close buttons, but desaturated"],
+						get = function(info) return E.db.enhanced.skins.closeButton.originalCloseButton end,
+						set = function(info, value) E.db.enhanced.skins.closeButton.originalCloseButton = value E:StaticPopup_Show("CONFIG_RL") end
+					},
+					classColor = {
+						order = 2,
+						type = "toggle",
+						name = L["Use Class Color"],
+						get = function(info) return E.db.enhanced.skins.closeButton.classColor end,
+						set = function(info, value) E.db.enhanced.skins.closeButton.classColor = value E:StaticPopup_Show("CONFIG_RL") end,
+					}
+				}
+			}
+		}
+	}
+
+	return config
+end
+
 -- Tooltip
 local function TooltipOptions()
 	local config = {
-		order = 7,
+		order = 8,
 		type = "group",
 		name = L["Tooltip"],
 		get = function(info) return E.db.enhanced.tooltip[info[#info]] end,
@@ -654,7 +688,7 @@ local function TooltipOptions()
 					modifier = {
 						order = 3,
 						type = "select",
-						name = L["Visibility"],
+						name = L["Modifier Key"],
 						set = function(info, value) E.db.enhanced.tooltip.progressInfo[info[#info]] = value; E:GetModule("Enhanced_ProgressionInfo"):UpdateModifier(); end,
 						values = {
 							["ALL"] = ALWAYS,
@@ -723,7 +757,7 @@ local function WatchFrameOptions()
 	};
 
 	local config = {
-		order = 8,
+		order = 9,
 		type = "group",
 		name = L["Objective Frame"],
 		get = function(info) return E.db.enhanced.watchframe[info[#info]] end,
@@ -793,7 +827,7 @@ end
 -- Loss Control
 local function LoseControlOptions()
 	local config = {
-		order = 7,
+		order = 10,
 		type = "group",
 		name = L["Lose Control"],
 		get = function(info) return E.db.enhanced.tooltip[info[#info]] end,
@@ -854,7 +888,7 @@ local function UnitFrameOptions()
 	local TC = E:GetModule("TargetClass")
 
 	local config = {
-		order = 10,
+		order = 11,
 		type = "group",
 		name = L["UnitFrames"],
 		childGroups = "tab",
@@ -1082,6 +1116,126 @@ local function UnitFrameOptions()
 	return config
 end
 
+local function RaidMarkerOptions()
+	local RM = E:GetModule("RaidMarkerBar")
+
+	local config = {
+		order = 12,
+		type = "group",
+		name = L["Raid Markers"],
+		get = function(info) return E.db.enhanced.raidmarkerbar[ info[#info] ] end,	
+		args = {
+			header = {
+				order = 1,
+				type = "header",
+				name = ColorizeSettingName(L["Raid Markers"])
+			},
+			enable = {
+				order = 2,
+				type = "toggle",
+				name = L["Enable"],
+				desc = L["Display a quick action bar for raid targets and world markers."],
+				set = function(info, value) E.db.enhanced.raidmarkerbar.enable = value; RM:Visibility() end
+			},
+			reverse = {
+				order = 3,
+				type = "toggle",
+				name = L["Reverse"],
+				disabled = function() return not E.db.enhanced.raidmarkerbar.enable end,
+				set = function(info, value) E.db.enhanced.raidmarkerbar.reverse = value; RM:UpdateBar() end
+			},
+			backdrop = {
+				order = 4,
+				type = "toggle",
+				name = L["Backdrop"],
+				disabled = function() return not E.db.enhanced.raidmarkerbar.enable end,
+				set = function(info, value) E.db.enhanced.raidmarkerbar.backdrop = value; RM:Backdrop() end
+			},
+			transparentButtons = {
+				order = 5,
+				type = "toggle",
+				name = L["Transparent Buttons"],
+				disabled = function() return not E.db.enhanced.raidmarkerbar.enable end,
+				set = function(info, value) E.db.enhanced.raidmarkerbar.transparentButtons = value; RM:ButtonBackdrop() end
+			},
+			transparentBackdrop = {
+				order = 6,
+				type = "toggle",
+				name = L["Transparent Backdrop"],
+				disabled = function() return not E.db.enhanced.raidmarkerbar.enable end,
+				set = function(info, value) E.db.enhanced.raidmarkerbar.transparentBackdrop = value; RM:Backdrop() end
+			},
+			spacer = {
+				order = 7,
+				type = "description",
+				name = " "
+			},
+			buttonSize = {
+				order = 8,
+				type = "range",
+				name = L["Button Size"],
+				min = 16, max = 60, step = 1,
+				disabled = function() return not E.db.enhanced.raidmarkerbar.enable end,
+				set = function(info, value) E.db.enhanced.raidmarkerbar.buttonSize = value; RM:UpdateBar() end
+			},
+			spacing = {
+				order = 9,
+				type = "range",
+				name = L["Button Spacing"],
+				min = 0, max = 20, step = 1,
+				disabled = function() return not E.db.enhanced.raidmarkerbar.enable end,
+				set = function(info, value) E.db.enhanced.raidmarkerbar.spacing = value; RM:UpdateBar() end
+			},
+			orientation = {
+				order = 10,
+				type = "select",
+				name = L["Orientation"],
+				disabled = function() return not E.db.enhanced.raidmarkerbar.enable end,
+				values = {
+					["HORIZONTAL"] = L["Horizontal"],
+					["VERTICAL"] = L["Vertical"]
+				},
+				set = function(info, value) E.db.enhanced.raidmarkerbar.orientation = value; RM:UpdateBar() end
+			},
+			modifier = {
+				order = 11,
+				type = "select",
+				name = L["Modifier Key"],
+				desc = L["Set the modifier key for placing world markers."],
+				disabled = function() return not E.db.enhanced.raidmarkerbar.enable end,
+				set = function(info, value) E.db.enhanced.raidmarkerbar.modifier = value; RM:UpdateWorldMarkersAndTooltips() end,
+				values = {
+					["shift-"] = SHIFT_KEY,
+					["ctrl-"] = CTRL_KEY,
+					["alt-"] = ALT_KEY
+				}
+			},
+			visibility = {
+				order = 12,
+				type = "select",
+				name = L["Visibility"],
+				disabled = function() return not E.db.enhanced.raidmarkerbar.enable end,
+				values = {
+					["DEFAULT"] = DEFAULT,
+					["INPARTY"] = AGGRO_WARNING_IN_PARTY,
+					["ALWAYS"] = ALWAYS,
+					["CUSTOM"] = CUSTOM
+				},
+				set = function(info, value) E.db.enhanced.raidmarkerbar.visibility = value; RM:Visibility() end
+			},
+			customVisibility = {
+				order = 13,
+				type = "input",
+				width = "full",
+				name = L["Visibility State"],
+				disabled = function() return E.db.enhanced.raidmarkerbar.visibility ~= "CUSTOM" or not E.db.enhanced.raidmarkerbar.enable end,
+				set = function(info, value) E.db.enhanced.raidmarkerbar.customVisibility = value; RM:Visibility() end
+			}
+		}
+	}
+	return config
+end
+
 function addon:GetOptions()
 	E.Options.args.enhanced = {
 		order = 50,
@@ -1100,6 +1254,8 @@ function addon:GetOptions()
 			unitframesGroup = UnitFrameOptions(),
 			losecontrolGroup = LoseControlOptions(),
 			watchFrameGroup = WatchFrameOptions(),
+			raidmarkerGroup = RaidMarkerOptions(),
+			skinsGroup = SkinsOptions(),
 		}
 	};
 end
