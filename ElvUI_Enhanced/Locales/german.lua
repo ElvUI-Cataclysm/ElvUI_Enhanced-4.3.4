@@ -9,7 +9,7 @@ L["ITEMLEVEL_DESC"] = "Passen Sie die Einstellungen für die Anzeige von Gegenst
 L["WATCHFRAME_DESC"] = "Passen Sie die Einstellungen des Watchframe (Questlog) nach ihren Wünschen an."
 
 -- Actionbars
-L["Equipped Item Border"] = true;
+L["Equipped Item Border"] = "Rahmen der angelegten Items"
 L["Sets actionbars' backgrounds to transparent template."] = "Setzt den Aktionsleisten Hintergrund transparent."
 L["Sets actionbars buttons' backgrounds to transparent template."] = "Setzt die Aktionsleisten Tasten transparent."
 L["Transparent ActionBars"] = "Transparente Aktionsleisten"
@@ -17,11 +17,11 @@ L["Transparent Backdrop"] = "Transparenter Hintergrund"
 L["Transparent Buttons"] = "Transparente Tasten"
 
 -- AddOn List
-L["Enable All"] = true;
-L["Dependencies: "] = true;
-L["Disable All"] = true;
-L["Load AddOn"] = true;
-L["Requires Reload"] = true;
+L["Enable All"] = "Alle aktivieren"
+L["Dependencies: "] = "Abhängigkeiten"
+L["Disable All"] = "Alle deaktivieren"
+L["Load AddOn"] = "Lade AddOn"
+L["Requires Reload"] = "Benötigt Reload"
 
 -- Animated Loss
 L["Animated Loss"] = true;
@@ -30,12 +30,11 @@ L["Start Delay"] = true;
 L["Postpone Delay"] = true;
 
 -- Chat
-L["Filter DPS meters Spam"] = true;
+L["Filter DPS meters Spam"] = "Spam von DPS-Metern filtern"
 L["Replaces long reports from damage meters with a clickable hyperlink to reduce chat spam.\nWorks correctly only with general reports such as DPS or HPS. May fail to filter te report of other things"] = true;
 
 -- Datatext
 L["Combat Indicator"] = "Kampfanzeige"
-L["Datatext Disabled"] = "Infotext deaktiviert"
 L["Distance"] = "Entfernung"
 L["Enhanced Time Color"] = "Erweiterte Zeit-Färbung"
 L["Equipped"] = "Angelegt"
@@ -46,7 +45,6 @@ L["Out of Combat"] = "Außerhalb des Kampfes"
 L["Reincarnation"] = "Wiederbelebung"
 L["Target Range"] = "Zielreichweite"
 L["Total"] = "Gesamt"
-L["You are not playing a |cff0070DEShaman|r, datatext disabled."] = "Du spielst keinen |cff0070DEShaman|r, Infotext deaktiviert."
 
 -- Death Recap
 L["%s %s"] = true;
@@ -73,7 +71,7 @@ L["Enable/Disable the display of durability information on the character screen.
 L["Enable/Disable the display of item levels on the character screen."] = "Anzeige von Gegenstandsstufen im Charakterfenster aktivieren / deaktivieren."
 L["Equipment"] = "Ausrüstung"
 L["Only show durabitlity information for items that are damaged."] = "Nur die Haltbarkeit für beschädigte Ausrüstungsteile anzeigen."
-L["Quality Color"] = true;
+L["Quality Color"] = "Qualitätsfarbe"
 
 -- General
 L["Add button to Dressing Room frame with ability to undress model."] = true;
@@ -105,6 +103,8 @@ L["Above Minimap"] = "Oberhalb der Minimap"
 L["Combat Hide"] = true;
 L["FadeIn Delay"] = "Einblendungsverzögerung"
 L["Hide minimap while in combat."] = "Ausblenden der Minimap während des Kampfes."
+L["Show Location Digits"] = true
+L["Toggle Location Digits."] = true
 L["Location Digits"] = "Koordinaten Nachkommastellen"
 L["Location Panel"] = "Standort-Panel"
 L["Number of digits for map location."] = "Anzahl der Nachkommastellen der Koordinaten."
@@ -163,11 +163,11 @@ L["Set the modifier key for placing world markers."] = "Setzt eine modifierungs 
 
 -- Unitframes
 L["All role icons (Damage/Healer/Tank) on the unit frames are hidden when you go into combat."] = "Alle Rollensymbole (Schaden/Heiler/Tank) auf den Einheitenfenstern werden versteckt, wenn der Charakter sich im Kampf befindet."
-L["Class Icons"] = true;
+L["Class Icons"] = "Klassensymbole"
 L["Detached Height"] = "Höhe loslösen"
 L["Hide Role Icon in combat"] = "Verstecke Rollensymbol im Kampf"
 L["Show class icon for units."] = "Zeige Klassensymbole für Einheiten"
-L["Target"] = true;
+L["Target"] = "Ziel"
 
 -- WatchFrame
 L["Arena"] = "Arena"

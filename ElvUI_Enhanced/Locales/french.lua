@@ -35,7 +35,6 @@ L["Replaces long reports from damage meters with a clickable hyperlink to reduce
 
 -- Datatext
 L["Combat Indicator"] = true;
-L["Datatext Disabled"] = true;
 L["Distance"] = true;
 L["Enhanced Time Color"] = true;
 L["Equipped"] = true;
@@ -46,7 +45,6 @@ L["Out of Combat"] = true;
 L["Reincarnation"] = true;
 L["Target Range"] = true;
 L["Total"] = true;
-L["You are not playing a |cff0070DEShaman|r, datatext disabled."] = true;
 
 -- Death Recap
 L["%s %s"] = true;
@@ -105,6 +103,8 @@ L["Above Minimap"] = "Sous la minicarte"
 L["Combat Hide"] = true;
 L["FadeIn Delay"] = "Délais d'estompage"
 L["Hide minimap while in combat."] = "Cacher la minicarte quand vous êtes en combat"
+L["Show Location Digits"] = true
+L["Toggle Location Digits."] = true
 L["Location Digits"] = "Chiffres d'emplacement"
 L["Location Panel"] = true;
 L["Number of digits for map location."] = "Nombre de chiffres pour l'emplacement."

@@ -64,8 +64,9 @@ local function OnEnter(self)
 	local color
 
 	DT:SetupTooltip(self)
-	DT.tooltip:AddDoubleLine(L["Equipped"], floor(equipped), 1, 1, 1, 1, 1, 0)
-	DT.tooltip:AddDoubleLine(L["Total"], floor(total), 1, 1, 1, 1, 1, 0)
+	DT.tooltip:AddLine(STAT_AVERAGE_ITEM_LEVEL)
+	DT.tooltip:AddDoubleLine(L["Equipped"], floor(equipped), 1, 1, 1)
+	DT.tooltip:AddDoubleLine(L["Total"], floor(total), 1, 1, 1)
 	DT.tooltip:AddLine(" ")
 
 	for i = 1, #slots do
