@@ -42,13 +42,13 @@ function UB:ToggleState()
 		self.dressUpButton:Show()
 		self.sideDressUpButton:Show()
 
-		SideDressUpModelResetButton:Point("BOTTOM", 43, 1)
+		SideDressUpModelResetButton:Point("BOTTOM", 43, 2)
 	else
 		if self.dressUpButton and self.dressUpButton then
 			self.dressUpButton:Hide()
 			self.sideDressUpButton:Hide()
 		end
-		SideDressUpModelResetButton:Point("BOTTOM", 0, 0)
+		SideDressUpModelResetButton:Point("BOTTOM", 0, 2)
 	end
 end
 
