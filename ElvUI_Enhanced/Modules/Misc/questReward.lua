@@ -2,43 +2,56 @@ local E, L, V, P, G = unpack(ElvUI)
 local M = E:GetModule("Enhanced_Misc")
 
 local _G = _G
-local format = string.format
+local select = select
 
-local function SelectQuestReward(index)
-	local btn = _G[("QuestInfoItem%d"):format(index)]
-	if(btn.type == "choice") then
-		QuestInfoItemHighlight:ClearAllPoints()
-		QuestInfoItemHighlight:SetAllPoints(btn)
-		QuestInfoItemHighlight:Show()
+local GetItemInfo = GetItemInfo
+local GetQuestItemLink = GetQuestItemLink
 
-		QuestInfoFrame.itemChoice = btn:GetID()
+local function SelectQuestReward(id)
+	local button = _G["QuestInfoItem"..id]
+
+	if button.type == "choice" then
+		if E.private.skins.blizzard.enable and E.private.skins.blizzard.quest then
+			_G[button:GetName()]:SetBackdropBorderColor(1, 0.80, 0.10)
+			_G[button:GetName()].backdrop:SetBackdropBorderColor(1, 0.80, 0.10)
+			_G[button:GetName().."Name"]:SetTextColor(1, 0.80, 0.10)
+		else
+			QuestInfoItemHighlight:ClearAllPoints()
+			QuestInfoItemHighlight:SetAllPoints(button)
+			QuestInfoItemHighlight:Show()
+		end
+
+		QuestInfoFrame.itemChoice = button:GetID()
 	end
 end
 
 function M:QUEST_COMPLETE()
-	if not E.private.general.selectQuestReward then return end
+	local numItems = GetNumQuestChoices()
+	if numItems <= 0 then return end
 
-	local choice, price = 1, 0
-	local num = GetNumQuestChoices()
+	local link, itemPrice
+	local choiceID, maxPrice = 1, 0
 
-	if num <= 0 then
-		return
-	end
+	for i = 1, numItems do
+		link = GetQuestItemLink("choice", i)
 
-	for index = 1, num do
-		local link = GetQuestItemLink("choice", index)
-		if (link) then
-			local vsp = select(11, GetItemInfo(link))
-			if vsp and vsp > price then
-				price = vsp
-				choice = index
+		if link then
+			itemPrice = select(11, GetItemInfo(link))
+
+			if itemPrice and itemPrice > maxPrice then
+				maxPrice = itemPrice
+				choiceID = i
 			end
 		end
 	end
 
-	SelectQuestReward(choice)
+	SelectQuestReward(choiceID)
 end
 
-function M:LoadQuestReward()
-	self:RegisterEvent("QUEST_COMPLETE")
+function M:ToggleQuestReward()
+	if E.private.general.selectQuestReward then
+		self:RegisterEvent("QUEST_COMPLETE")
+	else
+		self:UnregisterEvent("QUEST_COMPLETE")
+	end
 end

@@ -1,5 +1,6 @@
 local E, L, V, P, G = unpack(ElvUI)
 local DT = E:GetModule("DataTexts")
+local EE = E:GetModule("ElvUI_Enhanced")
 
 local HasNewMail = HasNewMail
 local GetInboxNumItems = GetInboxNumItems
@@ -10,10 +11,6 @@ local HAVE_MAIL_FROM = HAVE_MAIL_FROM
 
 local Mail_Icon = "|TInterface\\MINIMAP\\TRACKING\\Mailbox.blp:14:14|t"
 local Read
-
-local function ColorizeSettingName(settingName)
-	return format("|cffff8000%s|r", settingName)
-end
 
 local function MakeIconString()
 	local str = ""
@@ -75,4 +72,4 @@ local function OnEnter(self)
 	DT.tooltip:Show()
 end
 
-DT:RegisterDatatext("Mail", {"PLAYER_ENTERING_WORLD", "MAIL_INBOX_UPDATE", "UPDATE_PENDING_MAIL", "MAIL_CLOSED", "PLAYER_LOGIN", "MAIL_SHOW"}, OnEvent, OnUpdate, nil, OnEnter, nil, ColorizeSettingName(MAIL_LABEL))
+DT:RegisterDatatext("Mail", {"PLAYER_ENTERING_WORLD", "MAIL_INBOX_UPDATE", "UPDATE_PENDING_MAIL", "MAIL_CLOSED", "PLAYER_LOGIN", "MAIL_SHOW"}, OnEvent, OnUpdate, nil, OnEnter, nil, EE:ColorizeSettingName(MAIL_LABEL))

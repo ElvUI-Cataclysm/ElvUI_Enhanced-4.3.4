@@ -1,8 +1,7 @@
 ## Interface: 40300
 ## Author: Bunny, Apollyon
-## Version: 4.3.4-1.01
-## Title: |cff1784d1E|r|cffe5e3e3lvUI|r |cff1784d1E|r|cffe5e3e3nhanced|r
-## Notes: Plugin-Enhancements for |cffA11313E|r|cffC4C4C4lvUI|r.
+## Version: 1.02
+## Title: |cffff7000E|r|cffe5e3e3lvUI|r |cffff7000E|r|cffe5e3e3nhanced|r
 ## SavedVariables: EnhancedDB
 ## RequiredDeps: ElvUI
 ## DefaultState: Enabled
@@ -13,5 +12,5 @@ Locales\Load_Locales.xml
 Media\Load_Media.xml
 ElvUI_Enhanced.lua
 Settings\Load_Settings.xml
-Config\Load_Config.xml
 Modules\load_Modules.xml
+Config\Load_Config.xml

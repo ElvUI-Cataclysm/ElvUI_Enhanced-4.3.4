@@ -19,79 +19,52 @@ local UnitExists = UnitExists
 local UnitGUID = UnitGUID
 local UnitIsPlayer = UnitIsPlayer
 local UnitLevel = UnitLevel
-
 local MAX_PLAYER_LEVEL = MAX_PLAYER_LEVEL
 
-local difficulties = {
-	"H",
-	"N"
-}
+local difficulties = {"H", "N"}
 
 local tiers = {
 	["DS"] = {
-		{ -- Heroic
-			6154, 6156, 6158, 6160, 6162, 6164, 6166, 6168
-		},
-		{ -- Normal
-			6153, 6155, 6157, 6159, 6161, 6163, 6165, 6167
-		}
+		{6154, 6156, 6158, 6160, 6162, 6164, 6166, 6168},	-- Heroic
+		{6153, 6155, 6157, 6159, 6161, 6163, 6165, 6167}	-- Normal
 	},
 	["FL"] = {
-		{ -- Heroic
-			5965, 5967, 5969, 5971, 5973, 5975, 5977
-		},
-		{ -- Normal
-			5964, 5966, 5968, 5970, 5972, 5974, 5976
-		}
+		{5965, 5967, 5969, 5971, 5973, 5975, 5977},			-- Heroic
+		{5964, 5966, 5968, 5970, 5972, 5974, 5976}			-- Normal
 	},
 	["BH"] = {
 		{},
-		{ -- Normal
-			5578, 5981, 6170
-		}
+		{5578, 5981, 6170}									-- Normal
 	},
 	["TOTFW"] = {
-		{ -- Heroic
-			5574, 5577
-		},
-		{ -- Normal
-			5575, 5576
-		}
+		{5574, 5577},										-- Heroic
+		{5575, 5576}										-- Normal
 	},
 	["BT"] = {
-		{ -- Heroic
-			5553, 5568, 5570, 5571, 5573
-		},
-		{ -- Normal
-			5554, 5567, 5569, 5572
-		}
+		{5553, 5568, 5570, 5571, 5573},						-- Heroic
+		{5554, 5567, 5569, 5572}							-- Normal
 	},
 	["BWD"] = {
-		{ -- Heroic
-			5556, 5558, 5560, 5562, 5563, 5566
-		},
-		{ -- Normal
-			5555, 5557, 5559, 5561, 5564, 5565
-		}
+		{5556, 5558, 5560, 5562, 5563, 5566},				-- Heroic
+		{5555, 5557, 5559, 5561, 5564, 5565}				-- Normal
 	}
 }
-		
-local playerGUID = UnitGUID("player")
+
 local progressCache = {}
 
 local function GetEntryCount(tab)
 	local i = 0
-	for _, _ in pairs(tab) do
+	for _ in pairs(tab) do
 		i = i + 1
 	end
 	return i
 end
 
 local function GetProgression(guid)
-	local statFunc = guid == playerGUID and GetStatistic or GetComparisonStatistic
+	local statFunc = guid == E.myguid and GetStatistic or GetComparisonStatistic
 	local total, kills, killed
 
-	for tier, _ in pairs(tiers) do
+	for tier in pairs(tiers) do
 		progressCache[guid].header[tier] = {}
 		progressCache[guid].info[tier] = {}
 
@@ -108,13 +81,11 @@ local function GetProgression(guid)
 					end
 				end
 
-				if (killed > 0) then
+				if killed > 0 then
 					progressCache[guid].header[tier][i] = format("%s [%s]:", L[tier], difficulty)
 					progressCache[guid].info[tier][i] = format("%d/%d", killed, total)
 
-					if killed == total then
-						break
-					end
+					if killed == total then break end
 				end
 			end
 		end
@@ -137,11 +108,11 @@ local function SetProgressionInfo(guid, tt)
 		for i = 1, tt:NumLines() do
 			local leftTipText = _G["GameTooltipTextLeft"..i]
 
-			for tier, _ in pairs(tiers) do
+			for tier in pairs(tiers) do
 				if E.db.enhanced.tooltip.progressInfo.tiers[tier] then
 					for j, difficulty in ipairs(difficulties) do
 						if GetEntryCount(tiers[tier][j]) > 0 then
-							if (leftTipText:GetText() and find(leftTipText:GetText(), L[tier]) and find(leftTipText:GetText(), difficulty)) then
+							if leftTipText:GetText() and find(leftTipText:GetText(), L[tier]) and find(leftTipText:GetText(), difficulty) then
 								local rightTipText = _G["GameTooltipTextRight"..i]
 								leftTipText:SetText(progressCache[guid].header[tier][j])
 								rightTipText:SetText(progressCache[guid].info[tier][j])
@@ -155,7 +126,7 @@ local function SetProgressionInfo(guid, tt)
 
 		if updated == 1 then return end
 
-		for tier, _ in pairs(tiers) do
+		for tier in pairs(tiers) do
 			if E.db.enhanced.tooltip.progressInfo.tiers[tier] then
 				for i, difficulty in ipairs(difficulties) do
 					if GetEntryCount(tiers[tier][i]) > 0 then
@@ -178,7 +149,7 @@ function PI:INSPECT_ACHIEVEMENT_READY(GUID)
 end
 
 function PI:MODIFIER_STATE_CHANGED(_, key)
-	if ((key == format("L%s", self.modifier) or key == format("R%s", self.modifier)) and UnitExists("mouseover")) then
+	if (key == format("L%s", self.modifier) or key == format("R%s", self.modifier)) and UnitExists("mouseover") then
 		GameTooltip:SetUnit("mouseover")
 	end
 end
@@ -186,8 +157,8 @@ end
 local function ShowInspectInfo(tt)
 	if InCombatLockdown() then return end
 
-	local modifier = E.db.enhanced.tooltip.progressInfo.modifier;
-	if(modifier ~= "ALL" and not ((modifier == "SHIFT" and IsShiftKeyDown()) or (modifier == "CTRL" and IsControlKeyDown()) or (modifier == "ALT" and IsAltKeyDown()))) then return; end
+	local modifier = E.db.enhanced.tooltip.progressInfo.modifier
+	if modifier ~= "ALL" and not ((modifier == "SHIFT" and IsShiftKeyDown()) or (modifier == "CTRL" and IsControlKeyDown()) or (modifier == "ALT" and IsAltKeyDown())) then return end
 
 	local unit = select(2, tt:GetUnit())
 	if not unit or not UnitIsPlayer(unit) then return end
@@ -197,12 +168,12 @@ local function ShowInspectInfo(tt)
 	local level = UnitLevel(unit)
 	if not level or level < MAX_PLAYER_LEVEL then return end
 
-	if not (CanInspect(unit, false)) then return end
+	if not CanInspect(unit, false) then return end
 
 	local guid = UnitGUID(unit)
 
 	if not progressCache[guid] or (GetTime() - progressCache[guid].timer) > 600 then
-		if guid == playerGUID then
+		if guid == E.myguid then
 			UpdateProgression(guid)
 		else
 			local self = E.private.tooltip.enable and TT or GameTooltip

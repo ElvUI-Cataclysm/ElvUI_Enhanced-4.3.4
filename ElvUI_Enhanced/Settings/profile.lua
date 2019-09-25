@@ -1,77 +1,64 @@
-local E, L, V, P, G = unpack(ElvUI);
+local E, L, V, P, G = unpack(ElvUI)
 
--- Minimap
-P.general.minimap.locationText = "ABOVE"
-
--- Unitframes
-P.unitframe.units.player.portrait.detachFromFrame = false;
-P.unitframe.units.player.portrait.detachedWidth = 54;
-P.unitframe.units.player.portrait.detachedHeight = 54;
-
-P.unitframe.units.target.portrait.detachFromFrame = false;
-P.unitframe.units.target.portrait.detachedWidth = 54;
-P.unitframe.units.target.portrait.detachedHeight = 54;
-
-P.unitframe.units.player.animatedLoss = {
-	enable = false,
-	duration = .75,
-	startDelay = .2,
-	pauseDelay = .05,
-	postponeDelay = .05
-};
-
--- Enhanced
 P.enhanced = {
 	general = {
 		pvpAutoRelease = false,
 		autoRepChange = false,
 		merchant = false,
-		moverTransparancy = 0.8,
+		merchantItemLevel = false,
+		moverTransparancy = 1,
 		showQuestLevel = false,
+		questItemLevel = false,
+		selectQuestReward = false,
 		declineduel = false,
+		declineParty = false,
 		hideZoneText = false,
-
-		trainAllButton = false,
+		trainAllSkills = false,
 		undressButton = false,
-		alreadyKnown = true
-	},
-	skins = {
-		closeButton = {
-			originalCloseButton = false,
-			classColor = false
-		}
+		alreadyKnown = false
 	},
 	actionbars = {
-		equipped = false,
-		equippedColor = {r = 0, g = 1.0, b = 0},
-		transparentActionbars = {
-			transparentBackdrops = false,
-			transparentButtons = false
+		pet = {
+			checkedBorder = false,
+			checkedBorderColor = {r = 1, g = 0.56, b = 0},
+			autoCastBorder = false,
+			autoCastBorderColor = {r = 1, g = 0, b = 0}
+		}
+	},
+	blizzard = {
+		errorFrame = {
+			enable = false,
+			width = 300,
+			height = 60,
+			font = "PT Sans Narrow",
+			fontSize = 12,
+			fontOutline = "NONE"
 		}
 	},
 	chat = {
-		dpsLinks = false,
-	},
-	datatexts = {
-		timeColorEnch = false,
+		dpsLinks = false
 	},
 	equipment = {
-		font = "Homespun",
-		fontSize = 10,
-		fontOutline = "MONOCHROMEOUTLINE",
+		enable = false,
 		durability = {
 			enable = true,
 			onlydamaged = true,
-			position = "TOPLEFT",
+			position = "TOPRIGHT",
 			xOffset = 2,
-			yOffset = 0
+			yOffset = -2,
+			font = "Homespun",
+			fontSize = 10,
+			fontOutline = "MONOCHROMEOUTLINE"
 		},
 		itemlevel = {
 			enable = true,
-			qualityColor = false,
-			position = "BOTTOMLEFT",
+			qualityColor = true,
+			position = "BOTTOMRIGHT",
 			xOffset = 2,
-			yOffset = 3
+			yOffset = 2,
+			font = "Homespun",
+			fontSize = 10,
+			fontOutline = "MONOCHROMEOUTLINE"
 		}
 	},
 	minimap = {
@@ -79,20 +66,38 @@ P.enhanced = {
 		showlocationdigits = true,
 		locationdigits = 1,
 		hideincombat = false,
-		fadeindelay = 5,
+		fadeindelay = 5
 	},
 	nameplates = {
-		cacheUnitClass = false,
-		smooth = false,
-		smoothSpeed = 0.3,
+		classCache = false,
+		chatBubbles = false,
+		titleCache = false,
+		smoothBars = {
+			enable = false,
+			smoothingAmount = 0.3
+		},
+		guild = {
+			font = "PT Sans Narrow",
+			fontSize = 11,
+			fontOutline = "OUTLINE",
+			color = {r = 1, g = 1, b = 1},
+			separator = " "
+		},
+		npc = {
+			font = "PT Sans Narrow",
+			fontSize = 11,
+			fontOutline = "OUTLINE",
+			color = {r = 1, g = 1, b = 1},
+			separator = " "
+		}
 	},
 	tooltip = {
 		itemQualityBorderColor = false,
 		tooltipIcon = {
 			enable = false,
-			tooltipIconSpells  = true,
-			tooltipIconItems  = true,
-			tooltipIconAchievements  = true
+			tooltipIconSpells = true,
+			tooltipIconItems = true,
+			tooltipIconAchievements = true
 		},
 		progressInfo = {
 			enable = false,
@@ -108,15 +113,29 @@ P.enhanced = {
 			}
 		}
 	},
-	loseofcontrol = { 
+	loseControl = {
+		iconSize = 60,
+		compactMode = false,
 		CC = true,
 		PvE = true,
 		Silence = true,
 		Disarm = true,
 		Root = false,
-		Snare = true
+		Snare = false
 	},
 	unitframe = {
+		detachPortrait = {
+			player = {
+				enable = false,
+				width = 54,
+				height = 54
+			},
+			target = {
+				enable = false,
+				width = 54,
+				height = 54
+			}
+		},
 		units = {
 			target = {
 				classicon = {
@@ -126,8 +145,7 @@ P.enhanced = {
 					yOffset = -22
 				}
 			}
-		},
-		hideRoleInCombat = false
+		}
 	},
 	watchframe = {
 		enable = false,
@@ -138,16 +156,16 @@ P.enhanced = {
 		raid = "COLLAPSED"
 	},
 	raidmarkerbar = {
-		["enable"] = false,
-		["backdrop"] = true,
-		["transparentButtons"] = false,
-		["transparentBackdrop"] = false,
-		["buttonSize"] = 22,
-		["spacing"] = 1,
-		["orientation"] = "HORIZONTAL",
-		["reverse"] = false,
-		["modifier"] = "shift-",
-		["visibility"] = "DEFAULT",
-		["customVisibility"] = "[noexists, nogroup] hide;show"
+		enable = false,
+		backdrop = true,
+		transparentButtons = false,
+		transparentBackdrop = false,
+		buttonSize = 22,
+		spacing = 1,
+		orientation = "HORIZONTAL",
+		reverse = false,
+		modifier = "shift-",
+		visibility = "DEFAULT",
+		customVisibility = "[noexists, nogroup] hide;show"
 	}
 }

@@ -1,3 +1,14 @@
-local LSM = LibStub("LibSharedMedia-3.0")
+local E, L, V, P, G = unpack(ElvUI)
+local LSM = E.Libs.LSM
+local M = [[Interface\AddOns\ElvUI_Enhanced\Media\]]
 
-LSM:Register("font", "TukUI Unitframes", [[Interface\Addons\ElvUI_Enhanced\Media\fonts\uf_font.ttf]], LSM.LOCALE_BIT_ruRU + LSM.LOCALE_BIT_western);
+E.EnhancedMedia = {
+	Fonts = {
+		TukUI = M..[[Fonts\TukUI_UF_Font.ttf]],
+	},
+	Textures = {
+		DeathRecap = M..[[Textures\DeathRecap.blp]]
+	}
+}
+
+LSM:Register("font", "TukUI Unitframes", E.EnhancedMedia.Fonts.TukUI, LSM.LOCALE_BIT_ruRU + LSM.LOCALE_BIT_western)

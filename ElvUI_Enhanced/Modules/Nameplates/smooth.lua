@@ -1,10 +1,11 @@
 local E, L, V, P, G = unpack(ElvUI)
 local ENP = E:GetModule("Enhanced_NamePlates")
-local mod = E:GetModule("NamePlates")
+local NP = E:GetModule("NamePlates")
 
 local min, max = math.min, math.max
 
 local smoothing = {}
+
 local function SetSmooth(self, value)
 	local _, maxValue = self:GetMinMaxValues()
 	if value == self:GetValue() or (self._max and self._max ~= maxValue) then
@@ -16,22 +17,18 @@ local function SetSmooth(self, value)
 	self._max = maxValue
 end
 
-local function Smooth(bar)
-	if not bar.SetValue_ then
-		bar.SetValue_ = bar.SetValue;
-		bar.SetValue = SetSmooth;
-	end
-	bar.Smooth = E.db.enhanced.nameplates.smooth
-	bar.SmoothSpeed = E.db.enhanced.nameplates.smoothSpeed * 10
-end
-
 function ENP:UpdateAllFrame(_, frame)
-	frame.HealthBar.Smooth = E.db.enhanced.nameplates.smooth
-	frame.HealthBar.SmoothSpeed = E.db.enhanced.nameplates.smoothSpeed * 10
+	frame.HealthBar.Smooth = E.db.enhanced.nameplates.smoothBars.enable
+	frame.HealthBar.SmoothSpeed = E.db.enhanced.nameplates.smoothBars.smoothingAmount * 10
 end
 
 function ENP:OnCreated(_, frame)
-	Smooth(frame.UnitFrame.HealthBar)
+	if not frame.UnitFrame.HealthBar.SetValue_ then
+		frame.UnitFrame.HealthBar.SetValue_ = frame.UnitFrame.HealthBar.SetValue
+		frame.UnitFrame.HealthBar.SetValue = SetSmooth
+	end
+	frame.UnitFrame.HealthBar.Smooth = E.db.enhanced.nameplates.smoothBars.enable
+	frame.UnitFrame.HealthBar.SmoothSpeed = E.db.enhanced.nameplates.smoothBars.smoothingAmount * 10
 end
 
 local f = CreateFrame("Frame")
@@ -41,7 +38,6 @@ f:SetScript("OnUpdate", function()
 		local cur = bar:GetValue()
 		local new = cur + min((value-cur)/(bar.SmoothSpeed or 3), max(value-cur, limit))
 		if new ~= new then
-			-- Mad hax to prevent QNAN.
 			new = value
 		end
 		bar:SetValue_(new)
@@ -56,6 +52,6 @@ f:SetScript("OnUpdate", function()
 end)
 
 function ENP:Smooth()
-	self:SecureHook(mod, "UpdateAllFrame")
-	self:SecureHook(mod, "OnCreated")
+	self:SecureHook(NP, "UpdateAllFrame")
+	self:SecureHook(NP, "OnCreated")
 end

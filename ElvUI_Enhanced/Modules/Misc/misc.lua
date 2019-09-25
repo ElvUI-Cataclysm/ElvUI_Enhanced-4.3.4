@@ -1,16 +1,19 @@
 local E, L, V, P, G = unpack(ElvUI)
 local M = E:NewModule("Enhanced_Misc", "AceHook-3.0", "AceEvent-3.0")
 
-E.Enhanced_Misc = M
-
 local CancelDuel = CancelDuel
 local IsInInstance = IsInInstance
 local RepopMe = RepopMe
 
+local soulstone
 function M:PLAYER_DEAD()
 	local inInstance, instanceType = IsInInstance()
-	if inInstance and (instanceType == "pvp") then
-		local soulstone = GetSpellInfo(20707)
+
+	if inInstance and instanceType == "pvp" then
+		if not soulstone then
+			soulstone = GetSpellInfo(20707)
+		end
+
 		if E.myclass ~= "SHAMAN" and not (soulstone and UnitBuff("player", soulstone)) then
 			RepopMe()
 		end
@@ -39,6 +42,20 @@ function M:DeclineDuel()
 	end
 end
 
+function M:PARTY_INVITE_REQUEST(_, name)
+	StaticPopup_Hide("PARTY_INVITE")
+	DeclineGroup()
+	E:Print(L["Declined party request from "]..name..".")
+end
+
+function M:DeclineParty()
+	if E.db.enhanced.general.declineParty then
+		self:RegisterEvent("PARTY_INVITE_REQUEST")
+	else
+		self:UnregisterEvent("PARTY_INVITE_REQUEST")
+	end
+end
+
 function M:HideZone()
 	if E.db.enhanced.general.hideZoneText then
 		ZoneTextFrame:UnregisterAllEvents()
@@ -53,11 +70,14 @@ function M:Initialize()
 	self:AutoRelease()
 	self:DeclineDuel()
 	self:HideZone()
-	self:LoadQuestReward()
+	self:QuestItemLevel()
+	self:ToggleQuestReward()
 	self:WatchedFaction()
 	self:LoadMoverTransparancy()
 	self:QuestLevelToggle()
 	self:BuyStackToggle()
+	self:MerchantItemLevel()
+	self:DeclineParty()
 end
 
 local function InitializeCallback()

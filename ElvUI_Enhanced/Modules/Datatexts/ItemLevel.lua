@@ -1,9 +1,10 @@
 local E, L, V, P, G = unpack(ElvUI)
 local DT = E:GetModule("DataTexts")
-local PD = E:GetModule("PaperDoll")
+local PD = E:GetModule("Enhanced_PaperDoll")
+local EE = E:GetModule("ElvUI_Enhanced")
 
 local floor = math.floor
-local format, join = string.format, string.join
+local join = string.join
 
 local GetInventoryItemLink = GetInventoryItemLink
 local GetInventorySlotInfo = GetInventorySlotInfo
@@ -14,10 +15,6 @@ local STAT_AVERAGE_ITEM_LEVEL = STAT_AVERAGE_ITEM_LEVEL
 
 local displayString = ""
 local lastPanel
-
-local function ColorizeSettingName(settingName)
-	return format("|cffff8000%s|r", settingName)
-end
 
 local slots = {
 	{"HeadSlot", HEADSLOT},
@@ -98,6 +95,6 @@ local function ValueColorUpdate(hex)
 		OnEvent(lastPanel)
 	end
 end
-E["valueColorUpdateFuncs"][ValueColorUpdate] = true
+E.valueColorUpdateFuncs[ValueColorUpdate] = true
 
-DT:RegisterDatatext("Item Level", {"PLAYER_ENTERING_WORLD", "PLAYER_EQUIPMENT_CHANGED", "UNIT_INVENTORY_CHANGED"}, OnEvent, nil, OnClick, OnEnter, nil, ColorizeSettingName(STAT_AVERAGE_ITEM_LEVEL))
+DT:RegisterDatatext("Item Level", {"PLAYER_ENTERING_WORLD", "PLAYER_EQUIPMENT_CHANGED", "UNIT_INVENTORY_CHANGED"}, OnEvent, nil, OnClick, OnEnter, nil, EE:ColorizeSettingName(STAT_AVERAGE_ITEM_LEVEL))

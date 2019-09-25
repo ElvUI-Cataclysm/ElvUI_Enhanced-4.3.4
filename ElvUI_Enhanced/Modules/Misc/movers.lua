@@ -1,10 +1,15 @@
 local E, L, V, P, G = unpack(ElvUI)
 local M = E:GetModule("Enhanced_Misc")
 
+local _G = _G
+local pairs = pairs
+
 function M:UpdateMoverTransparancy()
 	local mover
-	for name, _ in pairs(E.CreatedMovers) do
+
+	for name in pairs(E.CreatedMovers) do
 		mover = _G[name]
+
 		if mover then
 			mover:SetAlpha(E.db.enhanced.general.moverTransparancy)
 		end

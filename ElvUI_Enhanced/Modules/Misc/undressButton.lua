@@ -21,21 +21,21 @@ function UB:CreateUndressButton()
 	end)
 	self.sideDressUpButton.model = SideDressUpModel
 
-	if E.private.skins.blizzard.enable ~= true or E.private.skins.blizzard.dressingroom ~= true then
-		DressUpFrameUndressButton:Point("RIGHT", DressUpFrameResetButton, "LEFT", 2, 0)
-		SideDressUpFrameUndressButton:Point("BOTTOM", SideDressUpModelResetButton, "BOTTOM", 0, -25)
-	else
+	if E.private.skins.blizzard.enable and E.private.skins.blizzard.dressingroom then
 		S:HandleButton(DressUpFrameUndressButton)
 		DressUpFrameUndressButton:Point("RIGHT", DressUpFrameResetButton, "LEFT", -3, 0)
 
 		S:HandleButton(SideDressUpFrameUndressButton)
 		SideDressUpFrameUndressButton:Point("RIGHT", SideDressUpModelResetButton, "LEFT", -3, 0)
+	else
+		DressUpFrameUndressButton:Point("RIGHT", DressUpFrameResetButton, "LEFT", 2, 0)
+		SideDressUpFrameUndressButton:Point("BOTTOM", SideDressUpModelResetButton, "BOTTOM", 0, -25)
 	end
 end
 
 function UB:ToggleState()
 	if E.db.enhanced.general.undressButton then
-		if not (self.dressUpButton and self.dressUpButton) then
+		if not self.dressUpButton then
 			self:CreateUndressButton()
 		end
 

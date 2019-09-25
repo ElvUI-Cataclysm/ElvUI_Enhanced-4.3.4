@@ -11,8 +11,6 @@ local ShowUIPanel = ShowUIPanel
 local ItemRefTooltip = ItemRefTooltip
 
 local channelEvents = {
-	"CHAT_MSG_INSTANCE_CHAT",
-	"CHAT_MSG_INSTANCE_CHAT_LEADER",
 	"CHAT_MSG_CHANNEL",
 	"CHAT_MSG_GUILD",
 	"CHAT_MSG_OFFICER",
@@ -44,7 +42,7 @@ local spamFirstLines = {
 }
 
 local spamNextLines = {
-	"^(%d+)\. (.*)$",	-- Recount, Skada
+	"^(%d+)%. (.*)$",	-- Recount, Skada
 	"^ (%d+). (.*)$",	-- Skada
 --	"^(.*)   (.*)$",	-- Additional Skada
 	"^.*%%%)$",			-- Skada player details
@@ -53,16 +51,16 @@ local spamNextLines = {
 
 function EDL:FilterLine(event, source, msg, ...)
 	for _, line in ipairs(spamNextLines) do
-		if msg and msg:match(line) then
+		if msg:match(line) then
 			local curTime = GetTime()
 
-			for id, meter in ipairs(self.Meters) do
+			for _, meter in ipairs(self.Meters) do
 				local elapsed = curTime - meter.time
 
 				if meter.src == source and meter.evt == event and elapsed < 1 then
 					local toInsert = true
 
-					for a, b in ipairs(meter.data) do
+					for _, b in ipairs(meter.data) do
 						if b == msg then
 							toInsert = false
 						end
@@ -81,7 +79,7 @@ function EDL:FilterLine(event, source, msg, ...)
 	for i, line in ipairs(spamFirstLines) do
 		local newID = 0
 
-		if msg and msg:match(line) then
+		if msg:match(line) then
 			local curTime = GetTime()
 
 			if find(msg, "|cff(.+)|r") then
@@ -152,10 +150,10 @@ function EDL:SetItemRef(link, text, button, chatframe)
 	return self.hooks.SetItemRef(link, text, button, chatframe)
 end
 
-function EDL:ItemRefTooltip_SetHyperlink(self, link, ...)
+function EDL:ItemRefTooltip_SetHyperlink(tt, link, ...)
 	if link:sub(0, 4) == "EDL:" then return end
 
-	return EDL.hooks[self].SetHyperlink(self, link, ...)
+	return EDL.hooks[tt].SetHyperlink(tt, link, ...)
 end
 
 function EDL:UpdateSettings()
