@@ -5,6 +5,8 @@ local select = select
 
 local GetItemInfo = GetItemInfo
 local GetMerchantItemLink = GetMerchantItemLink
+local ARMOR = ARMOR
+local ENCHSLOT_WEAPON = ENCHSLOT_WEAPON
 
 function M:MerchantFrame_UpdateMerchantInfo()
 	local index, button, itemLink
@@ -103,9 +105,9 @@ function M:MerchantItemLevel()
 		end
 
 		for i = 1, BUYBACK_ITEMS_PER_PAGE do
-			if _G["MerchantItem"..i.."ItemButton"].text then
-				_G["MerchantItem"..i.."ItemButton"].text:SetText("")
-			end
+			local button = _G["MerchantItem"..i.."ItemButton"]
+
+			if button.text then button.text:SetText("") end
 		end
 		if MerchantBuyBackItemItemButton.text then
 			MerchantBuyBackItemItemButton.text:SetText("")

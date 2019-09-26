@@ -14,7 +14,7 @@ local function UpdatePet(event, unit)
 
 	for i = 1, NUM_PET_ACTION_SLOTS do
 		local button = _G["PetActionButton"..i]
-		local shine = _G["PetActionButton"..i.."AutoCast"]
+		local shine = _G["PetActionButton"..i.."Shine"]
 		local _, _, texture, _, isActive, _, autoCastEnabled = GetPetActionInfo(i)
 
 		if E.db.enhanced.actionbars.pet.checkedBorder then button:SetChecked(false) end

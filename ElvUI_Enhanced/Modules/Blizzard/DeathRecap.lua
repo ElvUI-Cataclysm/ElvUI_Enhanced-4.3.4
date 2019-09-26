@@ -261,14 +261,7 @@ local function OpenRecap(recapID)
 		dmgInfo.school = evtData.school
 
 		entry.SpellInfo.Caster:SetText(dmgInfo.caster)
-
-		--local _, class = UnitClass()
-		--if class then
-		--	local textColor = CUSTOM_CLASS_COLORS and CUSTOM_CLASS_COLORS[class] or RAID_CLASS_COLORS[class]
-		--	entry.SpellInfo.Caster:SetTextColor(textColor.r, textColor.g, textColor.b)
-		--else
-			entry.SpellInfo.Caster:SetTextColor(0.5, 0.5, 0.5)
-		--end
+		entry.SpellInfo.Caster:SetTextColor(0.5, 0.5, 0.5)
 
 		entry.SpellInfo.Name:SetText(spellName)
 		entry.SpellInfo.Icon:SetTexture(texture)

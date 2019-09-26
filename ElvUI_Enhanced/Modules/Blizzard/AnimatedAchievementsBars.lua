@@ -20,7 +20,7 @@ local function LoadSkin()
 		bar.anim.color.StartR, bar.anim.color.StartG, bar.anim.color.StartB = 1, 0, 0
 
 		if not noNumber then
-			bar.anim2 = CreateAnimationGroup(_G[bar:GetName() .. "Text"])
+			bar.anim2 = CreateAnimationGroup(_G[bar:GetName().."Text"])
 			bar.anim2.number = bar.anim2:CreateAnimation("Number")
 			bar.anim2.number:SetDuration(1.7)
 		end
@@ -42,7 +42,7 @@ local function LoadSkin()
 		bar.anim:Play()
 
 		if not noNumber then
-			bar.anim2.number:SetPostfix("/" .. max)
+			bar.anim2.number:SetPostfix("/"..max)
 			bar.anim2.number:SetChange(value)
 			bar.anim2:Play()
 		end
@@ -53,13 +53,13 @@ local function LoadSkin()
 	AnimationStatusBar(AchievementFrameComparisonSummaryFriendStatusBar)
 
 	for i = 1, 8 do
-		local frame = _G["AchievementFrameSummaryCategoriesCategory" .. i]
+		local frame = _G["AchievementFrameSummaryCategoriesCategory"..i]
 		AnimationStatusBar(frame)
 	end
 
 	hooksecurefunc("AchievementFrameCategory_StatusBarTooltip", function(self)
 		local index = GameTooltip.shownStatusBars
-		local name = GameTooltip:GetName() .. "StatusBar" .. index
+		local name = GameTooltip:GetName().."StatusBar"..index
 		local statusBar = _G[name]
 		if not statusBar then return end
 
@@ -91,7 +91,7 @@ local function LoadSkin()
 	end)
 
 	hooksecurefunc("AchievementButton_GetProgressBar", function(index)
-		local frame = _G["AchievementFrameProgressBar" .. index]
+		local frame = _G["AchievementFrameProgressBar"..index]
 		if frame and not frame.anim then
 			AnimationStatusBar(frame, true)
 		end

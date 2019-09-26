@@ -166,17 +166,23 @@ function AK:IsAlreadyKnown(itemLink)
 	local _, _, _, _, _, itemType = GetItemInfo(itemLink)
 	if not self.knowableTypes[itemType] then return end
 
-	self.scantip:ClearLines()
-	self.scantip:SetHyperlink(itemLink)
+	E.ScanTooltip:SetOwner(UIParent, "ANCHOR_NONE")
+	E.ScanTooltip:ClearLines()
+	E.ScanTooltip:SetHyperlink(itemLink)
+	E.ScanTooltip:Show()
 
-	for i = 2, self.scantip:NumLines() do
-		local text = _G["ElvUI_MerchantAlreadyKnownTextLeft"..i]:GetText()
+	local bindTypeLines = GetCVarBool("colorblindmode") and 8 or 7
+	for i = 2, bindTypeLines do
+		local line = _G["ElvUI_ScanTooltipTextLeft"..i]:GetText()
 
-		if text == ITEM_SPELL_KNOWN then
+		if line == ITEM_SPELL_KNOWN then
 			self.knownTable[itemID] = true
+
 			return true
 		end
 	end
+
+	E.ScanTooltip:Hide()
 end
 
 function AK:ADDON_LOADED(_, addon)
@@ -230,9 +236,6 @@ function AK:ToggleState()
 	if not self:IsLoadeble() then return end
 
 	if not self.initialized then
-		self.scantip = CreateFrame("GameTooltip", "ElvUI_MerchantAlreadyKnown", nil, "GameTooltipTemplate")
-		self.scantip:SetOwner(UIParent, "ANCHOR_NONE")
-
 		self.knownTable = {}
 
 		local _, _, _, consumable, glyph, _, recipe, _, miscallaneous = GetAuctionItemClasses()
@@ -249,7 +252,7 @@ function AK:ToggleState()
 	if E.db.enhanced.general.alreadyKnown then
 		self:SetHooks()
 
-		if not IsAddOnLoaded("Blizzard_AuctionUI") and IsAddOnLoaded("Blizzard_GuildBankUI") then
+		if not (IsAddOnLoaded("Blizzard_AuctionUI") and IsAddOnLoaded("Blizzard_GuildBankUI")) then
 			self:RegisterEvent("ADDON_LOADED")
 		end
 	else
