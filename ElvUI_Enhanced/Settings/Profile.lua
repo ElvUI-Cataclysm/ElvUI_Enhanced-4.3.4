@@ -17,14 +17,6 @@ P.enhanced = {
 		undressButton = false,
 		alreadyKnown = false
 	},
-	actionbars = {
-		pet = {
-			checkedBorder = false,
-			checkedBorderColor = {r = 1, g = 0.56, b = 0},
-			autoCastBorder = false,
-			autoCastBorderColor = {r = 1, g = 0, b = 0}
-		}
-	},
 	blizzard = {
 		errorFrame = {
 			enable = false,

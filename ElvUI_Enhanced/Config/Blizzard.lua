@@ -38,7 +38,7 @@ function EE:BlizzardOptions()
 					deathRecap = {
 						order = 2,
 						type = "toggle",
-						name = L["Death Recap Frame"]
+						name = L["Death Recap"]
 					},
 					animatedAchievementBars = {
 						order = 3,
@@ -124,7 +124,7 @@ function EE:BlizzardOptions()
 			watchframe = {
 				order = 4,
 				type = "group",
-				name = L["Watch Frame"],
+				name = L["Objective Frame"],
 				get = function(info) return E.db.enhanced.watchframe[info[#info]] end,
 				set = function(info, value)
 					E.db.enhanced.watchframe[info[#info]] = value
@@ -134,7 +134,7 @@ function EE:BlizzardOptions()
 					header = {
 						order = 1,
 						type = "header",
-						name = L["Watch Frame"]
+						name = L["Objective Frame"]
 					},
 					intro = {
 						order = 2,

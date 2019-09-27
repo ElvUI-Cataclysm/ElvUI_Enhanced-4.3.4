@@ -52,7 +52,6 @@ function EE:GetOptions()
 				name = L["Enhanced"]
 			},
 			generalGroup = EE:GeneralOptions(),
-			actionbarGroup = EE:ActionbarOptions(),
 			blizzardGroup = EE:BlizzardOptions(),
 			chatGroup = EE:ChatOptions(),
 			minimapGroup = EE:MinimapOptions(),

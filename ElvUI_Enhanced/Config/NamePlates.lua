@@ -44,7 +44,7 @@ function EE:NamePlatesOptions()
 					enable = {
 						order = 1,
 						type = "toggle",
-						name = L["Enable"],
+						name = L["ENABLE"],
 						desc = L["Bars will transition smoothly."],
 						set = function(info, value)
 							E.db.enhanced.nameplates.smoothBars[info[#info]] = value
@@ -75,7 +75,7 @@ function EE:NamePlatesOptions()
 					titleCache = {
 						order = 1,
 						type = "toggle",
-						name = L["Enable"],
+						name = L["ENABLE"],
 						set = function(info, value)
 							E.db.enhanced.nameplates[info[#info]] = value
 							ENP:UpdateAllSettings()
@@ -85,7 +85,7 @@ function EE:NamePlatesOptions()
 					guildGroup = {
 						order = 3,
 						type = "group",
-						name = L["Guild"],
+						name = L["GUILD"],
 						guiInline = true,
 						get = function(info) return E.db.enhanced.nameplates.guild[info[#info]] end,
 						set = function(info, value)
