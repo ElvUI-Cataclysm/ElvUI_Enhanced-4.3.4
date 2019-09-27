@@ -1,6 +1,6 @@
 ## Interface: 40300
 ## Author: Bunny, Apollyon
-## Version: 1.02
+## Version: 1.3
 ## Title: |cffff7000E|r|cffe5e3e3lvUI|r |cffff7000E|r|cffe5e3e3nhanced|r
 ## SavedVariables: EnhancedDB
 ## RequiredDeps: ElvUI
