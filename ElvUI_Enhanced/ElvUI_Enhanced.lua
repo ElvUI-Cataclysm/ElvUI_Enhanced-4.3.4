@@ -45,6 +45,10 @@ function EE:DBConversions()
 	if E.db.enhanced.nameplates.cacheUnitClass ~= nil then
 		E.db.enhanced.nameplates.classCache = true
 	end
+
+	if EnhancedDB and EnhancedDB.UnitClass and next(EnhancedDB.UnitClass) then
+		EnhancedDB.UnitClass[UNKNOWN] = nil
+	end
 end
 
 function EE:Initialize()

@@ -2,23 +2,24 @@ local E, L, V, P, G = unpack(ElvUI)
 local DT = E:GetModule("DataTexts")
 local EE = E:GetModule("ElvUI_Enhanced")
 
-local HasNewMail = HasNewMail
 local GetInboxNumItems = GetInboxNumItems
 local GetLatestThreeSenders = GetLatestThreeSenders
-local AddLine = AddLine
+local HasNewMail = HasNewMail
+
 local MAIL_LABEL = MAIL_LABEL
 local HAVE_MAIL_FROM = HAVE_MAIL_FROM
 
 local Mail_Icon = "|TInterface\\MINIMAP\\TRACKING\\Mailbox.blp:14:14|t"
-local Read
+
+local readMail, unreadMail
 
 local function MakeIconString()
 	local str = ""
-		str = str..Mail_Icon
+	str = str..Mail_Icon
+
 	return str
 end
 
-local unreadMail
 local function OnEvent(self, event, ...)
 	local newMail = false
 
@@ -32,9 +33,11 @@ local function OnEvent(self, event, ...)
 		self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 		self:UnregisterEvent("PLAYER_LOGIN")
 	end
+
 	if event == "MAIL_INBOX_UPDATE" or event == "MAIL_SHOW" or event == "MAIL_CLOSED" then
 		for i = 1, GetInboxNumItems() do
 			local _, _, _, _, _, _, _, _, wasRead = GetInboxHeaderInfo(i)
+
 			if not wasRead then
 				newMail = true
 				break
@@ -45,11 +48,13 @@ local function OnEvent(self, event, ...)
 	if newMail then
 		self.text:SetText(MakeIconString()..L["New Mail"])
 		self.text:SetTextColor(0, 1, 0)
-		Read = false
+
+		readMail = false
 	else
 		self.text:SetText(L["No Mail"])
 		self.text:SetTextColor(1, 1, 1)
-		Read = true
+
+		readMail = true
 	end
 end
 
@@ -63,12 +68,14 @@ local function OnEnter(self)
 
 	local sender1, sender2, sender3 = GetLatestThreeSenders()
 
-	if not Read then
+	if not readMail then
 		DT.tooltip:AddLine(HAVE_MAIL_FROM)
+
 		if sender1 then DT.tooltip:AddLine("    "..sender1) end
 		if sender2 then DT.tooltip:AddLine("    "..sender2) end
 		if sender3 then DT.tooltip:AddLine("    "..sender3) end
 	end
+
 	DT.tooltip:Show()
 end
 

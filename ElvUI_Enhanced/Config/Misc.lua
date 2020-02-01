@@ -276,7 +276,7 @@ function EE:MiscOptions()
 					typeGroup = {
 						order = 5,
 						type = "group",
-						name = TYPE,
+						name = L["TYPE"],
 						guiInline = true,
 						get = function(info) return E.db.enhanced.loseControl[info[#info]] end,
 						set = function(info, value) E.db.enhanced.loseControl[info[#info]] = value end,

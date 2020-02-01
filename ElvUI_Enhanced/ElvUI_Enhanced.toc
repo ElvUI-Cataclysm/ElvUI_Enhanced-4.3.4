@@ -7,7 +7,6 @@
 ## DefaultState: Enabled
 
 Developer\Load_Developer.xml
-Libraries\Load_Libraries.xml
 Locales\Load_Locales.xml
 Media\Load_Media.xml
 ElvUI_Enhanced.lua

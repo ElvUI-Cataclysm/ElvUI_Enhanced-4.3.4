@@ -11,6 +11,7 @@ local lastPanel
 
 local function OnEvent(self)
 	self.text:SetFormattedText(displayNumberString, STAT_ENERGY_REGEN, GetPowerRegen())
+
 	lastPanel = self
 end
 

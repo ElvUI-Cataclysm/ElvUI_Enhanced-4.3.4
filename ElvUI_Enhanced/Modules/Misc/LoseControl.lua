@@ -7,7 +7,7 @@ local UnitDebuff = UnitDebuff
 
 local spellNameList = {}
 local spellIDList = {
--- Death Knight
+	-- Death Knight
 	[47481]	= "CC",			-- Gnaw (Ghoul)
 	[49203]	= "CC",			-- Hungering Cold
 	[91797]	= "CC",			-- Monstrous Blow (Super ghoul)
@@ -15,7 +15,7 @@ local spellIDList = {
 	[45524]	= "Snare",		-- Chains of Ice
 	[55666]	= "Snare",		-- Desecration
 	[50040]	= "Snare",		-- Chilblains
--- Druid
+	-- Druid
 	[5211]	= "CC",			-- Bash (also Shaman Spirit Wolf ability)
 	[33786]	= "CC",			-- Cyclone
 	[2637]	= "CC",			-- Hibernate
@@ -26,7 +26,7 @@ local spellIDList = {
 	[45334]	= "Root",		-- Feral Charge Effect
 	[58179]	= "Snare",		-- Infected Wounds
 	[61391]	= "Snare",		-- Typhoon
--- Hunter
+	-- Hunter
 	[3355]	= "CC",			-- Freezing Trap Effect
 	[24394]	= "CC",			-- Intimidation
 	[1513]	= "CC",			-- Scare Beast
@@ -40,7 +40,7 @@ local spellIDList = {
 	[13810]	= "Snare",		-- Frost Trap Aura
 	[61394]	= "Snare",		-- Glyph of Freezing Trap
 	[2974]	= "Snare",		-- Wing Clip
--- Hunter Pets
+	-- Hunter Pets
 	[50519]	= "CC",			-- Sonic Blast (Bat)
 	[90337]	= "CC",			-- Bad Manner (Monkey)
 	[50541]	= "Disarm",		-- Snatch (Bird of Prey)
@@ -49,7 +49,7 @@ local spellIDList = {
 	[50245]	= "Root",		-- Pin (Crab)
 	[54644]	= "Snare",		-- Froststorm Breath (Chimera)
 	[50271]	= "Snare",		-- Tendon Rip (Hyena)
--- Mage
+	-- Mage
 	[44572]	= "CC",			-- Deep Freeze
 	[31661]	= "CC",			-- Dragon"s Breath
 	[12355]	= "CC",			-- Impact
@@ -68,7 +68,7 @@ local spellIDList = {
 	[116]	= "Snare",		-- Frostbolt
 	[44614]	= "Snare",		-- Frostfire Bolt
 	[31589]	= "Snare",		-- Slow
--- Paladin
+	-- Paladin
 	[853]	= "CC",			-- Hammer of Justice
 	[2812]	= "CC",			-- Holy Wrath
 	[20066]	= "CC",			-- Repentance
@@ -76,7 +76,7 @@ local spellIDList = {
 	[31935]	= "Silence",	-- Avenger's Shield
 	[63529]	= "Snare",		-- Dazed - Avenger's Shield
 	[20170]	= "Snare",		-- Seal of Justice (100% movement snare druids and shamans might want this though)
--- Priest
+	-- Priest
 	[605]	= "CC",			-- Mind Control
 	[64044]	= "CC",			-- Psychic Horror
 	[8122]	= "CC",			-- Psychic Scream
@@ -86,7 +86,7 @@ local spellIDList = {
 	[64058]	= "Disarm",		-- Psychic Horror
 	[87194]	= "Root",		-- Paralysis
 	[15407]	= "Snare",		-- Mind Flay
--- Rogue
+	-- Rogue
 	[2094]	= "CC",			-- Blind
 	[1833]	= "CC",			-- Cheap Shot
 	[1776]	= "CC",			-- Gouge
@@ -99,7 +99,7 @@ local spellIDList = {
 	[31125]	= "Snare",		-- Blade Twisting
 	[3409]	= "Snare",		-- Crippling Poison
 	[26679]	= "Snare",		-- Deadly Throw
--- Shaman
+	-- Shaman
 	[76780]	= "CC",			-- Bind Elemental
 	[61882]	= "CC",			-- Earthquake
 	[51514]	= "CC",			-- Hex
@@ -109,7 +109,7 @@ local spellIDList = {
 	[3600]	= "Snare",		-- Earthbind (5 second duration per pulse, but will keep re-applying the debuff as long as you stand within the pulse radius)
 	[8056]	= "Snare",		-- Frost Shock
 	[8034]	= "Snare",		-- Frostbrand Attack
--- Warlock
+	-- Warlock
 	[93986]	= "CC",			-- Aura of Foreboding
 	[89766]	= "CC",			-- Axe Toss (Felguard)
 	[710]	= "CC",			-- Banish
@@ -125,7 +125,7 @@ local spellIDList = {
 	[18118]	= "Snare",		-- Aftermath
 	[18223]	= "Snare",		-- Curse of Exhaustion
 	[63311]	= "Snare",		-- Shadowsnare (Glyph of Shadowflame)
--- Warrior
+	-- Warrior
 	[7922]	= "CC",			-- Charge Stun
 	[12809]	= "CC",			-- Concussion Blow
 	[6544]	= "CC",			-- Heroic Leap
@@ -138,7 +138,7 @@ local spellIDList = {
 	[23694]	= "Root",		-- Improved Hamstring
 	[1715]	= "Snare",		-- Hamstring
 	[12323]	= "Snare",		-- Piercing Howl
--- Other
+	-- Other
 	[30217]	= "CC",			-- Adamantite Grenade
 	[67769]	= "CC",			-- Cobalt Frag Bomb
 	[30216]	= "CC",			-- Fel Iron Bomb
@@ -150,7 +150,7 @@ local spellIDList = {
 	[55536]	= "Root",		-- Frostweave Net
 	[13099]	= "Root",		-- Net-o-Matic
 	[29703]	= "Snare",		-- Dazed
--- PvE
+	-- PvE
 	[11428]	= "PvE",		-- Knockdown (generic)
 }
 
@@ -193,29 +193,29 @@ function LC:UNIT_AURA(event, unit)
 	if unit ~= "player" then return end
 
 	local ccExpirationTime = 0
-	local ccName, ccIcon, ccDuration, ccPriority, wyvernsting
+	local ccName, ccIcon, ccDuration, ccPriority, wyvernSting
 	local _, name, icon, duration, expirationTime, spellID, priority
 
 	for i = 1, 40 do
-		name, _, icon, _, _, duration, expirationTime, _, _, _, spellID = UnitDebuff("player", i)
-		if not spellID then break end
+		name, _, icon, _, _, duration, expirationTime = UnitDebuff("player", i)
+		if not name then break end
 
-		if spellID == 19386 then
-			wyvernsting = 1
+		if name == self.wyvernStingName then
+			wyvernSting = 1
 
-			if not self.wyvernsting then
-				self.wyvernsting = 1
-			elseif expirationTime > self.wyvernsting_expirationTime then
-				self.wyvernsting = 2
+			if not self.wyvernSting then
+				self.wyvernSting = 1
+			elseif expirationTime > self.wyvernStingExpirationTime then
+				self.wyvernSting = 2
 			end
 
-			self.wyvernsting_expirationTime = expirationTime
+			self.wyvernStingExpirationTime = expirationTime
 
-			if self.wyvernsting == 2 then
-				spellID = 0
+			if self.wyvernSting == 2 then
+				name = nil
 			end
-		elseif spellID == 64058 and icon ~= "Interface\\Icons\\Ability_Warrior_Disarm" then
-			spellID = 0
+		elseif name == self.psychicHorrorName and icon ~= "Interface\\Icons\\Ability_Warrior_Disarm" then
+			name = nil
 		end
 
 		priority = self.db[spellNameList[name]]
@@ -229,8 +229,8 @@ function LC:UNIT_AURA(event, unit)
 		end
 	end
 
-	if self.wyvernsting == 2 and not wyvernsting then
-		self.wyvernsting = nil
+	if self.wyvernSting == 2 and not wyvernSting then
+		self.wyvernSting = nil
 	end
 
 	if ccExpirationTime == 0 then
@@ -343,9 +343,12 @@ function LC:Initialize()
 
 	self:UpdateSettings()
 
-	E:CreateMover(self.frame, "LossControlMover", L["Loss Control"], nil, nil, nil, "ALL,ARENA")
+	E:CreateMover(self.frame, "LossControlMover", L["Loss Control Icon"], nil, nil, nil, "ALL,ARENA")
 
 	self:UpdateSpellNames()
+
+	self.wyvernStingName = GetSpellInfo(19386)
+	self.psychicHorrorName = GetSpellInfo(64058)
 
 	self:RegisterEvent("UNIT_AURA")
 

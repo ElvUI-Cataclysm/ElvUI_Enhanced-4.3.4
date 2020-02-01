@@ -4,7 +4,7 @@ local M = [[Interface\AddOns\ElvUI_Enhanced\Media\]]
 
 E.EnhancedMedia = {
 	Fonts = {
-		TukUI = M..[[Fonts\TukUI_UF_Font.ttf]],
+		TukUI = M..[[Fonts\TukUI_UF_Font.ttf]]
 	},
 	Textures = {
 		DeathRecap = M..[[Textures\DeathRecap.blp]]

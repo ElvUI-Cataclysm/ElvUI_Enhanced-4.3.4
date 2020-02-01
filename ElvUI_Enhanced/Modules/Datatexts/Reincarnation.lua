@@ -11,6 +11,7 @@ local GetTime = GetTime
 local IsSpellKnown = IsSpellKnown
 local GetSpellCooldown = GetSpellCooldown
 local IsInInstance = IsInInstance
+
 local SPELL_FAILED_NOT_KNOWN = SPELL_FAILED_NOT_KNOWN
 local TIME_REMAINING = TIME_REMAINING
 local READY = READY

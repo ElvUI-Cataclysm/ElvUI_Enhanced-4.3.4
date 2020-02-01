@@ -10,7 +10,6 @@ local tsort, twipe = table.sort, table.wipe
 local tonumber = tonumber
 
 local CannotBeResurrected = CannotBeResurrected
-local CombatLog_String_SchoolString = CombatLog_String_SchoolString
 local CopyTable = CopyTable
 local GetReleaseTimeRemaining = GetReleaseTimeRemaining
 local GetSpellInfo = GetSpellInfo

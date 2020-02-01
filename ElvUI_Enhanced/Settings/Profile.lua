@@ -64,16 +64,24 @@ P.enhanced = {
 		classCache = false,
 		chatBubbles = false,
 		titleCache = false,
-		smoothBars = {
-			enable = false,
-			smoothingAmount = 0.3
-		},
 		guild = {
 			font = "PT Sans Narrow",
 			fontSize = 11,
 			fontOutline = "OUTLINE",
-			color = {r = 1, g = 1, b = 1},
-			separator = " "
+			separator = " ",
+			colors = {
+				raid = {r = 1, g = 127/255, b = 0},
+				party = {r = 118/255, g = 200/255, b = 1},
+				guild = {r = 64/255, g = 1, b = 64/255},
+				none = {r = 1, g = 1, b = 1}
+			},
+			visibility = {
+				city = true,
+				pvp = true,
+				arena = true,
+				party = true,
+				raid = true
+			}
 		},
 		npc = {
 			font = "PT Sans Narrow",

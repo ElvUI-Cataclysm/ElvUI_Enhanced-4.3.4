@@ -14,6 +14,7 @@ local ITEM_LEVEL_ABBR = ITEM_LEVEL_ABBR
 local STAT_AVERAGE_ITEM_LEVEL = STAT_AVERAGE_ITEM_LEVEL
 
 local displayString = ""
+
 local lastPanel
 
 local slots = {
@@ -39,7 +40,7 @@ local slots = {
 local levelColors = {
 	[0] = {1, 0, 0},
 	[1] = {0, 1, 0},
-	[2] = {1, 1, .5}
+	[2] = {1, 1, 0.5}
 }
 
 local function OnEvent(self, event)
