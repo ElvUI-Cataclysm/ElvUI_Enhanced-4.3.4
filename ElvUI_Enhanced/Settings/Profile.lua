@@ -53,12 +53,35 @@ P.enhanced = {
 			fontOutline = "MONOCHROMEOUTLINE"
 		}
 	},
+	map = {
+		fogClear = {
+			enable = false,
+			color = {r = 0.5, g = 0.5, b = 0.5, a = 1}
+		}
+	},
 	minimap = {
 		location = false,
 		showlocationdigits = true,
 		locationdigits = 1,
 		hideincombat = false,
-		fadeindelay = 5
+		fadeindelay = 5,
+		buttonGrabber = {
+			backdrop = false,
+			backdropSpacing = 1,
+			transparentBackdrop = false,
+			mouseover = false,
+			alpha = 1,
+			buttonSize = 22,
+			buttonSpacing = 0,
+			buttonsPerRow = 1,
+			growFrom = "TOPLEFT",
+			insideMinimap = {
+				enable = true,
+				position = "TOPLEFT",
+				xOffset = -1,
+				yOffset = 1
+			}
+		}
 	},
 	nameplates = {
 		classCache = false,

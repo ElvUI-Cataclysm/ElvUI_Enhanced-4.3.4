@@ -11,26 +11,16 @@ function EE:MiscOptions()
 		name = L["MISCELLANEOUS"],
 		get = function(info) return E.db.enhanced.raidmarkerbar[info[#info]] end,	
 		args = {
-			header = {
-				order = 1,
-				type = "header",
-				name = L["MISCELLANEOUS"]
-			},
 			equipment = {
-				order = 2,
+				order = 1,
 				type = "group",
 				name = L["Equipment"],
 				childGroups = "tab",
 				get = function(info) return E.db.enhanced.equipment[info[#info]] end,
 				set = function(info, value) E.db.enhanced.equipment[info[#info]] = value end,
 				args = {
-					header = {
-						order = 1,
-						type = "header",
-						name = L["Equipment"]
-					},
 					enable = {
-						order = 2,
+						order = 1,
 						type = "toggle",
 						name = L["ENABLE"],
 						set = function(info, value)
@@ -50,37 +40,32 @@ function EE:MiscOptions()
 							PD:UpdateInfoText("Inspect")
 						end,
 						args = {
-							header = {
-								order = 1,
-								type = "header",
-								name = L["DURABILITY"]
-							},
 							info = {
-								order = 2,
+								order = 1,
 								type = "description",
 								name = L["DURABILITY_DESC"]
 							},
 							enable = {
-								order = 3,
+								order = 2,
 								type = "toggle",
 								name = L["ENABLE"],
 								desc = L["Enable/Disable the display of durability information on the character screen."],
 								disabled = function() return not E.db.enhanced.equipment.enable end
 							},
 							onlydamaged = {
-								order = 4,
+								order = 3,
 								type = "toggle",
 								name = L["Damaged Only"],
 								desc = L["Only show durabitlity information for items that are damaged."],
 								disabled = function() return not E.db.enhanced.equipment.durability.enable or not E.db.enhanced.equipment.enable end
 							},
 							spacer = {
-								order = 5,
+								order = 4,
 								type = "description",
 								name = " "
 							},
 							position = {
-								order = 6,
+								order = 5,
 								type = "select",
 								name = L["Position"],
 								values = {
@@ -94,21 +79,21 @@ function EE:MiscOptions()
 								disabled = function() return not E.db.enhanced.equipment.durability.enable or not E.db.enhanced.equipment.enable end
 							},
 							xOffset = {
-								order = 7,
+								order = 6,
 								type = "range",
-								name = L["xOffset"],
+								name = L["X-Offset"],
 								min = -50, max = 50, step = 1,
 								disabled = function() return not E.db.enhanced.equipment.durability.enable or not E.db.enhanced.equipment.enable end
 							},
 							yOffset = {
-								order = 8,
+								order = 7,
 								type = "range",
-								name = L["yOffset"],
+								name = L["Y-Offset"],
 								min = -50, max = 50, step = 1,
 								disabled = function() return not E.db.enhanced.equipment.durability.enable or not E.db.enhanced.equipment.enable end
 							},
 							font = {
-								order = 9,
+								order = 8,
 								type = "select",
 								dialogControl = "LSM30_Font",
 								name = L["Font"],
@@ -116,14 +101,14 @@ function EE:MiscOptions()
 								disabled = function() return not E.db.enhanced.equipment.durability.enable or not E.db.enhanced.equipment.enable end
 							},
 							fontSize = {
-								order = 10,
+								order = 9,
 								type = "range",
 								name = L["FONT_SIZE"],
 								min = 6, max = 36, step = 1,
 								disabled = function() return not E.db.enhanced.equipment.durability.enable or not E.db.enhanced.equipment.enable end
 							},
 							fontOutline = {
-								order = 11,
+								order = 10,
 								type = "select",
 								name = L["Font Outline"],
 								values = {
@@ -148,36 +133,31 @@ function EE:MiscOptions()
 							PD:UpdateInfoText("Inspect")
 						end,
 						args = {
-							header = {
-								order = 1,
-								type = "header",
-								name = L["Item Level"]
-							},
 							info = {
-								order = 2,
+								order = 1,
 								type = "description",
 								name = L["ITEMLEVEL_DESC"]
 							},
 							enable = {
-								order = 3,
+								order = 2,
 								type = "toggle",
 								name = L["ENABLE"],
 								desc = L["Enable/Disable the display of item levels on the character screen."],
 								disabled = function() return not E.db.enhanced.equipment.enable end
 							},
 							qualityColor = {
-								order = 4,
+								order = 3,
 								type = "toggle",
 								name = L["Quality Color"],
 								disabled = function() return not E.db.enhanced.equipment.itemlevel.enable or not E.db.enhanced.equipment.enable end
 							},
 							spacer = {
-								order = 5,
+								order = 4,
 								type = "description",
 								name = " "
 							},
 							position = {
-								order = 6,
+								order = 5,
 								type = "select",
 								name = L["Position"],
 								values = {
@@ -191,21 +171,21 @@ function EE:MiscOptions()
 								disabled = function() return not E.db.enhanced.equipment.itemlevel.enable or not E.db.enhanced.equipment.enable end
 							},
 							xOffset = {
-								order = 7,
+								order = 6,
 								type = "range",
-								name = L["xOffset"],
+								name = L["X-Offset"],
 								min = -50, max = 50, step = 1,
 								disabled = function() return not E.db.enhanced.equipment.itemlevel.enable or not E.db.enhanced.equipment.enable end
 							},
 							yOffset = {
-								order = 8,
+								order = 7,
 								type = "range",
-								name = L["yOffset"],
+								name = L["Y-Offset"],
 								min = -50, max = 50, step = 1,
 								disabled = function() return not E.db.enhanced.equipment.itemlevel.enable or not E.db.enhanced.equipment.enable end
 							},
 							font = {
-								order = 9,
+								order = 8,
 								type = "select",
 								dialogControl = "LSM30_Font",
 								name = L["Font"],
@@ -213,14 +193,14 @@ function EE:MiscOptions()
 								disabled = function() return not E.db.enhanced.equipment.itemlevel.enable or not E.db.enhanced.equipment.enable end
 							},
 							fontSize = {
-								order = 10,
+								order = 9,
 								type = "range",
 								name = L["FONT_SIZE"],
 								min = 6, max = 36, step = 1,
 								disabled = function() return not E.db.enhanced.equipment.itemlevel.enable or not E.db.enhanced.equipment.enable end
 							},
 							fontOutline = {
-								order = 11,
+								order = 10,
 								type = "select",
 								name = L["Font Outline"],
 								values = {
@@ -236,7 +216,7 @@ function EE:MiscOptions()
 				}
 			},
 			loseControl = {
-				order = 4,
+				order = 2,
 				type = "group",
 				name = L["Lose Control"],
 				get = function(info) return E.db.enhanced.loseControl[info[#info]] end,
@@ -245,13 +225,8 @@ function EE:MiscOptions()
 					LOC:UpdateSettings()
 				end,
 				args = {
-					header = {
-						order = 1,
-						type = "header",
-						name = L["Lose Control"]
-					},
 					enable = {
-						order = 2,
+						order = 1,
 						type = "toggle",
 						name = L["ENABLE"],
 						get = function(info) return E.private.enhanced.loseControl.enable end,
@@ -261,20 +236,20 @@ function EE:MiscOptions()
 						end
 					},
 					compactMode = {
-						order = 3,
+						order = 2,
 						type = "toggle",
 						name = L["Compact mode"],
 						disabled = function() return not E.private.enhanced.loseControl.enable end
 					},
 					iconSize = {
-						order = 4,
+						order = 3,
 						type = "range",
 						min = 30, max = 120, step = 1,
 						name = L["Icon Size"],
 						disabled = function() return not E.private.enhanced.loseControl.enable end
 					},
 					typeGroup = {
-						order = 5,
+						order = 4,
 						type = "group",
 						name = L["TYPE"],
 						guiInline = true,
@@ -311,18 +286,13 @@ function EE:MiscOptions()
 				}
 			},
 			raidMarkerBar = {
-				order = 5,
+				order = 3,
 				type = "group",
 				name = L["Raid Markers"],
 				get = function(info) return E.db.enhanced.raidmarkerbar[info[#info]] end,	
 				args = {
-					header = {
-						order = 1,
-						type = "header",
-						name = L["Raid Markers"]
-					},
 					enable = {
-						order = 2,
+						order = 1,
 						type = "toggle",
 						name = L["ENABLE"],
 						desc = L["Display a quick action bar for raid targets and world markers."],
@@ -332,7 +302,7 @@ function EE:MiscOptions()
 						end
 					},
 					reverse = {
-						order = 3,
+						order = 2,
 						type = "toggle",
 						name = L["Reverse"],
 						disabled = function() return not E.db.enhanced.raidmarkerbar.enable end,
@@ -342,7 +312,7 @@ function EE:MiscOptions()
 						end
 					},
 					backdrop = {
-						order = 4,
+						order = 3,
 						type = "toggle",
 						name = L["Backdrop"],
 						disabled = function() return not E.db.enhanced.raidmarkerbar.enable end,
@@ -352,7 +322,7 @@ function EE:MiscOptions()
 						end
 					},
 					transparentButtons = {
-						order = 5,
+						order = 4,
 						type = "toggle",
 						name = L["Transparent Buttons"],
 						disabled = function() return not E.db.enhanced.raidmarkerbar.enable end,
@@ -362,7 +332,7 @@ function EE:MiscOptions()
 						end
 					},
 					transparentBackdrop = {
-						order = 6,
+						order = 5,
 						type = "toggle",
 						name = L["Transparent Backdrop"],
 						disabled = function() return not E.db.enhanced.raidmarkerbar.enable end,
@@ -372,12 +342,12 @@ function EE:MiscOptions()
 						end
 					},
 					spacer = {
-						order = 7,
+						order = 6,
 						type = "description",
 						name = " "
 					},
 					buttonSize = {
-						order = 8,
+						order = 7,
 						type = "range",
 						name = L["Button Size"],
 						min = 16, max = 60, step = 1,
@@ -388,7 +358,7 @@ function EE:MiscOptions()
 						end
 					},
 					spacing = {
-						order = 9,
+						order = 8,
 						type = "range",
 						name = L["Button Spacing"],
 						min = 0, max = 20, step = 1,
@@ -399,12 +369,12 @@ function EE:MiscOptions()
 						end
 					},
 					spacer2 = {
-						order = 10,
+						order = 9,
 						type = "description",
 						name = " "
 					},
 					orientation = {
-						order = 11,
+						order = 10,
 						type = "select",
 						name = L["Orientation"],
 						disabled = function() return not E.db.enhanced.raidmarkerbar.enable end,
@@ -418,7 +388,7 @@ function EE:MiscOptions()
 						end
 					},
 					modifier = {
-						order = 12,
+						order = 11,
 						type = "select",
 						name = L["Modifier Key"],
 						desc = L["Set the modifier key for placing world markers."],
@@ -434,7 +404,7 @@ function EE:MiscOptions()
 						}
 					},
 					visibility = {
-						order = 13,
+						order = 12,
 						type = "select",
 						name = L["Visibility"],
 						disabled = function() return not E.db.enhanced.raidmarkerbar.enable end,
@@ -450,7 +420,7 @@ function EE:MiscOptions()
 						end
 					},
 					customVisibility = {
-						order = 14,
+						order = 13,
 						type = "input",
 						width = "full",
 						name = L["Visibility State"],

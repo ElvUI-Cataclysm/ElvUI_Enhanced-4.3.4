@@ -9,6 +9,7 @@
 	<Script file="AlreadyKnown.lua"/>
 	<Script file="TrainAllButton.lua"/>
 	<Script file="UndressButton.lua"/>
+	<Script file="AddonsCompatibility.lua"/>
 	<Script file="QuestReward.lua"/>
 	<Script file="RaidMarkers.lua"/>
 	<Script file="MerchantBuyStack.lua"/>

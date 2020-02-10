@@ -20,35 +20,25 @@ function EE:BlizzardOptions()
 			E:StaticPopup_Show("PRIVATE_RL")
 		end,
 		args = {
-			header = {
-				order = 1,
-				type = "header",
-				name = L["BlizzUI Improvements"]
-			},
 			general = {
-				order = 2,
+				order = 1,
 				type = "group",
 				name = L["General"],
 				args = {
-					header = {
-						order = 1,
-						type = "header",
-						name = L["General"]
-					},
 					deathRecap = {
-						order = 2,
+						order = 1,
 						type = "toggle",
 						name = L["Death Recap"]
 					},
 					animatedAchievementBars = {
-						order = 3,
+						order = 2,
 						type = "toggle",
 						name = L["Animated Achievement Bars"]
 					}
 				}
 			},
 			errorFrame = {
-				order = 3,
+				order = 2,
 				type = "group",
 				name = L["Error Frame"],
 				get = function(info) return E.db.enhanced.blizzard.errorFrame[info[#info]] end,
@@ -57,13 +47,8 @@ function EE:BlizzardOptions()
 					B:ErrorFrameSize()
 				end,
 				args = {
-					header = {
-						order = 1,
-						type = "header",
-						name = L["Error Frame"]
-					},
 					enable = {
-						order = 2,
+						order = 1,
 						type = "toggle",
 						name = L["ENABLE"],
 						set = function(info, value)
@@ -72,12 +57,12 @@ function EE:BlizzardOptions()
 						end
 					},
 					spacer = {
-						order = 3,
+						order = 2,
 						type = "description",
 						name = " "
 					},
 					width = {
-						order = 4,
+						order = 3,
 						type = "range",
 						min = 100, max = 1000, step = 1,
 						name = L["Width"],
@@ -85,7 +70,7 @@ function EE:BlizzardOptions()
 						disabled = function() return not E.db.enhanced.blizzard.errorFrame.enable end
 					},
 					height = {
-						order = 5,
+						order = 4,
 						type = "range",
 						min = 30, max = 300, step = 1,
 						name = L["Height"],
@@ -93,7 +78,7 @@ function EE:BlizzardOptions()
 						disabled = function() return not E.db.enhanced.blizzard.errorFrame.enable end
 					},
 					font = {
-						order = 6,
+						order = 5,
 						type = "select",
 						dialogControl = "LSM30_Font",
 						name = L["Font"],
@@ -101,14 +86,14 @@ function EE:BlizzardOptions()
 						disabled = function() return not E.db.enhanced.blizzard.errorFrame.enable end
 					},
 					fontSize = {
-						order = 7,
+						order = 6,
 						type = "range",
 						min = 6, max = 36, step = 1,
 						name = L["FONT_SIZE"],
 						disabled = function() return not E.db.enhanced.blizzard.errorFrame.enable end
 					},
 					fontOutline = {
-						order = 8,
+						order = 7,
 						type = "select",
 						name = L["Font Outline"],
 						values = {
@@ -122,7 +107,7 @@ function EE:BlizzardOptions()
 				}
 			},
 			watchframe = {
-				order = 4,
+				order = 3,
 				type = "group",
 				name = L["Objective Frame"],
 				get = function(info) return E.db.enhanced.watchframe[info[#info]] end,
@@ -131,23 +116,18 @@ function EE:BlizzardOptions()
 					WF:UpdateSettings()
 				end,
 				args = {
-					header = {
-						order = 1,
-						type = "header",
-						name = L["Objective Frame"]
-					},
 					intro = {
-						order = 2,
+						order = 1,
 						type = "description",
 						name = L["WATCHFRAME_DESC"]
 					},
 					enable = {
-						order = 3,
+						order = 2,
 						type = "toggle",
 						name = L["ENABLE"]
 					},
 					settings = {
-						order = 4,
+						order = 3,
 						type = "group",
 						name = L["Visibility State"],
 						guiInline = true,

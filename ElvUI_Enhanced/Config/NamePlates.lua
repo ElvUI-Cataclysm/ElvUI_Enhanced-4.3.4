@@ -11,23 +11,13 @@ function EE:NamePlatesOptions()
 		get = function(info) return E.db.enhanced.nameplates[info[#info]] end,
 		childGroups = "tab",
 		args = {
-			header = {
-				order = 1,
-				type = "header",
-				name = L["NamePlates"]
-			},
 			general = {
-				order = 2,
+				order = 1,
 				type = "group",
 				name = L["General"],
 				args = {
-					header = {
-						order = 1,
-						type = "header",
-						name = L["General"]
-					},
 					classCache = {
-						order = 2,
+						order = 1,
 						type = "toggle",
 						name = L["Cache Unit Class"],
 						set = function(info, value)
@@ -36,7 +26,7 @@ function EE:NamePlatesOptions()
 						end
 					},
 					chatBubbles = {
-						order = 3,
+						order = 2,
 						type = "toggle",
 						name = L["Chat Bubbles"],
 						set = function(info, value)
@@ -53,13 +43,8 @@ function EE:NamePlatesOptions()
 				name = L["Cache Unit Guilds / NPC Titles"],
 				get = function(info) return E.db.enhanced.nameplates[info[#info]] end,
 				args = {
-					header = {
-						order = 1,
-						type = "header",
-						name = L["Cache Unit Guilds / NPC Titles"]
-					},
 					titleCache = {
-						order = 2,
+						order = 1,
 						type = "toggle",
 						name = L["ENABLE"],
 						set = function(info, value)
@@ -69,7 +54,7 @@ function EE:NamePlatesOptions()
 						end
 					},
 					guildGroup = {
-						order = 3,
+						order = 2,
 						type = "group",
 						name = L["GUILD"],
 						guiInline = true,
@@ -195,7 +180,7 @@ function EE:NamePlatesOptions()
 						}
 					},
 					npcGroup = {
-						order = 4,
+						order = 3,
 						type = "group",
 						name = L["NPC"],
 						guiInline = true,

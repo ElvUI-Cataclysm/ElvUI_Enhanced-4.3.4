@@ -11,13 +11,8 @@ function EE:TooltipOptions()
 		name = L["Tooltip"],
 		get = function(info) return E.db.enhanced.tooltip[info[#info]] end,
 		args = {
-			header = {
-				order = 1,
-				type = "header",
-				name = L["Tooltip"]
-			},
 			itemQualityBorderColor = {
- 				order = 2,
+ 				order = 1,
 				type = "toggle",
 				name = L["Item Border Color"],
 				desc = L["Colorize the tooltip border based on item quality."],
@@ -28,7 +23,7 @@ function EE:TooltipOptions()
 				end
 			},
 			tooltipIcon = {
-				order = 3,
+				order = 2,
 				type = "group",
 				name = L["Tooltip Icon"],
 				guiInline = true,
@@ -91,7 +86,7 @@ function EE:TooltipOptions()
 				}
 			},
 			progressInfo = {
-				order = 4,
+				order = 3,
 				type = "group",
 				name = L["Progress Info"],
 				guiInline = true,

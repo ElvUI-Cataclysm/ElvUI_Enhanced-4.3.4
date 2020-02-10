@@ -8,13 +8,8 @@ function EE:ChatOptions()
 		type = "group",
 		name = L["Chat"],
 		args = {
-			header = {
-				order = 1,
-				type = "header",
-				name = L["Chat"]
-			},
 			dpsLinks = {
-				order = 2,
+				order = 1,
 				type = "toggle",
 				name = L["Filter DPS meters Spam"],
 				desc = L["Replaces long reports from damage meters with a clickable hyperlink to reduce chat spam.\nWorks correctly only with general reports such as DPS or HPS. May fail to filter te report of other things"],

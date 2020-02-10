@@ -12,49 +12,20 @@ function EE:GetOptions()
 			order = 50,
 			type = "group",
 			name = "|cffff7000E|r|cffe5e3e3lvUI |r|cffff7000P|r|cffe5e3e3lugins|r",
-			args = {
-				header = {
-					order = 0,
-					type = "header",
-					name = "|cffff7000E|r|cffe5e3e3lvUI |r|cffff7000P|r|cffe5e3e3lugins|r"
-				},
-				enhancedShortcut = {
-					type = "execute",
-					name = EE:ColorizeSettingName(L["Enhanced"]),
-					func = function()
-						if IsAddOnLoaded("ElvUI_OptionsUI") then
-							ACD:SelectGroup("ElvUI", "elvuiPlugins", "enhanced", "generalGroup")
-						end
-					end
-				}
-			}
-		}
-	elseif not E.Options.args.elvuiPlugins.args.enhancedShortcut then
-		E.Options.args.elvuiPlugins.args.enhancedShortcut = {
-			type = "execute",
-			name = EE:ColorizeSettingName(L["Enhanced"]),
-			func = function()
-				if IsAddOnLoaded("ElvUI_OptionsUI") then
-					ACD:SelectGroup("ElvUI", "elvuiPlugins", "enhanced", "generalGroup")
-				end
-			end
+			args = {}
 		}
 	end
 
 	E.Options.args.elvuiPlugins.args.enhanced = {
 		type = "group",
 		childGroups = "tab",
-		name = EE:ColorizeSettingName("Enhanced"),
+		name = "|r|cffff7000E|r|cffe5e3e3nhanced",
 		args = {
-			header = {
-				order = 0,
-				type = "header",
-				name = L["Enhanced"]
-			},
 			generalGroup = EE:GeneralOptions(),
 			blizzardGroup = EE:BlizzardOptions(),
 			chatGroup = EE:ChatOptions(),
 			minimapGroup = EE:MinimapOptions(),
+			mapGroup = EE:MapOptions(),
 			namePlatesGroup = EE:NamePlatesOptions(),
 			tooltipGroup = EE:TooltipOptions(),
 			unitframesGroup = EE:UnitFrameOptions(),

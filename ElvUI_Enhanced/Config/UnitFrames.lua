@@ -11,23 +11,13 @@ function EE:UnitFrameOptions()
 		name = L["UnitFrames"],
 		childGroups = "tab",
 		args = {
-			header = {
-				order = 1,
-				type = "header",
-				name = L["UnitFrames"]
-			},
 			player = {
-				order = 2,
+				order = 1,
 				type = "group",
 				name = L["PLAYER"],
 				args = {
-					header = {
-						order = 1,
-						type = "header",
-						name = L["PLAYER"]
-					},
 					detachPortrait = {
-						order = 2,
+						order = 1,
 						type = "group",
 						name = L["Portrait"],
 						get = function(info) return E.db.enhanced.unitframe.detachPortrait.player[info[#info]] end,
@@ -36,13 +26,8 @@ function EE:UnitFrameOptions()
 							UF:CreateAndUpdateUF("player")
 						end,
 						args = {
-							header = {
-								order = 1,
-								type = "header",
-								name = L["Portrait"]
-							},
 							enable = {
-								order = 2,
+								order = 1,
 								type = "toggle",
 								name = L["Detach From Frame"],
 								set = function(info, value)
@@ -52,19 +37,19 @@ function EE:UnitFrameOptions()
 								disabled = function() return not E.db.unitframe.units.player.portrait.enable end
 							},
 							spacer = {
-								order = 3,
+								order = 2,
 								type = "description",
 								name = " "
 							},
 							detachedWidth = {
-								order = 4,
+								order = 3,
 								type = "range",
 								name = L["Detached Width"],
 								min = 10, max = 600, step = 1,
 								disabled = function() return not E.db.unitframe.units.player.portrait.enable end
 							},
 							detachedHeight = {
-								order = 5,
+								order = 4,
 								type = "range",
 								name = L["Detached Height"],
 								min = 10, max = 600, step = 1,
@@ -75,27 +60,17 @@ function EE:UnitFrameOptions()
 				}
 			},
 			target = {
-				order = 3,
+				order = 2,
 				type = "group",
 				name = L["TARGET"],
 				args = {
-					header = {
-						order = 1,
-						type = "header",
-						name = L["TARGET"]
-					},
 					classIcon = {
-						order = 2,
+						order = 1,
 						type = "group",
 						name = L["Class Icons"],
 						args = {
-							header = {
-								order = 1,
-								type = "header",
-								name = L["Class Icons"]
-							},
 							enable = {
-								order = 2,
+								order = 1,
 								type = "toggle",
 								name = L["ENABLE"],
 								desc = L["Show class icon for units."],
@@ -106,12 +81,12 @@ function EE:UnitFrameOptions()
 								end
 							},
 							spacer = {
-								order = 3,
+								order = 2,
 								type = "description",
 								name = " "
 							},
 							size = {
-								order = 4,
+								order = 3,
 								type = "range",
 								name = L["Size"],
 								desc = L["Size of the indicator icon."],
@@ -124,7 +99,7 @@ function EE:UnitFrameOptions()
 								disabled = function() return not E.db.enhanced.unitframe.units.target.classicon.enable end
 							},
 							xOffset = {
-								order = 5,
+								order = 4,
 								type = "range",
 								name = L["X-Offset"],
 								min = -100, max = 100, step = 1,
@@ -136,7 +111,7 @@ function EE:UnitFrameOptions()
 								disabled = function() return not E.db.enhanced.unitframe.units.target.classicon.enable end
 							},
 							yOffset = {
-								order = 6,
+								order = 5,
 								type = "range",
 								name = L["Y-Offset"],
 								min = -80, max = 40, step = 1,
@@ -150,7 +125,7 @@ function EE:UnitFrameOptions()
 						}
 					},
 					detachPortrait = {
-						order = 3,
+						order = 2,
 						type = "group",
 						name = L["Portrait"],
 						get = function(info) return E.db.enhanced.unitframe.detachPortrait.target[info[#info]] end,
@@ -159,13 +134,8 @@ function EE:UnitFrameOptions()
 							UF:CreateAndUpdateUF("target")
 						end,
 						args = {
-							header = {
-								order = 1,
-								type = "header",
-								name = L["Portrait"]
-							},
 							enable = {
-								order = 2,
+								order = 1,
 								type = "toggle",
 								name = L["Detach From Frame"],
 								set = function(info, value)
@@ -175,19 +145,19 @@ function EE:UnitFrameOptions()
 								disabled = function() return not E.db.unitframe.units.target.portrait.enable end
 							},
 							spacer = {
-								order = 3,
+								order = 2,
 								type = "description",
 								name = " "
 							},
 							detachedWidth = {
-								order = 4,
+								order = 3,
 								type = "range",
 								name = L["Detached Width"],
 								min = 10, max = 600, step = 1,
 								disabled = function() return not E.db.unitframe.units.target.portrait.enable end
 							},
 							detachedHeight = {
-								order = 5,
+								order = 4,
 								type = "range",
 								name = L["Detached Height"],
 								min = 10, max = 600, step = 1,
