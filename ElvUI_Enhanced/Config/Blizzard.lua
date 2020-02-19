@@ -4,12 +4,6 @@ local EE = E:GetModule("ElvUI_Enhanced")
 local B = E:GetModule("Enhanced_Blizzard")
 local WF = E:GetModule("Enhanced_WatchFrame")
 
-local choices = {
-	["NONE"] = L["NONE"],
-	["COLLAPSED"] = L["Collapsed"],
-	["HIDDEN"] = L["Hidden"]
-}
-
 function EE:BlizzardOptions()
 	local config = {
 		type = "group",
@@ -142,31 +136,51 @@ function EE:BlizzardOptions()
 								order = 1,
 								type = "select",
 								name = L["City (Resting)"],
-								values = choices
+								values = {
+									["NONE"] = L["NONE"],
+									["COLLAPSED"] = L["Collapsed"],
+									["HIDDEN"] = L["Hidden"]
+								}
 							},
 							pvp = {
 								order = 2,
 								type = "select",
 								name = L["PvP"],
-								values = choices
+								values = {
+									["NONE"] = L["NONE"],
+									["COLLAPSED"] = L["Collapsed"],
+									["HIDDEN"] = L["Hidden"]
+								}
 							},
 							arena = {
 								order = 3,
 								type = "select",
 								name = L["ARENA"],
-								values = choices
+								values = {
+									["NONE"] = L["NONE"],
+									["COLLAPSED"] = L["Collapsed"],
+									["HIDDEN"] = L["Hidden"]
+								}
 							},
 							party = {
 								order = 4,
 								type = "select",
 								name = L["PARTY"],
-								values = choices
+								values = {
+									["NONE"] = L["NONE"],
+									["COLLAPSED"] = L["Collapsed"],
+									["HIDDEN"] = L["Hidden"]
+								}
 							},
 							raid = {
 								order = 5,
 								type = "select",
 								name = L["RAID"],
-								values = choices
+								values = {
+									["NONE"] = L["NONE"],
+									["COLLAPSED"] = L["Collapsed"],
+									["HIDDEN"] = L["Hidden"]
+								}
 							}
 						}
 					}

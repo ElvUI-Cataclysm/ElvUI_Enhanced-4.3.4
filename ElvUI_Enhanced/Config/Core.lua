@@ -1,12 +1,7 @@
-local E, _, V, P, G = unpack(ElvUI)
-local L = E.Libs.ACL:GetLocale("ElvUI", E.global.general.locale)
+local E, L, V, P, G = unpack(ElvUI)
 local EE = E:GetModule("ElvUI_Enhanced")
 
-local IsAddOnLoaded = IsAddOnLoaded
-
 function EE:GetOptions()
-	local ACD = E.Libs.AceConfigDialog
-
 	if not E.Options.args.elvuiPlugins then
 		E.Options.args.elvuiPlugins = {
 			order = 50,
@@ -19,7 +14,7 @@ function EE:GetOptions()
 	E.Options.args.elvuiPlugins.args.enhanced = {
 		type = "group",
 		childGroups = "tab",
-		name = "|r|cffff7000E|r|cffe5e3e3nhanced",
+		name = "|cffff7000E|r|cffe5e3e3nhanced",
 		args = {
 			generalGroup = EE:GeneralOptions(),
 			blizzardGroup = EE:BlizzardOptions(),

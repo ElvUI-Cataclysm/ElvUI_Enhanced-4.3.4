@@ -38,9 +38,9 @@ end
 function RM:CreateButtons()
 	for i, layout in ipairs(layouts) do
 		local button = CreateFrame("Button", format("RaidMarkerBarButton%d", i), self.frame, "SecureActionButtonTemplate")
-		button:SetHeight(self.db.buttonSize)
-		button:SetWidth(self.db.buttonSize)
 		button:SetTemplate("Default", true)
+		button:StyleButton()
+		button:Size(self.db.buttonSize)
 
 		local image = button:CreateTexture(nil, "ARTWORK")
 		image:SetInside()
@@ -88,9 +88,6 @@ function RM:UpdateWorldMarkersAndTooltips()
 		button:SetScript("OnLeave", function(self)
 			GameTooltip:Hide() 
 		end)
-
-		button:HookScript("OnEnter", S.SetModifiedBackdrop)
-		button:HookScript("OnLeave", S.SetOriginalBackdrop)
 	end
 end
 
@@ -109,24 +106,23 @@ function RM:UpdateBar(update)
 		local prev = self.frame.buttons[i + 1]
 		button:ClearAllPoints()
 
-		button:SetWidth(self.db.buttonSize)
-		button:SetHeight(self.db.buttonSize)
+		button:Size(self.db.buttonSize)
 
 		if self.db.orientation == "VERTICAL" then
 			head = self.db.reverse and "BOTTOM" or "TOP"
 			tail = self.db.reverse and "TOP" or "BOTTOM"
 			if i == 9 then
-				button:SetPoint(head, 0, (self.db.reverse and 2 or -2))
+				button:Point(head, 0, (self.db.reverse and 2 or -2))
 			else
-				button:SetPoint(head, prev, tail, 0, self.db.spacing*(self.db.reverse and 1 or -1))
+				button:Point(head, prev, tail, 0, self.db.spacing*(self.db.reverse and 1 or -1))
 			end
 		else
 			head = self.db.reverse and "RIGHT" or "LEFT"
 			tail = self.db.reverse and "LEFT" or "RIGHT"
 			if i == 9 then
-				button:SetPoint(head, (self.db.reverse and -2 or 2), 0)
+				button:Point(head, (self.db.reverse and -2 or 2), 0)
 			else
-				button:SetPoint(head, prev, tail, self.db.spacing*(self.db.reverse and -1 or 1), 0)
+				button:Point(head, prev, tail, self.db.spacing*(self.db.reverse and -1 or 1), 0)
 			end
 		end
 	end

@@ -4,15 +4,74 @@ local EE = E:GetModule("ElvUI_Enhanced")
 local RM = E:GetModule("RaidMarkerBar")
 local PD = E:GetModule("Enhanced_PaperDoll")
 local LOC = E:GetModule("Enhanced_LoseControl")
+local EDC = E:GetModule("Enhanced_DataTextColors")
 
 function EE:MiscOptions()
 	local config = {
 		type = "group",
 		name = L["MISCELLANEOUS"],
-		get = function(info) return E.db.enhanced.raidmarkerbar[info[#info]] end,	
 		args = {
-			equipment = {
+			dataTextColors = {
 				order = 1,
+				type = "group",
+				name = L["DataTexts Color"],
+				args = {
+					enable = {
+						order = 1,
+						type = "toggle",
+						name = L["ENABLE"],
+						get = function(info)
+							return E.private.enhanced.dataTextColors
+						end,
+						set = function(info, value)
+							E.private.enhanced.dataTextColors = value
+							E:StaticPopup_Show("PRIVATE_RL")
+						end
+					},
+					spacer = {
+						order = 2,
+						type = "description",
+						name = " "
+					},
+					colorType = {
+						order = 3,
+						type = "select",
+						name = L["Color Type"],
+						values = {
+							["CLASS"] = L["CLASS"],
+							["CUSTOM"] = L["CUSTOM"],
+							["DEFAULT"] = L["DEFAULT"],
+						},
+						get = function(info)
+							return E.db.enhanced.datatexts.dataTextColors[info[#info]]
+						end,
+						set = function(info, value)
+							E.db.enhanced.datatexts.dataTextColors[info[#info]] = value
+							EDC:ColorFont()
+						end,
+						disabled = function() return not E.private.enhanced.dataTextColors end
+					},
+					color = {
+						order = 4,
+						type = "color",
+						name = L["COLOR"],
+						get = function(info)
+							local t = E.db.enhanced.datatexts.dataTextColors[info[#info]]
+							return t.r, t.g, t.b, t.a
+						end,
+						set = function(info, r, g, b)
+							local t = E.db.enhanced.datatexts.dataTextColors[info[#info]]
+							t.r, t.g, t.b = r, g, b
+							EDC:ColorFont()
+						end,
+						disabled = function()
+							return not E.private.enhanced.dataTextColors or (E.db.enhanced.datatexts.dataTextColors.colorType == "CLASS" or E.db.enhanced.datatexts.dataTextColors.colorType == "DEFAULT")
+						end
+					}
+				}
+			},
+			equipment = {
+				order = 2,
 				type = "group",
 				name = L["Equipment"],
 				childGroups = "tab",
@@ -216,7 +275,7 @@ function EE:MiscOptions()
 				}
 			},
 			loseControl = {
-				order = 2,
+				order = 3,
 				type = "group",
 				name = L["Lose Control"],
 				get = function(info) return E.db.enhanced.loseControl[info[#info]] end,
@@ -286,7 +345,7 @@ function EE:MiscOptions()
 				}
 			},
 			raidMarkerBar = {
-				order = 3,
+				order = 4,
 				type = "group",
 				name = L["Raid Markers"],
 				get = function(info) return E.db.enhanced.raidmarkerbar[info[#info]] end,	

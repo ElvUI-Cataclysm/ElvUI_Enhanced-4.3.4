@@ -1,7 +1,6 @@
 local E, _, V, P, G = unpack(ElvUI)
 local L = E.Libs.ACL:GetLocale("ElvUI", E.global.general.locale)
 local EE = E:GetModule("ElvUI_Enhanced")
-local MM = E:GetModule("Minimap")
 local MFC = E:GetModule("Enhanced_FogClear")
 
 function EE:MapOptions()

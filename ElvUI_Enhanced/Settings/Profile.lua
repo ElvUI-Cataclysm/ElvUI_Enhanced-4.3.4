@@ -30,6 +30,12 @@ P.enhanced = {
 	chat = {
 		dpsLinks = false
 	},
+	datatexts = {
+		dataTextColors = {
+			colorType = "DEFAULT",
+			color = {r = 1, g = 1, b = 1}
+		}
+	},
 	equipment = {
 		enable = false,
 		durability = {

@@ -1215,6 +1215,15 @@ local errata = {
 	["*"] = {}
 }
 
+errata.Hyjal_terrain1 = errata.Hyjal
+errata.Uldum_terrain1 = errata.Uldum
+errata.Gilneas_terrain1 = errata.Gilneas
+errata.Gilneas_terrain2 = errata.Gilneas
+errata.TheLostIsles_terrain1 = errata.TheLostIsles
+errata.TheLostIsles_terrain2 = errata.TheLostIsles
+errata.TwilightHighlands_terrain1 = errata.TwilightHighlands
+errata.BlastedLands_terrain1 = errata.BlastedLands
+
 local function UpdateOverlayTextures(frame, frameName, textureCache, scale, r, g, b, alpha)
 	local mapFileName = GetMapInfo()
 
