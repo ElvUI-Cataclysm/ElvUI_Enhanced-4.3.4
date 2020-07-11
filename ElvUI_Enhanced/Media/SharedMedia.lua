@@ -8,7 +8,7 @@ E.EnhancedMedia = {
 	},
 	Textures = {
 		DeathRecap = M..[[Textures\DeathRecap.blp]],
-		BuiOnePixel = M..[[BuiOnePixel.tga]]
+		BuiOnePixel = M..[[Textures\BuiOnePixel.tga]]
 	}
 }
 
