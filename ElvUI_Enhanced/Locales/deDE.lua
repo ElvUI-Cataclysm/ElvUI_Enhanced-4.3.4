@@ -116,7 +116,6 @@ L["Toggle Location Digits."] = true
 L["Toggle Location Panel."] = "Umschalten des Standort-Panels"
 L["Tooltip Icon"] = true
 L["Total"] = "Gesamt"
-L["Track Reputation"] = "Ruf beobachten"
 L["Undress"] = "Ausziehen"
 L["You died."] = "Du bist gestorben."
 

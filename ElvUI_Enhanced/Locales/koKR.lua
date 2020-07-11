@@ -116,7 +116,6 @@ L["Toggle Location Digits."] = true
 L["Toggle Location Panel."] = true
 L["Tooltip Icon"] = true
 L["Total"] = "합계"
-L["Track Reputation"] = true
 L["Undress"] = true
 L["You died."] = true
 
