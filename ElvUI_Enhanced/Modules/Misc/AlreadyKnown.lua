@@ -171,8 +171,7 @@ function AK:IsAlreadyKnown(itemLink)
 	E.ScanTooltip:SetHyperlink(itemLink)
 	E.ScanTooltip:Show()
 
-	local bindTypeLines = GetCVarBool("colorblindmode") and 8 or 7
-	for i = 2, bindTypeLines do
+	for i = 2, E.ScanTooltip:NumLines() do
 		local line = _G["ElvUI_ScanTooltipTextLeft"..i]:GetText()
 
 		if line == ITEM_SPELL_KNOWN then

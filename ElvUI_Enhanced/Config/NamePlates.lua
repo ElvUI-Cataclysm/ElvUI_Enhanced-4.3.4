@@ -225,8 +225,14 @@ function EE:NamePlatesOptions()
 									["("] = "( )"
 								}
 							},
-							color = {
+							reactionColor = {
 								order = 5,
+								type = "toggle",
+								name = L["Reaction Color"],
+								desc = L["Color based on reaction type."]
+							},
+							color = {
+								order = 6,
 								type = "color",
 								name = L["COLOR"],
 								get = function(info)
@@ -238,7 +244,8 @@ function EE:NamePlatesOptions()
 									local t = E.db.enhanced.nameplates.npc[info[#info]]
 									t.r, t.g, t.b = r, g, b
 									NP:ConfigureAll()
-								end
+								end,
+								disabled = function() return E.db.enhanced.nameplates.npc.reactionColor end
 							}
 						}
 					}

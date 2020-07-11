@@ -5,7 +5,7 @@ local S = E:GetModule("Skins")
 local _G = _G
 local band = bit.band
 local ceil, floor = math.ceil, math.floor
-local format, upper, sub = string.format, string.upper, string.sub
+local format, upper, sub, join = string.format, string.upper, string.sub, string.join
 local tsort, twipe = table.sort, table.wipe
 local tonumber = tonumber
 

@@ -93,7 +93,7 @@ local spellIDList = {
 	[408]	= "CC",			-- Kidney Shot
 	[6770]	= "CC",			-- Sap
 	[76577]	= "CC",			-- Smoke Bomb
-	[1330]	= "Silence",		-- Garrote - Silence
+	[1330]	= "Silence",	-- Garrote - Silence
 	[18425]	= "Silence",	-- Silenced - Improved Kick
 	[51722]	= "Disarm",		-- Dismantle
 	[31125]	= "Snare",		-- Blade Twisting
@@ -343,7 +343,7 @@ function LC:Initialize()
 
 	self:UpdateSettings()
 
-	E:CreateMover(self.frame, "LossControlMover", L["Loss Control Icon"], nil, nil, nil, "ALL,ARENA")
+	E:CreateMover(self.frame, "LossControlMover", L["Loss Control Icon"], nil, nil, nil, "ALL,ARENA", nil, "elvuiPlugins,enhanced,miscGroup,loseControl")
 
 	self:UpdateSpellNames()
 

@@ -17,7 +17,7 @@ function mod:ErrorFrameSize(db)
 	UIErrorsFrame:SetFont(LSM:Fetch("font", db.font), db.fontSize, db.fontOutline)
 
 	if not UIErrorsFrame.mover then
-		E:CreateMover(UIErrorsFrame, "UIErrorsFrameMover", L["Error Frame"], nil, nil, nil, "ALL,GENERAL", nil, "elvuiPlugins,enhanced,miscGroup,errorFrame")
+		E:CreateMover(UIErrorsFrame, "UIErrorsFrameMover", L["Error Frame"], nil, nil, nil, "ALL,GENERAL", nil, "elvuiPlugins,enhanced,blizzardGroup,errorFrame")
 	end
 end
 

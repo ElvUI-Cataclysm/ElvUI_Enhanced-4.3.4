@@ -25,8 +25,10 @@ local function AddIcon(self, icon)
 	if not icon then return end
 
 	local title = _G[self:GetName().."TextLeft1"]
-	if title and not find(title:GetText(), "|T"..icon) then
-		title:SetFormattedText("|T%s:30:30:0:0:64:64:5:59:5:59|t %s", icon, title:GetText())
+	local text = title and title:GetText()
+
+	if text and not find(text, "|T"..icon) then
+		title:SetFormattedText("|T%s:30:30:0:0:64:64:5:59:5:59|t %s", icon, text)
 	end
 end
 
@@ -55,7 +57,7 @@ end
 function TI:ToggleItemsState()
 	local state = E.db.enhanced.tooltip.tooltipIcon.tooltipIconItems and E.db.enhanced.tooltip.tooltipIcon.enable
 
-	for _, tooltip in pairs(itemTooltips) do
+	for _, tooltip in ipairs(itemTooltips) do
 		if state then
 			if not self:IsHooked(tooltip, "OnTooltipSetItem", ItemIcon) then
 				self:SecureHookScript(tooltip, "OnTooltipSetItem", ItemIcon)
@@ -69,7 +71,7 @@ end
 function TI:ToggleSpellsState()
 	local state = E.db.enhanced.tooltip.tooltipIcon.tooltipIconSpells and E.db.enhanced.tooltip.tooltipIcon.enable
 
-	for _, tooltip in pairs(spellTooltips) do
+	for _, tooltip in ipairs(spellTooltips) do
 		if state then
 			if not self:IsHooked(tooltip, "OnTooltipSetSpell", SpellIcon) then
 				self:SecureHookScript(tooltip, "OnTooltipSetSpell", SpellIcon)
