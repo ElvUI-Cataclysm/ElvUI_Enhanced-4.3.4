@@ -1,5 +1,4 @@
 local E, L, V, P, G = unpack(ElvUI)
-local EE = E:GetModule("ElvUI_Enhanced")
 local DT = E:GetModule("DataTexts")
 local EDC = E:NewModule("Enhanced_DataTextColors", "AceEvent-3.0")
 
@@ -29,12 +28,12 @@ function EDC:PLAYER_ENTERING_WORLD()
 end
 
 function EDC:Initialize()
+	if not E.private.enhanced.dataTextColors then return end
+
 	self:RegisterEvent("PLAYER_ENTERING_WORLD")
 end
 
 local function InitializeCallback()
-	if not E.private.enhanced.dataTextColors then return end
-
 	EDC:Initialize()
 end
 

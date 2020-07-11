@@ -6,7 +6,6 @@
 ## RequiredDeps: ElvUI
 ## DefaultState: Enabled
 
-Developer\Load_Developer.xml
 Locales\Load_Locales.xml
 Media\Load_Media.xml
 ElvUI_Enhanced.lua
