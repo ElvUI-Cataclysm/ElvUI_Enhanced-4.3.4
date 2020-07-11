@@ -1,6 +1,5 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/">
 	<Script file="Misc.lua"/>
-	<Script file="Faction.lua"/>
 	<Script file="Paperdoll.lua"/>
 	<Script file="Movers.lua"/>
 	<Script file="QuestItemLevel.lua"/>

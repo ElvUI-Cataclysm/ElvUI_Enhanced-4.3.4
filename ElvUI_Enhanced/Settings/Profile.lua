@@ -3,7 +3,6 @@ local E, L, V, P, G = unpack(ElvUI)
 P.enhanced = {
 	general = {
 		pvpAutoRelease = false,
-		autoRepChange = false,
 		merchant = false,
 		merchantItemLevel = false,
 		moverTransparancy = 1,

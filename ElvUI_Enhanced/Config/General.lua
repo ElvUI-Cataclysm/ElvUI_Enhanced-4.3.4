@@ -22,19 +22,8 @@ function EE:GeneralOptions()
 					M:AutoRelease()
 				end
 			},
-			autoRepChange = {
-				order = 2,
-				type = "toggle",
-				name = L["Track Reputation"],
-				desc = L["Automatically change your watched faction on the reputation bar to the faction you got reputation points for."],
-				get = function(info) return E.db.enhanced.general.autoRepChange end,
-				set = function(info, value)
-					E.db.enhanced.general.autoRepChange = value
-					M:WatchedFaction()
-				end
-			},
 			showQuestLevel = {
-				order = 3,
+				order = 2,
 				type = "toggle",
 				name = L["Show Quest Level"],
 				desc = L["Display quest levels at Quest Log."],
@@ -45,7 +34,7 @@ function EE:GeneralOptions()
 				end
 			},
 			selectQuestReward = {
-				order = 4,
+				order = 3,
 				type = "toggle",
 				name = L["Select Quest Reward"],
 				desc = L["Automatically select the quest reward with the highest vendor sell value."],
@@ -53,7 +42,7 @@ function EE:GeneralOptions()
 				set = function(info, value) E.db.enhanced.general.selectQuestReward = value end
 			},
 			declineduel = {
-				order = 5,
+				order = 4,
 				type = "toggle",
 				name = L["Decline Duel"],
 				desc = L["Auto decline all duels"],
@@ -64,7 +53,7 @@ function EE:GeneralOptions()
 				end
 			},
 			declineParty = {
-				order = 6,
+				order = 5,
 				type = "toggle",
 				name = L["Decline Party"],
 				desc = L["Auto decline party invites"],
@@ -75,7 +64,7 @@ function EE:GeneralOptions()
 				end
 			},
 			hideZoneText = {
-				order = 7,
+				order = 6,
 				type = "toggle",
 				name = L["Hide Zone Text"],
 				get = function(info) return E.db.enhanced.general.hideZoneText end,
@@ -85,7 +74,7 @@ function EE:GeneralOptions()
 				end
 			},
 			trainAllButton = {
- 				order = 8,
+ 				order = 7,
  				type = "toggle",
 				name = L["Train All Button"],
 				desc = L["Add button to Trainer frame with ability to train all available skills in one click."],
@@ -96,7 +85,7 @@ function EE:GeneralOptions()
 				end
 			},
 			undressButton = {
-				order = 9,
+				order = 8,
 				type = "toggle",
 				name = L["Undress Button"],
 				desc = L["Add button to Dressing Room frame with ability to undress model."],
@@ -107,7 +96,7 @@ function EE:GeneralOptions()
 				end
 			},
 			alreadyKnown = {
-				order = 10,
+				order = 9,
 				type = "toggle",
 				name = L["Already Known"],
 				desc = L["Colorizes recipes, mounts & pets that are already known"],
@@ -118,7 +107,7 @@ function EE:GeneralOptions()
 				end
 			},
 			altBuyMaxStack = {
-				order = 11,
+				order = 10,
 				type = "toggle",
 				name = L["Alt-Click Merchant"],
 				desc = L["Holding Alt key while buying something from vendor will now buy an entire stack."],
@@ -129,7 +118,7 @@ function EE:GeneralOptions()
 				end
 			},
 			merchantItemLevel = {
-				order = 12,
+				order = 11,
 				type = "toggle",
 				name = L["Merchant ItemLevel"],
 				desc = L["Display the item level on the MerchantFrame, to change the font you have to set it in ElvUI - Bags - ItemLevel"],
@@ -140,7 +129,7 @@ function EE:GeneralOptions()
 				end
 			},
 			questItemLevel = {
-				order = 13,
+				order = 12,
 				type = "toggle",
 				name = L["Quest ItemLevel"],
 				desc = L["Display the item level on the Quest frames, to change the font you have to set it in ElvUI - Bags - ItemLevel"],
@@ -152,7 +141,7 @@ function EE:GeneralOptions()
 				end
 			},
 			moverTransparancy = {
-				order = 14,
+				order = 13,
 				type = "range",
 				isPercent = true,
 				name = L["Mover Transparency"],
