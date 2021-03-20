@@ -41,14 +41,14 @@ function EE:GeneralOptions()
 				get = function(info) return E.db.enhanced.general.selectQuestReward end,
 				set = function(info, value) E.db.enhanced.general.selectQuestReward = value end
 			},
-			declineduel = {
+			declineDuel = {
 				order = 4,
 				type = "toggle",
 				name = L["Decline Duel"],
 				desc = L["Auto decline all duels"],
-				get = function(info) return E.db.enhanced.general.declineduel end,
+				get = function(info) return E.db.enhanced.general.declineDuel end,
 				set = function(info, value)
-					E.db.enhanced.general.declineduel = value
+					E.db.enhanced.general.declineDuel = value
 					M:DeclineDuel()
 				end
 			},
@@ -138,19 +138,6 @@ function EE:GeneralOptions()
 					E.db.enhanced.general.questItemLevel = value
 					M:QuestItemLevel()
 					E:StaticPopup_Show("PRIVATE_RL")
-				end
-			},
-			moverTransparancy = {
-				order = 13,
-				type = "range",
-				isPercent = true,
-				name = L["Mover Transparency"],
-				desc = L["Changes the transparency of all the movers."],
-				min = 0, max = 1, step = 0.01,
-				get = function(info) return E.db.enhanced.general.moverTransparancy end,
-				set = function(info, value)
-					E.db.enhanced.general.moverTransparancy = value
-					M:UpdateMoverTransparancy()
 				end
 			}
 		}

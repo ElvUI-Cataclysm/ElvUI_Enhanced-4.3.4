@@ -1,5 +1,6 @@
 local E, L, V, P, G = unpack(ElvUI)
 local TA = E:NewModule("Enhanced_TrainAll", "AceHook-3.0", "AceEvent-3.0")
+local S = E:GetModule("Skins")
 
 local select = select
 
@@ -79,8 +80,8 @@ function TA:ButtonCreate()
 
 	if E.private.skins.blizzard.enable and E.private.skins.blizzard.trainer then
 		self.button:Point("TOPRIGHT", ClassTrainerTrainButton, "TOPLEFT", -3, 0)
+		S:HandleButton(self.button)
 	else
-		E:GetModule("Skins"):HandleButton(self.button)
 		self.button:Point("TOPRIGHT", ClassTrainerTrainButton, "TOPLEFT", 0, 0)
 	end
 

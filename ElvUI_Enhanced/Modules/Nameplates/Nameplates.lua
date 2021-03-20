@@ -119,7 +119,7 @@ local function UnitClassHook(self, frame, unitType)
 		end
 	elseif unitType == "ENEMY_PLAYER" then
 		local _, g = frame.oldHealthBar:GetStatusBarColor()
-		return grenColorToClass[floor(g*100 + 0.5) / 100]
+		return grenColorToClass[floor(g * 100 + 0.5) / 100]
 	end
 end
 
@@ -137,11 +137,17 @@ end
 
 -- Title Cache
 local separatorMap = {
-	[" "] = "%s",
-	["<"] = "<%s>",
-	["("] = "(%s)",
-	["["] = "[%s]",
-	["{"] = "{%s}"
+	NONE = "%s",
+	ARROW = ">%s<",
+	ARROW1 = "> %s <",
+	ARROW2 = "<%s>",
+	ARROW3 = "< %s >",
+	BOX = "[%s]",
+	BOX1 = "[ %s ]",
+	CURLY = "{%s}",
+	CURLY1 = "{ %s }",
+	CURVE = "(%s)",
+	CURVE1 = "( %s )"
 }
 
 local function Update_NameHook(self, frame)
@@ -214,12 +220,14 @@ local function Update_NameHook(self, frame)
 
 		if E.db.enhanced.nameplates.npc.reactionColor then
 			local db = self.db.colors
-			if frame.UnitReaction == 5 then -- friendly
-				r, g, b = db.reactions.good.r, db.reactions.good.g, db.reactions.good.b
-			elseif frame.UnitReaction == 1 or frame.UnitReaction == 2 then -- hostile
-				r, g, b = db.reactions.bad.r, db.reactions.bad.g, db.reactions.bad.b
-			elseif frame.UnitReaction == 4  then -- neutral
-				r, g, b = db.reactions.neutral.r, db.reactions.neutral.g, db.reactions.neutral.b
+			if frame.UnitReaction then
+				if frame.UnitReaction == 4 then
+					r, g, b = db.reactions.neutral.r, db.reactions.neutral.g, db.reactions.neutral.b
+				elseif frame.UnitReaction > 4 then
+					r, g, b = db.reactions.good.r, db.reactions.good.g, db.reactions.good.b
+				else
+					r, g, b = db.reactions.bad.r, db.reactions.bad.g, db.reactions.bad.b
+				end
 			else
 				r, g, b = 1, 1, 1
 			end

@@ -13,7 +13,7 @@ local SHOW = SHOW
 local HIDE = HIDE
 
 local SEC_TO_MINUTE_FACTOR = 1 / 60
-local SEC_TO_HOUR_FACTOR = SEC_TO_MINUTE_FACTOR*SEC_TO_MINUTE_FACTOR
+local SEC_TO_HOUR_FACTOR = SEC_TO_MINUTE_FACTOR * SEC_TO_MINUTE_FACTOR
 
 local function OnUpdate(self)
 	local timer = StopwatchTicker.timer

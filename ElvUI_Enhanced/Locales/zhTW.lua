@@ -119,7 +119,7 @@ L["Total"] = "全部"
 L["Undress"] = "無裝備"
 L["You died."] = true
 
-L["ENH_LOGIN_MSG"] = "您正在使用 |cffff7000E|r|cffe5e3e3lvUI|r |cffff7000E|r|cffe5e3e3nhanced|r version %s%s|r."
+L["ENH_LOGIN_MSG"] = "您正在使用 |cffff7000ElvUI Enhanced|r version %s%s|r."
 L["DURABILITY_DESC"] = "調整設置人物窗口裝備耐久度顯示."
 L["ITEMLEVEL_DESC"] = "調整在角色資訊上顯示物品裝等的各種設定."
 L["WATCHFRAME_DESC"] = "Adjust the settings for the visibility of the watchframe (questlog) to your personal preference."

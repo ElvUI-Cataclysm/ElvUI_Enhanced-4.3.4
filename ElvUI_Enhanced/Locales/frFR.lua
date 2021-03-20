@@ -119,7 +119,7 @@ L["Total"] = true
 L["Undress"] = "Déshabillé"
 L["You died."] = true
 
-L["ENH_LOGIN_MSG"] = "Vous utilisez |cffff7000E|r|cffe5e3e3lvUI|r |cffff7000E|r|cffe5e3e3nhanced|r version %s%s|r."
+L["ENH_LOGIN_MSG"] = "Vous utilisez |cffff7000ElvUI Enhanced|r version %s%s|r."
 L["DURABILITY_DESC"] = "Ajustez les réglages pour afficher la durabilité sur l'écran d'infos de personnage."
 L["ITEMLEVEL_DESC"] = "Réglez les paramètres pour afficher le niveau d'objet sur l'écran d'infos de personnage."
 L["WATCHFRAME_DESC"] = "Adjust the settings for the visibility of the watchframe (questlog) to your personal preference."

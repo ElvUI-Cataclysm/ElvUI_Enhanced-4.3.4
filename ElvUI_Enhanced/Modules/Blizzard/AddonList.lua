@@ -236,7 +236,7 @@ function mod:AddonList()
 
 	local closeButton = CreateFrame("Button", "$parentCloseButton", addonList, "UIPanelCloseButton")
 	closeButton:Size(32)
-	closeButton:Point("TOPRIGHT", -2, 2)
+	closeButton:Point("TOPRIGHT", 4, 6)
 	S:HandleCloseButton(closeButton)
 
 	closeButton:SetScript("OnClick", function()
@@ -360,7 +360,9 @@ function mod:AddonList()
 	end
 
 	local buttonAddons = CreateFrame("Button", "ElvUI_ButtonAddons", GameMenuFrame, "GameMenuButtonTemplate")
-	S:HandleButton(buttonAddons)
+	if E.private.skins.blizzard.enable and E.private.skins.blizzard.misc then
+		S:HandleButton(buttonAddons)
+	end
 	buttonAddons:Point("TOP", GameMenuButtonMacros, "BOTTOM", 0, -1)
 	buttonAddons:SetText(ADDONS)
 	buttonAddons:SetScript("OnClick", function()
@@ -368,11 +370,11 @@ function mod:AddonList()
 		ElvUI_AddonList:Show()
 	end)
 
-	self:HookScript(GameMenuButtonRatings, "OnShow", function(self)
+	self:HookScript(GameMenuButtonRatings, "OnShow", function()
 		ElvUI_ButtonAddons:Point("TOP", GameMenuButtonRatings, "BOTTOM", 0, -1)
 	end)
 
-	self:HookScript(GameMenuButtonRatings, "OnHide", function(self)
+	self:HookScript(GameMenuButtonRatings, "OnHide", function()
 		ElvUI_ButtonAddons:Point("TOP", GameMenuButtonMacros, "BOTTOM", 0, -1)
 	end)
 

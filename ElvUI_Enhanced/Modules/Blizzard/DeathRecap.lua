@@ -7,10 +7,12 @@ local band = bit.band
 local ceil, floor = math.ceil, math.floor
 local format, upper, sub, join = string.format, string.upper, string.sub, string.join
 local tsort, twipe = table.sort, table.wipe
+local pcall = pcall
 local tonumber = tonumber
 
 local CannotBeResurrected = CannotBeResurrected
 local CopyTable = CopyTable
+local GetPlayerInfoByGUID = GetPlayerInfoByGUID
 local GetReleaseTimeRemaining = GetReleaseTimeRemaining
 local GetSpellInfo = GetSpellInfo
 local GetSpellLink = GetSpellLink
@@ -38,7 +40,7 @@ local index = 0
 local deathList = {}
 local eventList = {}
 
-local function AddEvent(timestamp, event, sourceName, spellId, spellName, environmentalType, amount, overkill, school, resisted, blocked, absorbed, critical)
+local function AddEvent(timestamp, event, sourceGUID, sourceName, spellId, spellName, environmentalType, amount, overkill, school, resisted, blocked, absorbed, critical)
 	if index > 0 and eventList[index].timestamp + 10 <= timestamp then
 		index = 0
 		twipe(eventList)
@@ -58,6 +60,7 @@ local function AddEvent(timestamp, event, sourceName, spellId, spellName, enviro
 
 	eventList[index].timestamp = timestamp
 	eventList[index].event = event
+	eventList[index].sourceGUID = sourceGUID
 	eventList[index].sourceName = sourceName
 	eventList[index].spellId = spellId
 	eventList[index].spellName = spellName
@@ -118,7 +121,7 @@ local function GetTableInfo(data)
 	local spellName = data.spellName
 
 	if event == "SWING_DAMAGE" then
-		spellId = 6603
+		spellId = 88163
 		spellName = ACTION_SWING
 
 		nameIsNotSpell = true
@@ -195,10 +198,10 @@ local function OpenRecap(recapID)
 		self.DeathTimeStamp = self.DeathTimeStamp or evtData.timestamp
 
 		if evtData.amount then
-			local amountStr = -evtData.amount
+			local amountStr = E:GetFormattedText("CURRENT", -evtData.amount)
+
 			dmgInfo.Amount:SetText(amountStr)
 			dmgInfo.AmountLarge:SetText(amountStr)
-			dmgInfo.amount = evtData.amount
 
 			dmgInfo.dmgExtraStr = ""
 
@@ -221,7 +224,7 @@ local function OpenRecap(recapID)
 				blckSpacer = " "
 			end
 			local critStr = (evtData.critical and evtData.critical > 0) and L["Critical"] or ""
-			dmgInfo.dmgExtraStr = join("", dmgInfo.dmgExtraStr, " ", ovrkStr, ovrkSpacer, absoStr, absoSpacer, resiStr, resiSpacer, blckStr, blckSpacer, critStr)
+			dmgInfo.dmgExtraStr = join("", dmgInfo.dmgExtraStr, "", ovrkStr, ovrkSpacer, absoStr, absoSpacer, resiStr, resiSpacer, blckStr, blckSpacer, critStr)
 
 			local absoDmg = (evtData.absorbed and evtData.absorbed > 0) and evtData.absorbed or 0
 			local resiDmg = (evtData.resisted and evtData.resisted > 0) and evtData.resisted or 0
@@ -249,6 +252,15 @@ local function OpenRecap(recapID)
 		dmgInfo.spellName = spellName
 
 		dmgInfo.caster = evtData.sourceName or COMBATLOG_UNKNOWN_UNIT
+		entry.SpellInfo.Caster:SetText(dmgInfo.caster)
+
+		local class = select(3, pcall(GetPlayerInfoByGUID, evtData.sourceGUID))
+		if class then
+			local classColor = E:ClassColor(class)
+			entry.SpellInfo.Caster:SetTextColor(classColor.r, classColor.g, classColor.b)
+		else
+			entry.SpellInfo.Caster:SetTextColor(0.5, 0.5, 0.5)
+		end
 
 		if evtData.school and evtData.school > 1 then
 			local colorArray = CombatLog_Color_ColorArrayBySchool(evtData.school)
@@ -258,9 +270,6 @@ local function OpenRecap(recapID)
 		end
 
 		dmgInfo.school = evtData.school
-
-		entry.SpellInfo.Caster:SetText(dmgInfo.caster)
-		entry.SpellInfo.Caster:SetTextColor(0.5, 0.5, 0.5)
 
 		entry.SpellInfo.Name:SetText(spellName)
 		entry.SpellInfo.Icon:SetTexture(texture)
@@ -331,31 +340,24 @@ function mod:PLAYER_DEAD()
 	end
 end
 
-function mod:COMBAT_LOG_EVENT_UNFILTERED(_, timestamp, event, _, _, sourceName, sourceFlags, _, _, _, destFlags, ...)
+function mod:COMBAT_LOG_EVENT_UNFILTERED(_, timestamp, event, _, sourceGUID, sourceName, sourceFlags, _, _, _, destFlags, ...)
 	if (band(destFlags, COMBATLOG_FILTER_ME) ~= COMBATLOG_FILTER_ME) or (band(sourceFlags, COMBATLOG_FILTER_ME) == COMBATLOG_FILTER_ME) then return end
-	if event ~= "ENVIRONMENTAL_DAMAGE"
-	and event ~= "RANGE_DAMAGE"
-	and event ~= "SPELL_DAMAGE"
-	and event ~= "SPELL_EXTRA_ATTACKS"
-	and event ~= "SPELL_INSTAKILL"
-	and event ~= "SPELL_PERIODIC_DAMAGE"
-	and event ~= "SWING_DAMAGE"
-	then return end
+	if event ~= "ENVIRONMENTAL_DAMAGE" and event ~= "RANGE_DAMAGE" and event ~= "SPELL_DAMAGE" and event ~= "SPELL_EXTRA_ATTACKS" and event ~= "SPELL_INSTAKILL" and event ~= "SPELL_PERIODIC_DAMAGE" and event ~= "SWING_DAMAGE" then return end
 
 	local subVal = sub(event, 1, 5)
-	local environmentalType, spellId, spellName, amount, overkill, school, resisted, blocked, absorbed
+	local _, environmentalType, spellId, spellName, amount, overkill, school, resisted, blocked, absorbed
 
 	if event == "SWING_DAMAGE" then
-		amount, overkill, school, resisted, blocked, absorbed, critical = ...
-	elseif subVal == "SPELL" then
-		spellId, spellName, _, amount, overkill, school, resisted, blocked, absorbed, critical = ...
+		_, amount, overkill, school, resisted, blocked, absorbed, critical = ...
+	elseif subVal == "SPELL" or event == "RANGE_DAMAGE" then
+		_, spellId, spellName, _, amount, overkill, school, resisted, blocked, absorbed, critical = ...
 	elseif event == "ENVIRONMENTAL_DAMAGE" then
-		environmentalType, amount, overkill, school, resisted, blocked, absorbed, critical = ...
+		_, environmentalType, amount, overkill, school, resisted, blocked, absorbed, critical = ...
 	end
 
 	if not tonumber(amount) then return end
 
-	AddEvent(timestamp, event, sourceName, spellId, spellName, environmentalType, amount, overkill, school, resisted, blocked, absorbed, critical)
+	AddEvent(timestamp, event, sourceGUID, sourceName, spellId, spellName, environmentalType, amount, overkill, school, resisted, blocked, absorbed, critical)
 end
 
 function mod:SetItemRef(link, ...)
@@ -383,7 +385,7 @@ function mod:DeathRecap()
 	tinsert(UISpecialFrames, frame:GetName())
 
 	frame.Title = frame:CreateFontString("ARTWORK", nil, "GameFontNormal")
-	frame.Title:Point("TOPLEFT", 12, -9)
+	frame.Title:Point("TOP", 0, -9)
 	frame.Title:SetText(L["Death Recap"])
 
 	frame.Unavailable = frame:CreateFontString("ARTWORK", nil, "GameFontNormal")
@@ -417,34 +419,34 @@ function mod:DeathRecap()
 
 		button.DamageInfo = CreateFrame("Button", nil, button)
 		button.DamageInfo:Point("TOPLEFT", 0, 0)
-		button.DamageInfo:Point("BOTTOMRIGHT", button, "BOTTOMLEFT", 80, 0)
+		button.DamageInfo:Point("BOTTOMRIGHT", button, "BOTTOMLEFT", 90, 0)
 		button.DamageInfo:SetScript("OnEnter", Amount_OnEnter)
 		button.DamageInfo:SetScript("OnLeave", GameTooltip_Hide)
 
 		button.DamageInfo.Amount = button.DamageInfo:CreateFontString("ARTWORK", nil, "GameFontNormalRight")
-		button.DamageInfo.Amount:SetJustifyH("RIGHT")
-		button.DamageInfo.Amount:SetJustifyV("CENTER")
 		button.DamageInfo.Amount:Size(0, 32)
-		button.DamageInfo.Amount:Point("TOPRIGHT", 0, 0)
 		button.DamageInfo.Amount:SetTextColor(0.75, 0.05, 0.05, 1)
+		button.DamageInfo.Amount:Point("TOPRIGHT", -6, -1)
+		button.DamageInfo.Amount:SetJustifyH("LEFT")
+		button.DamageInfo.Amount:SetJustifyV("CENTER")
 
 		button.DamageInfo.AmountLarge = button.DamageInfo:CreateFontString("ARTWORK", nil, "NumberFont_Outline_Large")
-		button.DamageInfo.AmountLarge:SetJustifyH("RIGHT")
-		button.DamageInfo.AmountLarge:SetJustifyV("CENTER")
 		button.DamageInfo.AmountLarge:Size(0, 32)
-		button.DamageInfo.AmountLarge:Point("TOPRIGHT", 0, 0)
 		button.DamageInfo.AmountLarge:SetTextColor(1, 0.07, 0.07, 1)
+		button.DamageInfo.AmountLarge:Point("TOPRIGHT", -6, -1)
+		button.DamageInfo.AmountLarge:SetJustifyH("LEFT")
+		button.DamageInfo.AmountLarge:SetJustifyV("CENTER")
 
 		button.SpellInfo = CreateFrame("Button", nil, button)
-		button.SpellInfo:Point("TOPLEFT", button.DamageInfo, "TOPRIGHT", 16, 0)
-		button.SpellInfo:Point("BOTTOMRIGHT", 0, 0)
+		button.SpellInfo:Point("TOPLEFT", button.DamageInfo, "TOPRIGHT", 2, 0)
+		button.SpellInfo:Point("BOTTOMRIGHT", 2, 0)
 		button.SpellInfo:SetScript("OnEnter", Spell_OnEnter)
 		button.SpellInfo:SetScript("OnLeave", GameTooltip_Hide)
 
 		button.SpellInfo.FrameIcon = CreateFrame("Button", nil, button.SpellInfo)
 		button.SpellInfo.FrameIcon:Size(34)
 		button.SpellInfo.FrameIcon:Point("LEFT", 0, 0)
-		button.SpellInfo.FrameIcon:SetTemplate("Default")
+		button.SpellInfo.FrameIcon:SetTemplate()
 
 		button.SpellInfo.Icon = button.SpellInfo:CreateTexture("ARTWORK")
 		button.SpellInfo.Icon:SetParent(button.SpellInfo.FrameIcon)
@@ -454,13 +456,13 @@ function mod:DeathRecap()
 		button.SpellInfo.Name = button.SpellInfo:CreateFontString("ARTWORK", nil, "GameFontNormal")
 		button.SpellInfo.Name:SetJustifyH("LEFT")
 		button.SpellInfo.Name:SetJustifyV("BOTTOM")
-		button.SpellInfo.Name:Point("BOTTOMLEFT", button.SpellInfo.Icon, "RIGHT", 8, 1)
+		button.SpellInfo.Name:Point("BOTTOMLEFT", button.SpellInfo.Icon, "RIGHT", 6, 1)
 		button.SpellInfo.Name:Point("TOPRIGHT", 0, 0)
 
 		button.SpellInfo.Caster = button.SpellInfo:CreateFontString("ARTWORK", nil, "SystemFont_Shadow_Small")
 		button.SpellInfo.Caster:SetJustifyH("LEFT")
 		button.SpellInfo.Caster:SetJustifyV("TOP")
-		button.SpellInfo.Caster:Point("TOPLEFT", button.SpellInfo.Icon, "RIGHT", 8, -2)
+		button.SpellInfo.Caster:Point("TOPLEFT", button.SpellInfo.Icon, "RIGHT", 6, -2)
 		button.SpellInfo.Caster:Point("BOTTOMRIGHT", 0, 0)
 		button.SpellInfo.Caster:SetTextColor(0.5, 0.5, 0.5, 1)
 
@@ -468,7 +470,7 @@ function mod:DeathRecap()
 			button:Point("BOTTOMLEFT", 16, 64)
 			button.tombstone = button:CreateTexture("ARTWORK")
 			button.tombstone:Size(15, 20)
-			button.tombstone:Point("LEFT", button.DamageInfo, "LEFT", 10, 0)
+			button.tombstone:Point("LEFT", button.DamageInfo, "LEFT", 8, 0)
 			button.tombstone:SetTexCoord(0.658203125, 0.6875, 0.00390625, 0.08203125)
 			button.tombstone:SetTexture(E.EnhancedMedia.Textures.DeathRecap)
 		else

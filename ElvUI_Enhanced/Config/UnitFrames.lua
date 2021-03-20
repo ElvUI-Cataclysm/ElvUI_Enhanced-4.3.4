@@ -41,14 +41,14 @@ function EE:UnitFrameOptions()
 								type = "description",
 								name = " "
 							},
-							detachedWidth = {
+							width = {
 								order = 3,
 								type = "range",
 								name = L["Detached Width"],
 								min = 10, max = 600, step = 1,
 								disabled = function() return not E.db.unitframe.units.player.portrait.enable end
 							},
-							detachedHeight = {
+							height = {
 								order = 4,
 								type = "range",
 								name = L["Detached Height"],
@@ -149,14 +149,14 @@ function EE:UnitFrameOptions()
 								type = "description",
 								name = " "
 							},
-							detachedWidth = {
+							width = {
 								order = 3,
 								type = "range",
 								name = L["Detached Width"],
 								min = 10, max = 600, step = 1,
 								disabled = function() return not E.db.unitframe.units.target.portrait.enable end
 							},
-							detachedHeight = {
+							height = {
 								order = 4,
 								type = "range",
 								name = L["Detached Height"],

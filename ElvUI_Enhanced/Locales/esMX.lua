@@ -119,7 +119,7 @@ L["Total"] = true
 L["Undress"] = true
 L["You died."] = true
 
-L["ENH_LOGIN_MSG"] = "You are using |cffff7000E|r|cffe5e3e3lvUI|r |cffff7000E|r|cffe5e3e3nhanced|r version %s%s|r."
+L["ENH_LOGIN_MSG"] = "You are using |cffff7000ElvUI Enhanced|r version %s%s|r."
 L["DURABILITY_DESC"] = "Adjust the settings for the durability information on the character screen."
 L["ITEMLEVEL_DESC"] = "Adjust the settings for the item level information on the character screen."
 L["WATCHFRAME_DESC"] = "Adjust the settings for the visibility of the watchframe (questlog) to your personal preference."

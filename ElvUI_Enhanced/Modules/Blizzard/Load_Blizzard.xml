@@ -4,4 +4,5 @@
 	<Script file="AddonList.lua"/>
 	<Script file="AnimatedAchievementsBars.lua"/>
 	<Script file="ErrorFrame.lua"/>
+	<Script file="PaperDoll.lua"/>
 </Ui>

@@ -19,7 +19,7 @@ function M:QuestInfo_Display()
 		if not item.text then
 			item.text = item:CreateFontString(nil, "OVERLAY")
 			item.text:FontTemplate(LSM:Fetch("font", E.db.bags.itemLevelFont), E.db.bags.itemLevelFontSize, E.db.bags.itemLevelFontOutline)
-			item.text:Point("BOTTOMRIGHT", icon, 0, 0)
+			item.text:Point("BOTTOMRIGHT", icon, -1, 2)
 
 			if E.private.skins.blizzard.enable and E.private.skins.blizzard.quest then
 				item.text:SetParent(item.backdrop)

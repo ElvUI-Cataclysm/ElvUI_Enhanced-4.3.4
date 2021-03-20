@@ -76,7 +76,7 @@ function EDL:FilterLine(event, source, msg, ...)
 		end
 	end
 
-	for i, line in ipairs(spamFirstLines) do
+	for _, line in ipairs(spamFirstLines) do
 		local newID = 0
 
 		if msg:match(line) then

@@ -98,10 +98,10 @@ function EE:MinimapOptions()
 						type = "select",
 						name = L["Grow direction"],
 						values = {
-							["TOPLEFT"] = "DOWN -> RIGHT",
-							["TOPRIGHT"] = "DOWN -> LEFT",
-							["BOTTOMLEFT"] = "UP -> RIGHT",
-							["BOTTOMRIGHT"] = "UP -> LEFT"
+							["TOPLEFT"] = format(L["%s and then %s"], L["Down"], L["Right"]),
+							["TOPRIGHT"] = format(L["%s and then %s"], L["Down"], L["Left"]),
+							["BOTTOMLEFT"] = format(L["%s and then %s"], L["Up"], L["Right"]),
+							["BOTTOMRIGHT"] = format(L["%s and then %s"], L["Up"], L["Left"])
 						}
 					},
 					buttonsPerRow = {
@@ -172,7 +172,6 @@ function EE:MinimapOptions()
 							E.db.enhanced.minimap.buttonGrabber.insideMinimap[info[#info]] = value
 							MBG:UpdatePosition()
 						end,
-						disabled = function() return not E.db.enhanced.minimap.buttonGrabber.insideMinimap.enable end,
 						args = {
 							enable = {
 								order = 1,
@@ -184,19 +183,22 @@ function EE:MinimapOptions()
 								order = 2,
 								type = "select",
 								name = L["Position"],
-								values = positionValues
+								values = positionValues,
+								disabled = function() return not E.db.enhanced.minimap.buttonGrabber.insideMinimap.enable or not E.private.enhanced.minimapButtonGrabber end
 							},
 							xOffset = {
 								order = 3,
 								type = "range",
 								name = L["X-Offset"],
-								min = -20, max = 20, step = 1
+								min = -20, max = 20, step = 1,
+								disabled = function() return not E.db.enhanced.minimap.buttonGrabber.insideMinimap.enable or not E.private.enhanced.minimapButtonGrabber end
 							},
 							yOffset = {
 								order = 4,
 								type = "range",
 								name = L["Y-Offset"],
-								min = -20, max = 20, step = 1
+								min = -20, max = 20, step = 1,
+								disabled = function() return not E.db.enhanced.minimap.buttonGrabber.insideMinimap.enable or not E.private.enhanced.minimapButtonGrabber end
 							}
 						}
 					}

@@ -130,7 +130,7 @@ function PD:UpdatePaperDoll(unit)
 							frame.ItemLevel:SetTextColor(1, 1, 1)
 						end
 					else
-						frame.ItemLevel:SetFormattedText("%s%d|r", levelColors[(itemLevel < avgEquipItemLevel-10 and 0 or (itemLevel > avgEquipItemLevel + 10 and 1 or (2)))], itemLevel)
+						frame.ItemLevel:SetFormattedText("%s%d|r", levelColors[(itemLevel < avgEquipItemLevel - 10 and 0 or (itemLevel > avgEquipItemLevel + 10 and 1 or (2)))], itemLevel)
 					end
 				end
 			end
@@ -193,7 +193,7 @@ function PD:OnEvent(event, unit)
 end
 
 function PD:DelayUpdateInfo(inspect)
-	if (updateTimer == 0 or PD:TimeLeft(updateTimer) == 0) then
+	if updateTimer == 0 or PD:TimeLeft(updateTimer) == 0 then
 		updateTimer = PD:ScheduleTimer("UpdatePaperDoll", 0.3, inspect)
 	end
 end

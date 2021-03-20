@@ -94,11 +94,17 @@ function EE:NamePlatesOptions()
 								type = "select",
 								name = L["Separator"],
 								values = {
-									[" "] = L["NONE"],
-									["<"] = "< >",
-									["("] = "( )",
-									["["] = "[ ]",
-									["{"] = "{ }"
+									NONE = L["NONE"],
+									ARROW = "><",
+									ARROW1 = ">  <",
+									ARROW2 = "<>",
+									ARROW3 = "<  >",
+									BOX = "[]",
+									BOX1 = "[  ]",
+									CURLY = "{}",
+									CURLY1 = "{  }",
+									CURVE = "()",
+									CURVE1 = "(  )"
 								}
 							},
 							colorsGroup = {
@@ -220,9 +226,17 @@ function EE:NamePlatesOptions()
 								type = "select",
 								name = L["Separator"],
 								values = {
-									[" "] = L["NONE"],
-									["<"] = "< >",
-									["("] = "( )"
+									NONE = L["NONE"],
+									ARROW = "><",
+									ARROW1 = "> <",
+									ARROW2 = "<>",
+									ARROW3 = "< >",
+									BOX = "[]",
+									BOX1 = "[ ]",
+									CURLY = "{}",
+									CURLY1 = "{ }",
+									CURVE = "()",
+									CURVE1 = "( )"
 								}
 							},
 							reactionColor = {

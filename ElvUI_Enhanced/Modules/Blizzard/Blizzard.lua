@@ -5,6 +5,7 @@ function mod:Initialize()
 	self:DeathRecap()
 	self:AddonList()
 	self:ErrorFrameSize()
+	self:PaperDollBackgrounds()
 end
 
 local function InitializeCallback()

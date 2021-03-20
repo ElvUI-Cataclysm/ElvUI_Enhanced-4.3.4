@@ -31,7 +31,7 @@ function EE:MapOptions()
 						hasAlpha = true,
 						get = function(info)
 							local t = E.db.enhanced.map.fogClear.color
-							local d = E.db.enhanced.map.fogClear.color
+							local d = P.enhanced.map.fogClear.color
 							return t.r, t.g, t.b, t.a, d.r, d.g, d.b, d.a
 						end,
 						set = function(_, r, g, b, a)

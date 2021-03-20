@@ -4,6 +4,7 @@ local EP = E.Libs.EP
 
 local addonName = ...
 
+local next = next
 local format = format
 
 function EE:ColorizeSettingName(name)
@@ -28,17 +29,16 @@ function EE:DBConversions()
 
 	if P.unitframe.units.player.portrait.detachFromFrame ~= nil then
 		E.db.enhanced.unitframe.detachPortrait.player.enable = P.unitframe.units.player.portrait.detachFromFrame
-		E.db.enhanced.unitframe.detachPortrait.player.width = P.unitframe.units.player.portrait.detachedWidth
-		E.db.enhanced.unitframe.detachPortrait.player.height = P.unitframe.units.player.portrait.detachedHeight
-		E.db.enhanced.unitframe.detachPortrait.target.enable = P.unitframe.units.target.portrait.detachFromFrame
-		E.db.enhanced.unitframe.detachPortrait.target.width = P.unitframe.units.target.portrait.detachedWidth
-		E.db.enhanced.unitframe.detachPortrait.target.height = P.unitframe.units.target.portrait.detachedHeight
-
 		P.unitframe.units.player.portrait.detachFromFrame = nil
+		E.db.enhanced.unitframe.detachPortrait.player.width = P.unitframe.units.player.portrait.detachedWidth
 		P.unitframe.units.player.portrait.detachedWidth = nil
+		E.db.enhanced.unitframe.detachPortrait.player.height = P.unitframe.units.player.portrait.detachedHeight
 		P.unitframe.units.player.portrait.detachedHeight = nil
+		E.db.enhanced.unitframe.detachPortrait.target.enable = P.unitframe.units.target.portrait.detachFromFrame
 		P.unitframe.units.target.portrait.detachFromFrame = nil
+		E.db.enhanced.unitframe.detachPortrait.target.width = P.unitframe.units.target.portrait.detachedWidth
 		P.unitframe.units.target.portrait.detachedWidth = nil
+		E.db.enhanced.unitframe.detachPortrait.target.height = P.unitframe.units.target.portrait.detachedHeight
 		P.unitframe.units.target.portrait.detachedHeight = nil
 	end
 
@@ -61,7 +61,7 @@ function EE:Initialize()
 	EP:RegisterPlugin(addonName, EE.GetOptions)
 
 	if E.db.general.loginmessage then
-		E:Print(format(L["ENH_LOGIN_MSG"], E.media.hexvaluecolor, EE.version))
+		print(format(L["ENH_LOGIN_MSG"], "|cffff7000", EE.version))
 	end
 end
 

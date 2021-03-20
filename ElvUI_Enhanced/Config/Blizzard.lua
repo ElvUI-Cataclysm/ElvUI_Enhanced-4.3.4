@@ -31,8 +31,85 @@ function EE:BlizzardOptions()
 					}
 				}
 			},
-			errorFrame = {
+			paperdollBackgrounds = {
 				order = 2,
+				type = "group",
+				name = L["Paperdolls"],
+				get = function(info) return E.db.enhanced.blizzard.backgrounds[info[#info]] end,
+				args = {
+					characterBackground = {
+						order = 1,
+						type = "toggle",
+						name = L["Character Background"],
+						set = function(info, value)
+							E.db.enhanced.blizzard.backgrounds.characterBackground = value
+							B:UpdateCharacterModelFrame()
+						end
+					},
+					characterBackdrop = {
+						order = 2,
+						type = "toggle",
+						name = L["Character Backdrop"],
+						set = function(info, value)
+							E.db.enhanced.blizzard.backgrounds.characterBackdrop = value
+							B:UpdateCharacterModelFrame()
+						end,
+						disabled = function()
+							E.db.enhanced.blizzard.backgrounds.characterBackdrop = true
+							return E.db.enhanced.blizzard.backgrounds.characterBackground
+						end
+					},
+					characterDesaturate = {
+						order = 3,
+						type = "toggle",
+						name = L["Desaturate"],
+						set = function(info, value)
+							E.db.enhanced.blizzard.backgrounds.characterDesaturate = value
+							B:UpdateCharacterModelFrame()
+						end,
+						disabled = function() return not E.db.enhanced.blizzard.backgrounds.characterBackground end
+					},
+					spacer = {
+						order = 4,
+						type = "description",
+						name = " "
+					},
+					inspectBackground = {
+						order = 5,
+						type = "toggle",
+						name = L["Inspect Background"],
+						set = function(info, value)
+							E.db.enhanced.blizzard.backgrounds.inspectBackground = value
+							B:UpdateInspectModelFrame()
+						end
+					},
+					inspectBackdrop = {
+						order = 6,
+						type = "toggle",
+						name = L["Inspect Backdrop"],
+						set = function(info, value)
+							E.db.enhanced.blizzard.backgrounds.inspectBackdrop = value
+							B:UpdateInspectModelFrame()
+						end,
+						disabled = function()
+							E.db.enhanced.blizzard.backgrounds.inspectBackdrop = true
+							return E.db.enhanced.blizzard.backgrounds.inspectBackground
+						end
+					},
+					inspectDesaturate = {
+						order = 7,
+						type = "toggle",
+						name = L["Desaturate"],
+						set = function(info, value)
+							E.db.enhanced.blizzard.backgrounds.inspectDesaturate = value
+							B:UpdateInspectModelFrame()
+						end,
+						disabled = function() return not E.db.enhanced.blizzard.backgrounds.inspectBackground end
+					}
+				}
+			},
+			errorFrame = {
+				order = 3,
 				type = "group",
 				name = L["Error Frame"],
 				get = function(info) return E.db.enhanced.blizzard.errorFrame[info[#info]] end,
@@ -101,7 +178,7 @@ function EE:BlizzardOptions()
 				}
 			},
 			watchframe = {
-				order = 3,
+				order = 4,
 				type = "group",
 				name = L["Objective Frame"],
 				get = function(info) return E.db.enhanced.watchframe[info[#info]] end,

@@ -35,7 +35,7 @@ function M:DUEL_REQUESTED(_, name)
 end
 
 function M:DeclineDuel()
-	if E.db.enhanced.general.declineduel then
+	if E.db.enhanced.general.declineDuel then
 		self:RegisterEvent("DUEL_REQUESTED")
 	else
 		self:UnregisterEvent("DUEL_REQUESTED")
@@ -72,7 +72,6 @@ function M:Initialize()
 	self:HideZone()
 	self:QuestItemLevel()
 	self:ToggleQuestReward()
-	self:LoadMoverTransparancy()
 	self:QuestLevelToggle()
 	self:BuyStackToggle()
 	self:MerchantItemLevel()

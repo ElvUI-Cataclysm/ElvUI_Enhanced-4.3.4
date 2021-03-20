@@ -445,8 +445,6 @@ function MBG:Initialize()
 		self.frame.mover:SetScript("OnSizeChanged", nil)
 	end
 
-	self.initialized = true
-
 	self:ToggleMouseover()
 	self:UpdateAlpha()
 	self:UpdatePosition()
@@ -459,6 +457,8 @@ function MBG:Initialize()
 	for addon, func in pairs(addonFixes) do
 		AddonsCompat:AddAddon(addon, func)
 	end
+
+	self.initialized = true
 end
 
 local function InitializeCallback()

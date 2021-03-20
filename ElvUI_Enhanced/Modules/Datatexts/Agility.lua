@@ -11,7 +11,7 @@ local ITEM_MOD_AGILITY_SHORT = ITEM_MOD_AGILITY_SHORT
 local displayNumberString = ""
 local lastPanel
 
-local function OnEvent(self, event, ...)
+local function OnEvent(self)
 	self.text:SetFormattedText(displayNumberString, AGILITY_COLON, select(2, UnitStat("player", 2)))
 	lastPanel = self
 end

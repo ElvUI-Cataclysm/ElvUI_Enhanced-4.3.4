@@ -5,12 +5,11 @@ P.enhanced = {
 		pvpAutoRelease = false,
 		merchant = false,
 		merchantItemLevel = false,
-		moverTransparancy = 1,
 		showQuestLevel = false,
 		questItemLevel = false,
 		selectQuestReward = false,
-		declineduel = false,
 		declineParty = false,
+		declineDuel = false,
 		hideZoneText = false,
 		trainAllSkills = false,
 		undressButton = false,
@@ -24,6 +23,15 @@ P.enhanced = {
 			font = "PT Sans Narrow",
 			fontSize = 12,
 			fontOutline = "NONE"
+		},
+		backgrounds = {
+			characterBackground = true,
+			characterBackdrop = true,
+			characterDesaturate = false,
+
+			inspectBackground = true,
+			inspectBackdrop = true,
+			inspectDesaturate = false
 		}
 	},
 	chat = {
@@ -96,11 +104,11 @@ P.enhanced = {
 			font = "PT Sans Narrow",
 			fontSize = 11,
 			fontOutline = "OUTLINE",
-			separator = " ",
+			separator = "NONE",
 			colors = {
-				raid = {r = 1, g = 127/255, b = 0},
-				party = {r = 118/255, g = 200/255, b = 1},
-				guild = {r = 64/255, g = 1, b = 64/255},
+				raid = {r = 1, g = 0.50, b = 0},
+				party = {r = 0.46, g = 0.78, b = 1},
+				guild = {r = 0.25, g = 1, b = 0.25},
 				none = {r = 1, g = 1, b = 1}
 			},
 			visibility = {
@@ -117,29 +125,29 @@ P.enhanced = {
 			fontOutline = "OUTLINE",
 			reactionColor = false,
 			color = {r = 1, g = 1, b = 1},
-			separator = " "
+			separator = "NONE"
 		}
 	},
 	tooltip = {
 		itemQualityBorderColor = false,
-		tooltipIcon = {
-			enable = false,
-			tooltipIconSpells = true,
-			tooltipIconItems = true,
-			tooltipIconAchievements = true
-		},
 		progressInfo = {
 			enable = false,
 			checkPlayer = false,
 			modifier = "SHIFT",
 			tiers = {
-				["DS"] = true,
-				["FL"] = true,
-				["BH"] = true,
-				["TOTFW"] = true,
-				["BT"] = true,
-				["BWD"] = true
+				DS = true,
+				FL = true,
+				BH = true,
+				TOTFW = true,
+				BT = true,
+				BWD = true
 			}
+		},
+		tooltipIcon = {
+			enable = false,
+			tooltipIconSpells = true,
+			tooltipIconItems = true,
+			tooltipIconAchievements = true
 		}
 	},
 	loseControl = {

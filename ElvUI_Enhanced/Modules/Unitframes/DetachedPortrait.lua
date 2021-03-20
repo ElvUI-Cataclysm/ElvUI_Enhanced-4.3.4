@@ -8,7 +8,7 @@ local function Configure_Portrait(self, frame)
 
 		frame.PORTRAIT_DETACHED = frame.USE_PORTRAIT and db.enable and not frame.USE_PORTRAIT_OVERLAY
 		frame.PORTRAIT_WIDTH = (frame.USE_PORTRAIT_OVERLAY or frame.PORTRAIT_DETACHED or not frame.USE_PORTRAIT) and 0 or frame.db.portrait.width
-		frame.CLASSBAR_WIDTH = frame.UNIT_WIDTH - (frame.BORDER + frame.SPACING) * 2 - frame.PORTRAIT_WIDTH - frame.POWERBAR_OFFSET
+		frame.CLASSBAR_WIDTH = frame.UNIT_WIDTH - (UF.BORDER + UF.SPACING) * 2 - frame.PORTRAIT_WIDTH - frame.POWERBAR_OFFSET
 
 		if frame.USE_PORTRAIT then
 			local portrait = frame.Portrait
@@ -19,9 +19,9 @@ local function Configure_Portrait(self, frame)
 					portrait.Holder:Size(db.width, db.height)
 
 					if frame.ORIENTATION == "LEFT" then
-						portrait.Holder:Point("RIGHT", frame, "LEFT", -frame.BORDER, 0)
+						portrait.Holder:Point("RIGHT", frame, "LEFT", -UF.BORDER, 0)
 					elseif frame.ORIENTATION == "RIGHT" then
-						portrait.Holder:Point("LEFT", frame, "RIGHT", frame.BORDER, 0)
+						portrait.Holder:Point("LEFT", frame, "RIGHT", UF.BORDER, 0)
 					end
 
 					portrait:SetInside(portrait.Holder)
@@ -46,6 +46,10 @@ local function Configure_Portrait(self, frame)
 
 			self:Configure_HealthBar(frame)
 			self:Configure_Power(frame)
+
+			if frame.CAN_HAVE_CLASSBAR and frame.unitframeType == "player" then
+				self:Configure_ClassBar(frame)
+			end
 		end
 	end
 end
