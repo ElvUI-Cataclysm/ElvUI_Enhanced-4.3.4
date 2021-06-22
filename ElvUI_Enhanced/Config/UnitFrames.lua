@@ -3,7 +3,6 @@ local L = E.Libs.ACL:GetLocale("ElvUI", E.global.general.locale)
 local EE = E:GetModule("ElvUI_Enhanced")
 local UF = E:GetModule("UnitFrames")
 local EDP = E:GetModule("Enhanced_DetachedPortrait")
-local TC = E:GetModule("Enhanced_TargetClass")
 
 function EE:UnitFrameOptions()
 	local config = {
@@ -64,68 +63,8 @@ function EE:UnitFrameOptions()
 				type = "group",
 				name = L["TARGET"],
 				args = {
-					classIcon = {
-						order = 1,
-						type = "group",
-						name = L["Class Icons"],
-						args = {
-							enable = {
-								order = 1,
-								type = "toggle",
-								name = L["ENABLE"],
-								desc = L["Show class icon for units."],
-								get = function(info) return E.db.enhanced.unitframe.units.target.classicon.enable end,
-								set = function(info, value)
-									E.db.enhanced.unitframe.units.target.classicon.enable = value
-									TC:ToggleSettings()
-								end
-							},
-							spacer = {
-								order = 2,
-								type = "description",
-								name = " "
-							},
-							size = {
-								order = 3,
-								type = "range",
-								name = L["Size"],
-								desc = L["Size of the indicator icon."],
-								min = 16, max = 40, step = 1,
-								get = function(info) return E.db.enhanced.unitframe.units.target.classicon.size end,
-								set = function(info, value)
-									E.db.enhanced.unitframe.units.target.classicon.size = value
-									TC:ToggleSettings()
-								end,
-								disabled = function() return not E.db.enhanced.unitframe.units.target.classicon.enable end
-							},
-							xOffset = {
-								order = 4,
-								type = "range",
-								name = L["X-Offset"],
-								min = -100, max = 100, step = 1,
-								get = function(info) return E.db.enhanced.unitframe.units.target.classicon.xOffset end,
-								set = function(info, value)
-									E.db.enhanced.unitframe.units.target.classicon.xOffset = value
-									TC:ToggleSettings()
-								end,
-								disabled = function() return not E.db.enhanced.unitframe.units.target.classicon.enable end
-							},
-							yOffset = {
-								order = 5,
-								type = "range",
-								name = L["Y-Offset"],
-								min = -80, max = 40, step = 1,
-								get = function(info) return E.db.enhanced.unitframe.units.target.classicon.yOffset end,
-								set = function(info, value)
-									E.db.enhanced.unitframe.units.target.classicon.yOffset = value
-									TC:ToggleSettings()
-								end,
-								disabled = function() return not E.db.enhanced.unitframe.units.target.classicon.enable end
-							}
-						}
-					},
 					detachPortrait = {
-						order = 2,
+						order = 1,
 						type = "group",
 						name = L["Portrait"],
 						get = function(info) return E.db.enhanced.unitframe.detachPortrait.target[info[#info]] end,

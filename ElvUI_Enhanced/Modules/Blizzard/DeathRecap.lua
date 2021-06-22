@@ -3,21 +3,23 @@ local mod = E:GetModule("Enhanced_Blizzard")
 local S = E:GetModule("Skins")
 
 local _G = _G
+local pcall, select, tonumber, unpack = pcall, select, tonumber, unpack
 local band = bit.band
 local ceil, floor = math.ceil, math.floor
-local format, upper, sub, join = string.format, string.upper, string.sub, string.join
+local format, upper, split, sub, join = string.format, string.upper, string.split, string.sub, string.join
 local tsort, twipe = table.sort, table.wipe
-local pcall = pcall
-local tonumber = tonumber
 
 local CannotBeResurrected = CannotBeResurrected
 local CopyTable = CopyTable
 local GetPlayerInfoByGUID = GetPlayerInfoByGUID
+local CreateFrame = CreateFrame
 local GetReleaseTimeRemaining = GetReleaseTimeRemaining
 local GetSpellInfo = GetSpellInfo
 local GetSpellLink = GetSpellLink
 local HasSoulstone = HasSoulstone
 local IsActiveBattlefieldArena = IsActiveBattlefieldArena
+local IsFalling = IsFalling
+local IsOutOfBounds = IsOutOfBounds
 local RepopMe = RepopMe
 local UnitClass = UnitClass
 local UnitHealth = UnitHealth
@@ -345,7 +347,7 @@ function mod:COMBAT_LOG_EVENT_UNFILTERED(_, timestamp, event, _, sourceGUID, sou
 	if event ~= "ENVIRONMENTAL_DAMAGE" and event ~= "RANGE_DAMAGE" and event ~= "SPELL_DAMAGE" and event ~= "SPELL_EXTRA_ATTACKS" and event ~= "SPELL_INSTAKILL" and event ~= "SPELL_PERIODIC_DAMAGE" and event ~= "SWING_DAMAGE" then return end
 
 	local subVal = sub(event, 1, 5)
-	local _, environmentalType, spellId, spellName, amount, overkill, school, resisted, blocked, absorbed
+	local _, environmentalType, spellId, spellName, amount, overkill, school, resisted, blocked, absorbed, critical
 
 	if event == "SWING_DAMAGE" then
 		_, amount, overkill, school, resisted, blocked, absorbed, critical = ...
@@ -362,7 +364,7 @@ end
 
 function mod:SetItemRef(link, ...)
 	if sub(link, 1, 5) == "death" then
-		local _, id = strsplit(":", link)
+		local _, id = split(":", link)
 		OpenRecap(tonumber(id))
 		return
 	else

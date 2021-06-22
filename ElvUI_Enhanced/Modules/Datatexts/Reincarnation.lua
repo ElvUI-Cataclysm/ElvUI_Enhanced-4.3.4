@@ -23,8 +23,7 @@ local displayString = ""
 local lastPanel
 
 local function OnUpdate(self)
-	local isKnown = IsSpellKnown(20608, false)
-	if not isKnown then return end
+	if not IsSpellKnown(20608) then return end
 
 	local start, duration = GetSpellCooldown(20608)
 	if start > 0 and duration > 0 then 
@@ -35,9 +34,7 @@ local function OnUpdate(self)
 end
 
 local function OnEvent(self, event)
-	local isKnown = IsSpellKnown(20608, false)
-
-	if not isKnown then
+	if not IsSpellKnown(20608) then
 		self.text:SetFormattedText(displayString, format(iconString, tex), SPELL_FAILED_NOT_KNOWN)
 	else
 		if event == "SPELL_UPDATE_COOLDOWN" then
@@ -56,8 +53,7 @@ local function OnEvent(self, event)
 end
 
 local function OnClick(self)
-	local isKnown = IsSpellKnown(20608, false)
-	if not isKnown then return end
+	if not IsSpellKnown(20608) then return end
 
 	local _, instanceType = IsInInstance()
 	local start, duration = GetSpellCooldown(20608)

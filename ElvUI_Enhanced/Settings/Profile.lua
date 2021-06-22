@@ -172,16 +172,6 @@ P.enhanced = {
 				width = 54,
 				height = 54
 			}
-		},
-		units = {
-			target = {
-				classicon = {
-					enable = false,
-					size = 28,
-					xOffset = -58,
-					yOffset = -22
-				}
-			}
 		}
 	},
 	watchframe = {
